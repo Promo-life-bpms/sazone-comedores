@@ -9,12 +9,12 @@
         <div class="space-y-2">
             <label for="" class="text-lg font-semibold">Correo</label>
             <input type="email" name="email" placeholder="Ingrese su correo"
-                class="input input-bordered w-full @error('email') input-error @enderror"" />
+                class="input input-bordered w-full @error('email') input-error @enderror" />
         </div>
         <div class="space-y-2">
             <label for="" class="text-lg font-semibold">Contraseña</label>
             <input type="password" name="password" placeholder="Ingrese su contraseña"
-                class="input input-bordered w-full @error('password') input-error @enderror"" />
+                class="input input-bordered w-full @error('password') input-error @enderror" />
             @if (Route::has('password.request'))
                 <div class="text-right h-16">
                     <a class="" href="{{ route('password.request') }}">
@@ -31,8 +31,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-
-
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
