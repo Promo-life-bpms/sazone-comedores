@@ -31,4 +31,14 @@ class HomeController extends Controller
         $anuncio = (object) $anuncio;
         return view('user.pages.home', compact('anuncio'));
     }
+
+    public function cupones()
+    {
+        return view('user.pages.cupones');
+    }
+
+    public function menu()
+    {
+        return view('user.pages.menu');
+    }
 }

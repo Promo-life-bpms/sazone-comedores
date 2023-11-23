@@ -4,7 +4,7 @@
     <div class="pt-5">
         <h1 class="text-3xl font-semibold mb-5">¡Hola Usuario!</h1>
         {{-- Carrusel de Anuncios --}}
-        <div class="carousel w-full h-96">
+        <div class="carousel w-full max-h-96">
             <div id="slide1" class="carousel-item relative w-full">
                 <div class="relative">
                     <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
@@ -46,7 +46,7 @@
         </div>
 
         {{-- Seccion Menu del dia y mis cupones --}}
-        <div class="grid grid-cols-3 mt-5 gap-10">
+        <div class="grid md:grid-cols-3 grid-cols-1 mt-5 gap-10">
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Menu del dia</p>
                 <div class="carousel w-full h-96">
@@ -84,23 +84,25 @@
                     </div>
                 </div>
             </div>
-            <div class="col-span-2">
+            <div class="col-span-1 md:col-span-2">
                 <p class="text-lg font-semibold mb-3">Mis Cupones</p>
-                <div class="grid grid-cols-3 gap-7">
-                    <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
-                        class="w-full object-cover col-span-1" />
-                    <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
-                        class="w-full object-cover col-span-1" />
-                    <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
-                        class="w-full object-cover col-span-1" />
-                    <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
-                        class="w-full object-cover col-span-1" />
-                    <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
-                        class="w-full object-cover col-span-1" />
-                    <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
-                        class="w-full object-cover col-span-1" />
-                    <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
-                        class="w-full object-cover col-span-1" />
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-7">
+                    <a href="{{ route('cupones') }}">
+                        <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
+                            class="w-full object-cover col-span-1" />
+                    </a>
+                    <a href="{{ route('cupones') }}">
+                        <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
+                            class="w-full object-cover col-span-1" />
+                    </a>
+                    <a href="{{ route('cupones') }}">
+                        <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
+                            class="w-full object-cover col-span-1" />
+                    </a>
+                    <a href="">
+                        <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
+                            class="w-full object-cover col-span-1" />
+                    </a>
                 </div>
             </div>
         </div>
