@@ -41,4 +41,14 @@ class HomeController extends Controller
     {
         return view('user.pages.menu');
     }
+
+    public function acerca()
+    {
+        return view('user.pages.acerca-de');
+    }
+
+    public function cuenta()
+    {
+        return view('user.pages.mi-cuenta');
+    }
 }
