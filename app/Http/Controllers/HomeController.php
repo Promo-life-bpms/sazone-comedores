@@ -23,6 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $anuncio = [
+            'title' => 'Anuncio 1',
+            'description' => 'Texto do anuncio 1',
+            'image' => 'https://via.placeholder.com/150'
+        ];
+        $anuncio = (object) $anuncio;
+        return view('user.pages.home', compact('anuncio'));
     }
 }
