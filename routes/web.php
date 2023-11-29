@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DinningRoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 Auth::routes();
 
@@ -23,5 +25,13 @@ Route::get('/menu', [App\Http\Controllers\HomeController::class, 'menu'])->name(
 Route::get('/acerca-de', [App\Http\Controllers\HomeController::class, 'acerca'])->name('acerca');
 Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])->name('mi-cuenta');
 
+Route::prefix('admin')->group(function () {
+    Route::resource('users', UserController::class);
+    Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin');
+});
 
-Route::get('/admin', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin');
+Route::prefix('super')->group(function () {
+    Route::get('/', [DinningRoomController::class, 'index'])->name('dinning.index');
+    Route::get('/dinnings/{dinning}', [DinningRoomController::class, 'show'])->name('dinning.show');
+    Route::post('/dinnings', [DinningRoomController::class, 'store'])->name('dinning.store');
+});
