@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('logo');
             $table->string('slug');
+            $table->text('customization')->nullable();
             $table->timestamps();
         });
     }

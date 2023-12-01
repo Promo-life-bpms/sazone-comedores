@@ -15,5 +15,6 @@ class DinningRoom extends Model
         'status',
         'logo',
         'slug',
+        'customization',
     ];
 }

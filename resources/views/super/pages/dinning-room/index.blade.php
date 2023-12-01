@@ -10,7 +10,6 @@
                 class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
-
         </div>
     </div>
     <h1 class="text-lg font-semibold my-2">Comedores Disponibles</h1>
@@ -64,7 +63,7 @@
                     @enderror
                 </div>
                 <div class="space-y-2">
-                    <label for="" class="text-lg font-semibold">Correo</label>
+                    <label for="" class="text-lg font-semibold">Logo</label>
                     <input type="file" name="logo" class="file-input file-input-primary file-input-bordered w-full" />
                     @error('email')
                         <div class="text-red-500">
