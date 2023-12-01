@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="pt-14">
-        <p class="text-2xl font-bold">FORD</p>
-        <p class="text-lg pb-5">Av Test, CP 222 México</p>
+        <p class="text-2xl font-bold">{{ $dinningRoom->name }}</p>
+        <p class="text-lg pb-5">{{ $dinningRoom->address }}</p>
         <div class="collapse collapse-plus bg-base-200">
             <input type="radio" name="my-accordion-3" checked="checked" />
             <div class="collapse-title text-xl font-medium">
