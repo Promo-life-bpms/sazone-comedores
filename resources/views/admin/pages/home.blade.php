@@ -5,7 +5,7 @@
         <p class="text-2xl font-bold">{{ $diningRoom->name }}</p>
         <p class="text-lg pb-5">{{ $diningRoom->address }}</p>
         <div class="collapse collapse-plus bg-base-200">
-            <input type="radio" name="my-accordion-3" checked="checked" />
+            <input type="radio" name="my-accordion-3" />
             <div class="collapse-title text-xl font-medium">
                 Detalles Generales
             </div>
@@ -90,18 +90,12 @@
             </div>
         </div>
         <div class="collapse collapse-plus bg-base-200">
-            <input type="radio" name="my-accordion-3" />
+            <input type="radio" name="my-accordion-3" checked="checked"/>
             <div class="collapse-title text-xl font-medium">
                 Menu
             </div>
             <div class="collapse-content">
-                <div role="tablist" class="tabs tabs-bordered">
-                    <a role="tab" class="tab">Lunes</a>
-                    <a role="tab" class="tab tab-active">Martes</a>
-                    <a role="tab" class="tab">Miercoles</a>
-                    <a role="tab" class="tab">Jueves</a>
-                    <a role="tab" class="tab">Viernes</a>
-                </div>
+                @include('admin.sections.menu')
             </div>
         </div>
         <div class="collapse collapse-plus bg-base-200">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DiningRoomController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,5 @@ Route::prefix('super')->group(function () {
     Route::get('/dinings/{dining}', [DiningRoomController::class, 'show'])->name('dining.show');
     Route::post('/dinings', [DiningRoomController::class, 'store'])->name('dining.store');
     Route::put('/dinings/{dining}/update-details-general', [DiningRoomController::class, 'updateGeneralDetails'])->name('dining.updateDetailsGeneral');
+    Route::post('/menus', [MenuController::class, 'store'])->name('menu.store');
 });

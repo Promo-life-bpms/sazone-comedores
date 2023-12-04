@@ -28,7 +28,7 @@ class DiningRoomController extends Controller
             'logo' => 'required',
         ]);
 
-        $DiningRoom = [
+        $diningRoom = [
             'name' => $request->name,
             'address' => $request->address,
             'status' => "created",
@@ -38,18 +38,20 @@ class DiningRoomController extends Controller
 
         $file = $request->file('logo');
 
-        $nameFile = $DiningRoom['slug'] . '_logo.' . $file->getClientOriginalExtension();
+        $nameFile = $diningRoom['slug'] . '_logo.' . $file->getClientOriginalExtension();
         $path = 'dining_room/' . Str::slug($request->name) . '/';
 
-        $DiningRoom['logo'] = $path . $nameFile;
+        $diningRoom['logo'] = $path . $nameFile;
 
         if ($file->isValid()) {
             Storage::putFileAs('public/' . $path, $file, $nameFile);
+        }else{
+            return redirect()->back()->with('error', 'No se ha podido crear el restaurante por un problema con la imagen');
         }
 
-        $DiningRoom = DiningRoom::create($DiningRoom);
+        $diningRoom = DiningRoom::create($diningRoom);
 
-        return redirect()->route('dining.show', $DiningRoom);
+        return redirect()->route('dining.show', $diningRoom);
     }
 
     public function updateGeneralDetails(Request $request, DiningRoom $dining)

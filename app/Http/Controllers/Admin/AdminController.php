@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DayFood;
 use App\Models\DiningRoom;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,8 +19,8 @@ class AdminController extends Controller
     {
         $diningRoom = DiningRoom::first();
         $users = $diningRoom->users;
-        $users = $diningRoom->users;
+        $menuDays = DayFood::all();
 
-        return view('admin.pages.home', compact('diningRoom', 'users'));
+        return view('admin.pages.home', compact('diningRoom', 'users', 'menuDays'));
     }
 }

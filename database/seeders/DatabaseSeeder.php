@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(DiningRoomSeed::class);
+        $this->call(DayFoodSeeder::class);
 
         // User Created
         User::create([
