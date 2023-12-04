@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\DinningRoom;
+use App\Models\DiningRoom;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,7 +15,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $dinningRoom = DinningRoom::first();
-        return view('admin.pages.home', compact('dinningRoom'));
+        $diningRoom = DiningRoom::first();
+        return view('admin.pages.home', compact('diningRoom'));
     }
 }

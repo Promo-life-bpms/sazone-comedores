@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\DinningRoomController;
+use App\Http\Controllers\DiningRoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,8 +31,8 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('super')->group(function () {
-    Route::get('/', [DinningRoomController::class, 'index'])->name('dinning.index');
-    Route::get('/dinnings/{dinning}', [DinningRoomController::class, 'show'])->name('dinning.show');
-    Route::post('/dinnings', [DinningRoomController::class, 'store'])->name('dinning.store');
-    Route::put('/dinnings/{dinning}/update-details-general', [DinningRoomController::class, 'updateGeneralDetails'])->name('dinning.updateDetailsGeneral');
+    Route::get('/', [DiningRoomController::class, 'index'])->name('dining.index');
+    Route::get('/dinings/{dining}', [DiningRoomController::class, 'show'])->name('dining.show');
+    Route::post('/dinings', [DiningRoomController::class, 'store'])->name('dining.store');
+    Route::put('/dinings/{dining}/update-details-general', [DiningRoomController::class, 'updateGeneralDetails'])->name('dining.updateDetailsGeneral');
 });

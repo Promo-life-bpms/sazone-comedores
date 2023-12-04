@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\DinningRoom;
+use App\Models\DiningRoom;
 use Illuminate\Database\Seeder;
 
-class DinningRoomSeed extends Seeder
+class DiningRoomSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class DinningRoomSeed extends Seeder
      */
     public function run()
     {
-        DinningRoom::factory(10)->create();
+        DiningRoom::factory(10)->create();
     }
 }

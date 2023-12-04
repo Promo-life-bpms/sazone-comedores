@@ -14,9 +14,9 @@
     </div>
     <h1 class="text-lg font-semibold my-2">Comedores Disponibles</h1>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-y-8">
-        @foreach ($dinningRooms as $dr)
+        @foreach ($diningRooms as $dr)
             <div class="col-span-1">
-                <a href="{{ route('dinning.show', ['dinning' => $dr->id]) }}" class="rounded-xl relative cursor-pointer">
+                <a href="{{ route('dining.show', ['dining' => $dr->id]) }}" class="rounded-xl relative cursor-pointer">
                     <img src="{{ asset('storage/' . $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
                         alt="">
                     <div class="absolute bottom-2 right-0 bg-primary w-3/5 p-2 text-white">
@@ -28,7 +28,7 @@
         @endforeach
     </div>
     <div class="flex justify-center">
-        {{ $dinningRooms->links() }}
+        {{ $diningRooms->links() }}
     </div>
 
 
@@ -39,7 +39,7 @@
             </form>
             <h3 class="font-bold text-lg text-center">Crear nuevo comedor</h3>
             <br>
-            <form method="POST" action="{{ route('dinning.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('dining.store') }}" enctype="multipart/form-data">
                 @method('POST')
                 @csrf
                 <div class="space-y-2">

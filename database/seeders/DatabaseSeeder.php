@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(DinningRoomSeed::class);
+        $this->call(DiningRoomSeed::class);
 
         // User Created
         User::create([

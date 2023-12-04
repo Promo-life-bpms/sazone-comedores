@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DinningRoom;
+use App\Models\DiningRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class DinningRoomController extends Controller
+class DiningRoomController extends Controller
 {
     public function index()
     {
-        $dinningRooms = DinningRoom::orderBy('created_at', 'DESC')->paginate(15);
-        return view('super.pages.dinning-room.index', compact('dinningRooms'));
+        $diningRooms = DiningRoom::orderBy('created_at', 'DESC')->paginate(15);
+        return view('super.pages.dining-room.index', compact('diningRooms'));
     }
 
-    public function show(DinningRoom $dinningRoom)
+    public function show(DiningRoom $DiningRoom)
     {
-        return view('admin.pages.home', compact('dinningRoom'));
+        return view('admin.pages.home', compact('DiningRoom'));
     }
 
     public function store(Request $request)
@@ -28,7 +28,7 @@ class DinningRoomController extends Controller
             'logo' => 'required',
         ]);
 
-        $dinningRoom = [
+        $DiningRoom = [
             'name' => $request->name,
             'address' => $request->address,
             'status' => "created",
@@ -38,23 +38,23 @@ class DinningRoomController extends Controller
 
         $file = $request->file('logo');
 
-        $nameFile = $dinningRoom['slug'] . '_logo.' . $file->getClientOriginalExtension();
-        $path = 'dinning_room/' . Str::slug($request->name) . '/';
+        $nameFile = $DiningRoom['slug'] . '_logo.' . $file->getClientOriginalExtension();
+        $path = 'dining_room/' . Str::slug($request->name) . '/';
 
-        $dinningRoom['logo'] = $path . $nameFile;
+        $DiningRoom['logo'] = $path . $nameFile;
 
         if ($file->isValid()) {
             Storage::putFileAs('public/' . $path, $file, $nameFile);
         }
 
-        $dinningRoom = DinningRoom::create($dinningRoom);
+        $DiningRoom = DiningRoom::create($DiningRoom);
 
-        return redirect()->route('dinning.show', $dinningRoom);
+        return redirect()->route('dining.show', $DiningRoom);
     }
 
-    public function updateGeneralDetails(Request $request, DinningRoom $dinning)
+    public function updateGeneralDetails(Request $request, DiningRoom $dining)
     {
-        $dinning->customization = json_encode([
+        $dining->customization = json_encode([
             'primary_color' => $request->primary,
             'secondary_color' => $request->secondary,
         ]);
@@ -63,17 +63,17 @@ class DinningRoomController extends Controller
         $file = $request->file('logo');
 
         if ($file) {
-            $nameFile = $dinning->slug . '_logo.' . $file->getClientOriginalExtension();
-            $path = 'dinning_room/' . Str::slug($dinning->name) . '/';
+            $nameFile = $dining->slug . '_logo.' . $file->getClientOriginalExtension();
+            $path = 'dining_room/' . Str::slug($dining->name) . '/';
 
-            $dinning->logo = $path . $nameFile;
+            $dining->logo = $path . $nameFile;
 
             if ($file->isValid()) {
                 Storage::putFileAs('public/' . $path, $file, $nameFile);
             }
         }
 
-        $dinning->save();
+        $dining->save();
 
         return redirect()->back()->with('success', 'Se han actualizado los colores correctamente');
     }
