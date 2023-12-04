@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -37,11 +38,25 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email',
             'password' => 'required',
-            'type' => 'required'
+            'type' => 'required|in:dining_manager,collaborator',
+            'dining_id' => 'required'
         ]);
 
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+
+        $user->profile()->create([
+            'dining_room_id' => $request->dining_id,
+            'type' => $request->type,
+        ]);
+
+
+        return redirect()->back()->with('success_user_create', 'Usuario creado correctamente');
     }
 
     /**

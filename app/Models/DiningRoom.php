@@ -17,4 +17,9 @@ class DiningRoom extends Model
         'slug',
         'customization',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'profiles');
+    }
 }
