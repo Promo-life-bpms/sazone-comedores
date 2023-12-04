@@ -21,10 +21,10 @@
             <div class="grid grid-cols-1 md:grid-cols-6 gap-5">
                 @foreach ($day->menus($diningRoom->id) as $food)
                     <div class="col-span-1">
-                        <div class="rounded-xl relative cursor-pointer">
+                        <div class="rounded-xl relative cursor-pointer ">
                             <img src="{{ asset('storage/' . $food->image) }}"
-                                class="object-cover w-full h-32 rounded-xl" alt="">
-                            <div class="absolute bottom-0 bg-[#00000075] w-full h-full p-2 text-white flex items-end">
+                                class="object-cover w-full h-40 rounded-xl" alt="">
+                            <div class="absolute bottom-0 rounded-xl h-40 bg-[#00000075] w-full p-2 text-white flex items-end">
                                 <p class="font-bold text-sm">{{ $food->name }}</p>
                             </div>
                         </div>

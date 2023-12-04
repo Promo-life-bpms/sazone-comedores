@@ -22,7 +22,7 @@
                     <th>{{ $loop->iteration }}</th>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ 'Tipo' }}</td>
+                    <td>{{ Str::ucfirst($user->profile->type) }}</td>
                     <td>
                         <div class="flex justify-end gap-3">
                             <button class="btn btn-circle btn-ghost btn-xs">
