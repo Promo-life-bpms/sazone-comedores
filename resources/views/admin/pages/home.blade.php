@@ -90,7 +90,7 @@
             </div>
         </div>
         <div class="collapse collapse-plus bg-base-200">
-            <input type="radio" name="my-accordion-3" checked="checked"/>
+            <input type="radio" name="my-accordion-3" checked="checked" />
             <div class="collapse-title text-xl font-medium">
                 Menu
             </div>
@@ -117,5 +117,5 @@
             </div>
         </div> --}}
     </div>
-@include('admin.sections.modal-coupon')
+    @include('admin.sections.modal-coupon')
 @endsection

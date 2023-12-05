@@ -37,4 +37,5 @@ Route::prefix('super')->group(function () {
     Route::post('/dinings', [DiningRoomController::class, 'store'])->name('dining.store');
     Route::put('/dinings/{dining}/update-details-general', [DiningRoomController::class, 'updateGeneralDetails'])->name('dining.updateDetailsGeneral');
     Route::post('/menus', [MenuController::class, 'store'])->name('menu.store');
+    Route::post('/menus/import', [MenuController::class, 'import'])->name('menu.import');
 });
