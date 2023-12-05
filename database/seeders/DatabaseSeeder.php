@@ -26,5 +26,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
         ]);
+
+        // Crear factory menu con relacion a day_menu
+        $this->call(MenuSeeder::class);
     }
 }

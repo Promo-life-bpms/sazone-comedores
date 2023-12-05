@@ -16,8 +16,18 @@ class MenuFactory extends Factory
      */
     public function definition()
     {
+        $tiempo = [
+            'desayuno',
+            'comida',
+            'cena'
+        ];
+
         return [
-            //
+            'name' => $this->faker->name(),
+            'description' => $this->faker->text(),
+            'dining_room_id' => $this->faker->numberBetween(1, 10),
+            'time' => $tiempo[$this->faker->numberBetween(0, 2)],
+            'image' => $this->faker->imageUrl(),
         ];
     }
 }
