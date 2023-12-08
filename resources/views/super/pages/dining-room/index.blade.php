@@ -16,7 +16,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-y-8">
         @foreach ($diningRooms as $dr)
             <div class="col-span-1">
-                <a href="{{ route('dining.show', ['dining' => $dr->id]) }}" class="rounded-xl relative cursor-pointer">
+                <a href="{{ route('dining.show', ['diningRoom' => $dr->id]) }}" class="rounded-xl relative cursor-pointer">
                     <img src="{{ asset('storage/' . $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
                         alt="">
                     <div class="absolute bottom-2 right-0 bg-primary w-3/5 p-2 text-white">

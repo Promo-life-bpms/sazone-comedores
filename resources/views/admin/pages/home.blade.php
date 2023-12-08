@@ -52,6 +52,16 @@
         <div class="collapse collapse-plus bg-base-200">
             <input type="radio" name="my-accordion-3" />
             <div class="collapse-title text-xl font-medium">
+                Anuncios
+            </div>
+            <div class="collapse-content">
+                {{-- Crea una lista con los anuncios de este comedor --}}
+                @include('admin.sections.advertisement')
+            </div>
+        </div>
+        <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" />
+            <div class="collapse-title text-xl font-medium">
                 Cupones
             </div>
             <div class="collapse-content">
@@ -74,8 +84,8 @@
                         <div class="col-span-1">
                             <a href="{{ route('dining.show', ['dining' => $dr->id]) }}"
                                 class="rounded-xl relative cursor-pointer">
-                                <img src="{{ asset('storage/' . $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
-                                    alt="">
+                                <img src="{{ asset('storage/' . $dr->logo) }}"
+                                    class="object-cover w-full h-32 rounded-xl" alt="">
                                 <div class="absolute bottom-2 right-0 bg-primary w-3/5 p-2 text-white">
                                     <p class="font-bold text-sm">{{ $dr->name }}</p>
                                     <p class="text-xs">{{ $dr->address }}</p>

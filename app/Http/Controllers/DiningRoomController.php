@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DayFood;
 use App\Models\DiningRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,9 +16,11 @@ class DiningRoomController extends Controller
         return view('super.pages.dining-room.index', compact('diningRooms'));
     }
 
-    public function show(DiningRoom $DiningRoom)
+    public function show(DiningRoom $diningRoom)
     {
-        return view('admin.pages.home', compact('DiningRoom'));
+        $users = $diningRoom->users;
+        $menuDays = DayFood::all();
+        return view('admin.pages.home', compact('diningRoom', 'menuDays', 'users'));
     }
 
     public function store(Request $request)

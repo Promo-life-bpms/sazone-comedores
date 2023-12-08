@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\DiningRoomController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
@@ -29,11 +30,12 @@ Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])
 Route::prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin');
+    Route::post('/anuncios', [AdvertisementController::class, 'store'])->name('anuncios.store');
 });
 
 Route::prefix('super')->group(function () {
     Route::get('/', [DiningRoomController::class, 'index'])->name('dining.index');
-    Route::get('/dinings/{dining}', [DiningRoomController::class, 'show'])->name('dining.show');
+    Route::get('/dinings/{diningRoom}', [DiningRoomController::class, 'show'])->name('dining.show');
     Route::post('/dinings', [DiningRoomController::class, 'store'])->name('dining.store');
     Route::put('/dinings/{dining}/update-details-general', [DiningRoomController::class, 'updateGeneralDetails'])->name('dining.updateDetailsGeneral');
     Route::post('/menus', [MenuController::class, 'store'])->name('menu.store');
