@@ -18,6 +18,6 @@ class Advertisement extends Model
 
     public function diningRooms()
     {
-        return $this->belongsTo(DiningRoom::class);
+        return $this->belongsToMany(DiningRoom::class);
     }
 }

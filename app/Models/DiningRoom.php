@@ -22,4 +22,9 @@ class DiningRoom extends Model
     {
         return $this->belongsToMany(User::class, 'profiles');
     }
+
+    public function advertisements()
+    {
+        return $this->belongsToMany(Advertisement::class);
+    }
 }

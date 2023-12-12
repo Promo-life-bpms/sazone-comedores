@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DayFood;
+use App\Models\DiningRoom;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,13 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $anuncio = [
-            'title' => 'Anuncio 1',
-            'description' => 'Texto do anuncio 1',
-            'image' => 'https://via.placeholder.com/150'
-        ];
-        $anuncio = (object) $anuncio;
-        return view('user.pages.home', compact('anuncio'));
+        $diningRoom = DiningRoom::first();
+        $menuDays = DayFood::all();
+        $advertisements = $diningRoom->advertisements;
+
+        return view('user.pages.home', compact('diningRoom', 'menuDays', 'advertisements'));
     }
 
     public function cupones()

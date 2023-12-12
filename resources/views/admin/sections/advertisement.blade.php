@@ -8,19 +8,25 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Tipo</th>
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>Informacion</th>
                 <th>...</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @foreach ($advertisements as $advertisement)
+                @php
+                    $vigencia = (object) json_decode($advertisement->vigencia);
+                @endphp
                 <tr>
                     <th>{{ $loop->iteration }}</th>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ Str::ucfirst($user->profile->type) }}</td>
+                    <td>{{ $advertisement->title }}</td>
+                    <td>{{ $advertisement->description }}</td>
+                    <td>
+                        <b>Inicio:</b> {{ $vigencia->start }}
+                        <b>Final:</b> {{ $vigencia->end }}
+                    </td>
                     <td>
                         <div class="flex justify-end gap-3">
                             <button class="btn btn-circle btn-ghost btn-xs">
@@ -61,14 +67,14 @@
         </form>
         <h3 class="font-bold text-lg text-center">Agregar Anuncio</h3>
         <br>
-        @if (session('success_user_create'))
+        @if (session('success_advertisment'))
             <div role="alert" class="alert alert-success">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>{{ session('success_user_create') }}</span>
+                <span>{{ session('success_advertisment') }}</span>
             </div>
         @endif
         {{--         'title',
@@ -115,7 +121,8 @@
                 </label>
                 <div class="grid grid-cols-2 gap-3">
                     <div class="col-span-1">
-                        <input type="date" name="vigencia" placeholder="Ingrese el correo del colaborador" autocomplete="off"
+                        <input type="date" name="start" placeholder="Ingrese el correo del colaborador"
+                            autocomplete="off"
                             class="input input-bordered w-full @error('vigencia') input-error @enderror" />
                         @error('vigencia')
                             <div class="text-red-500">
@@ -124,7 +131,8 @@
                         @enderror
                     </div>
                     <div class="col-span-1">
-                        <input type="date" name="vigencia" placeholder="Ingrese el correo del colaborador" autocomplete="off"
+                        <input type="date" name="end" placeholder="Ingrese el correo del colaborador"
+                            autocomplete="off"
                             class="input input-bordered w-full @error('vigencia') input-error @enderror" />
                         @error('vigencia')
                             <div class="text-red-500">
@@ -144,7 +152,7 @@
 </dialog>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        let showModalUser = {{ session('success_user_create') ? 'my_modal_anuncio.showModal()' : false }}
+        let showModalUser = {{ session('success_advertisment') ? 'my_modal_anuncio.showModal()' : false }}
 
     });
 </script>

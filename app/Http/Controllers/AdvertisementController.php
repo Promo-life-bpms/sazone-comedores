@@ -15,7 +15,8 @@ class AdvertisementController extends Controller
             'title' => 'required',
             'description' => 'required',
             'file_advertisment' => 'required',
-            'vigencia' => 'required',
+            'start' => 'required',
+            'end' => 'required',
             'dining_id' => 'required'
         ]);
 
@@ -25,8 +26,8 @@ class AdvertisementController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'vigencia' => json_encode([
-                'start' => $request->date_start,
-                'end' => $request->date_end
+                'start' => $request->start,
+                'end' => $request->end
             ]),
             'dining_room_id' => $request->dining_id,
         ];
@@ -44,10 +45,12 @@ class AdvertisementController extends Controller
             return redirect()->back()->with('error', 'No se ha podido crear el platillo por un problema con la imagen');
         }
 
+
+
         $advertisement = Advertisement::create($advertisement);
 
         $advertisement->diningRooms()->attach($dining);
 
-        return redirect()->back()->with('success', 'Anuncio creado correctamente');
+        return redirect()->back()->with('success_advertisment', 'Anuncio creado correctamente');
     }
 }
