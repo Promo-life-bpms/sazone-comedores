@@ -14,4 +14,15 @@ class Profile extends Model
         "dining_room_id",
         "type",
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function diningRoom()
+    {
+        return $this->belongsTo(DiningRoom::class);
+    }
+
 }

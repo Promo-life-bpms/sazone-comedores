@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('dining_room_id')->constrained();
             $table->enum('type', ['collaborator', 'dining_manager', 'super_manager', 'admin'])->default('collaborator');
+            // $table->string('position');
             $table->timestamps();
         });
     }

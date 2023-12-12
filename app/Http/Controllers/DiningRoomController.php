@@ -19,8 +19,12 @@ class DiningRoomController extends Controller
     public function show(DiningRoom $diningRoom)
     {
         $users = $diningRoom->users;
+
         $menuDays = DayFood::all();
-        return view('admin.pages.home', compact('diningRoom', 'menuDays', 'users'));
+        $advertisements = $diningRoom->advertisements;
+
+
+        return view('admin.pages.home', compact('diningRoom', 'menuDays', 'users', 'advertisements'));
     }
 
     public function store(Request $request)
@@ -29,6 +33,9 @@ class DiningRoomController extends Controller
             'name' => 'required',
             'address' => 'required',
             'logo' => 'required',
+            'mision' => 'required',
+            'vision' => 'required',
+            "valores" => 'required',
         ]);
 
         $diningRoom = [
@@ -36,6 +43,9 @@ class DiningRoomController extends Controller
             'address' => $request->address,
             'status' => "created",
             'slug' => Str::slug($request->name),
+            "mission" => $request->mision,
+            "vision" => $request->vision,
+            "values" => $request->valores,
         ];
 
 
@@ -48,7 +58,7 @@ class DiningRoomController extends Controller
 
         if ($file->isValid()) {
             Storage::putFileAs('public/' . $path, $file, $nameFile);
-        }else{
+        } else {
             return redirect()->back()->with('error', 'No se ha podido crear el restaurante por un problema con la imagen');
         }
 

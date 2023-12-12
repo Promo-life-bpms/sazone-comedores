@@ -22,6 +22,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/mi-comedor', [App\Http\Controllers\HomeController::class, 'comedor'])->name('dining.showUser');
 Route::get('/cupones', [App\Http\Controllers\HomeController::class, 'cupones'])->name('cupones');
 Route::get('/menu', [App\Http\Controllers\HomeController::class, 'menu'])->name('menu');
 Route::get('/acerca-de', [App\Http\Controllers\HomeController::class, 'acerca'])->name('acerca');
