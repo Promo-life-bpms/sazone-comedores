@@ -55,7 +55,8 @@ class HomeController extends Controller
 
     public function cupones()
     {
-        return view('user.pages.cupones');
+        $diningRoom = auth()->user()->profile->diningRoom;
+        return view('user.pages.cupones', compact('diningRoom'));
     }
 
     public function menu()

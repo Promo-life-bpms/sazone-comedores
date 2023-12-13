@@ -91,9 +91,8 @@
                 <label for="" class="text-lg font-semibold">Tiempo</label>
                 <select name="time_food" id="" class="select select-bordered w-full">
                     <option value="">Seleccionar...</option>
-                    <option value="breakfast">Desayuno</option>
-                    <option value="lunch">Comida</option>
-                    <option value="dinner">Cena</option>
+                    <option value="desayuno">Desayuno</option>
+                    <option value="comida">Comida</option>
                 </select>
                 @error('time_food')
                     <div class="text-red-500">

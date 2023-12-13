@@ -30,6 +30,12 @@
     @if (!Auth::user()->hasRole(['super-admin', 'master-admin']))
         @include('shared.soporte')
     @endif
+    <script>
+        var es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+        if (es_firefox) {
+            alert("El navegador que se está utilizando es Firefox");
+        }
+    </script>
 </body>
 
 </html>

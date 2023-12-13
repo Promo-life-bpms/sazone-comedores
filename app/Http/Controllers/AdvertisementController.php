@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Storage;
 
 class AdvertisementController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -32,7 +38,7 @@ class AdvertisementController extends Controller
 
         $file = $request->file('file_advertisment');
 
-        $nameFile = date('Y-m-d') . '_anuncio.' . $file->getClientOriginalExtension();
+        $nameFile = date('Y-m-d-s') . '_anuncio.' . $file->getClientOriginalExtension();
         $path = 'dining_room/' . $dining->slug . "/anuncio/";
 
         $advertisement['resource'] = $path . $nameFile;

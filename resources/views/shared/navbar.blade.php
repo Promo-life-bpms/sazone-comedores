@@ -1,6 +1,8 @@
 <div class="navbar bg-base-100 shadow-lg">
     <div class="flex-1">
-        <a class="btn btn-ghost text-xl" href="{{ route('home') }}">{{ $diningRoom->name }}</a>
+        <a class="btn btn-ghost text-xl" href="{{ route('home') }}">
+            <img class="max-h-10" src="{{ asset('storage/' . $diningRoom->logo) }}" alt="">
+        </a>
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1 py-0 gap-x-3">

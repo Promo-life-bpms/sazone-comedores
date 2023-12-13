@@ -31,17 +31,17 @@
         <div class="grid md:grid-cols-3 grid-cols-1 mt-5 gap-10">
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Menu del dia</p>
-                <div class="carousel w-full max-h-96 h-96">
+                <div class="carousel w-full max-h-72 h-72">
                     @if (count($day->menus($diningRoom->id)) > 0)
                         @foreach ($day->menus($diningRoom->id) as $menu)
                             <div id="menuSlide{{ $loop->iteration }}" class="carousel-item relative w-full">
                                 <div class="relative w-full">
                                     <img src="{{ asset('storage/' . $menu->image) }}" class="w-full object-contain" />
-                                    <div
-                                        class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                                        <h3 class="text-center pb-3">{{ $menu->name }}</h3>
-                                        <h3 class="text-sm text-center pb-3">{{ $menu->time }}</h3>
-                                    </div>
+                                    {{-- <div
+                                        class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#7bdac22e] p-5 rounded-md">
+                                        <h3 class="text-center pb-3 text-white text-2xl font-bold">{{ $menu->name }}</h3>
+                                     <h3 class="text-sm text-center pb-3 text-white">{{ $menu->time }}</h3>
+                                    </div> --}}
                                 </div>
                                 <div
                                     class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -69,19 +69,19 @@
                 <p class="text-lg font-semibold mb-3">Mis Cupones</p>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-7">
                     <a href="{{ route('cupones') }}">
-                        <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
+                        <img src="{{ asset('assets/cupones/Promociones_1.jpg') }}"
                             class="w-full object-cover col-span-1" />
                     </a>
                     <a href="{{ route('cupones') }}">
-                        <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
+                        <img src="{{ asset('assets/cupones/Promociones_2.jpg') }}"
                             class="w-full object-cover col-span-1" />
                     </a>
                     <a href="{{ route('cupones') }}">
-                        <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
+                        <img src="{{ asset('assets/cupones/Promociones_3.jpg') }}"
                             class="w-full object-cover col-span-1" />
                     </a>
-                    <a href="">
-                        <img src="https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1287142.jpg&fm=jpg"
+                    <a href="{{ route('cupones') }}">
+                        <img src="{{ asset('assets/cupones/Promociones_4.jpg') }}"
                             class="w-full object-cover col-span-1" />
                     </a>
                 </div>
