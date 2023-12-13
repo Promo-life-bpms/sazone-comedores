@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="pt-5">
-        <h1 class="text-3xl font-semibold mb-5">¡Hola Usuario!</h1>
+        <h1 class="text-3xl font-semibold mb-5">¡Hola {{ auth()->user()->name }}!</h1>
 
         {{-- Carrusel de Anuncios --}}
         <div class="carousel w-full max-h-96">
@@ -10,10 +10,13 @@
                 <div id="slide{{ $loop->iteration }}" class="carousel-item relative w-full">
                     <div class="relative w-full">
                         <img src="{{ asset('storage/' . $anuncio->resource) }}" class="w-full object-contain" />
-                        <div class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                            <h3 class="text-xl text-center pb-3">{{ $anuncio->title }}</h3>
-                            <p class="opacity-100 text-justify">{{ $anuncio->description }}</p>
-                        </div>
+                        @if (!($anuncio->title == null && $anuncio->description == null))
+                            <div
+                                class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
+                                <h3 class="text-xl text-center pb-3">{{ $anuncio->title }}</h3>
+                                <p class="opacity-100 text-justify">{{ $anuncio->description }}</p>
+                            </div>
+                        @endif
                     </div>
                     <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                         <a href="#slide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
@@ -25,7 +28,7 @@
         </div>
 
         {{-- Seccion Menu del dia y mis cupones --}}
-        <div class="grid md:grid-cols-4 grid-cols-1 mt-5 gap-10">
+        <div class="grid md:grid-cols-3 grid-cols-1 mt-5 gap-10">
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Menu del dia</p>
                 <div class="carousel w-full max-h-96 h-96">

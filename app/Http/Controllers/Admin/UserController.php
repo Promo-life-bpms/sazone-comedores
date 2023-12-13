@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -55,6 +56,14 @@ class UserController extends Controller
             'type' => $request->type,
         ]);
 
+        // si es colaborador, agregar el rol user y si es admin, agregar asu rol
+        if ($request->type == 'collaborator') {
+            $role = Role::where('name', 'user')->first();
+            $user->attachRole($role);
+        } else {
+            $role = Role::where('name', 'admin')->first();
+            $user->attachRole($role);
+        }
 
         return redirect()->back()->with('success_user_create', 'Usuario creado correctamente');
     }

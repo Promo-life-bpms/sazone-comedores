@@ -11,7 +11,7 @@
     </div>
     <div class="mt-32 space-y-5">
         <p><strong>Nombre: </strong> {{ auth()->user()->name }} </p>
-        <p><strong>Puesto: </strong> {{ auth()->user()->name }} </p>
+        {{-- <p><strong>Puesto: </strong> {{ auth()->user()->name }} </p> --}}
         {{-- Cerrar sesion --}}
         <button class="btn btn-primary w-full btn-outline" onclick="cerrarSesion()">CERRAR SESION</button>
         <form action="{{ route('logout') }}" method="POST" id="logout-form">

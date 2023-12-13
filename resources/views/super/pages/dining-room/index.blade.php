@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+@extends('layouts.app')
 
 @section('content')
     <h1 class="text-3xl font-semibold my-5">Comedores</h1>

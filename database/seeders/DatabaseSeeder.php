@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(DiningRoomSeed::class);
+        // $this->call(DiningRoomSeed::class);
         $this->call(DayFoodSeeder::class);
 
         // Crear 4 roles (master-admin, super-admin ,admin, user)
@@ -78,6 +78,6 @@ class DatabaseSeeder extends Seeder
 
 
         // Crear factory menu con relacion a day_menu
-        $this->call(MenuSeeder::class);
+        // $this->call(MenuSeeder::class);
     }
 }

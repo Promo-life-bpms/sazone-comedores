@@ -19,13 +19,17 @@
 </head>
 
 <body>
-    @include('shared.navbar')
+    @if (Auth::user()->hasRole(['super-admin', 'master-admin']))
+        @include('shared.navbar-admin')
+    @else
+        @include('shared.navbar')
+    @endif
     <div class="max-w-7xl mx-auto w-[95%]">
         @yield('content')
     </div>
-    <div class="fixed bg-primary bottom-5 right-5 h-16 w-16 flex justify-center items-center text-white rounded-full shadow-lg">
-        M
-    </div>
+    @if (!Auth::user()->hasRole(['super-admin', 'master-admin']))
+        @include('shared.soporte')
+    @endif
 </body>
 
 </html>

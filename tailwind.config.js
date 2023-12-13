@@ -7,13 +7,13 @@ module.exports = {
     plugins: [require("daisyui")],
     daisyui: {
         themes: [
-            /* {
-                mytheme: {
-                    "primary": "#015a77",
+            {
+                light: {
+                    ...require("daisyui/src/theming/themes")["light"],
+                    primary: "#015a77",
+                    secondary: "teal",
                 },
-            } */,
-            "light",
-            "dark",
+            }
         ],
     },
 };

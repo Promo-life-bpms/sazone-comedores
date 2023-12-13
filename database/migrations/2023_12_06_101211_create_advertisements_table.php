@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->mediumText('description');
+            $table->string('title')->nullable();
+            $table->mediumText('description')->nullable();
             $table->mediumText('resource');
             $table->mediumText('vigencia');
             $table->timestamps();

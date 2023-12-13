@@ -12,8 +12,6 @@ class AdvertisementController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
             'file_advertisment' => 'required',
             'start' => 'required',
             'end' => 'required',
@@ -23,8 +21,8 @@ class AdvertisementController extends Controller
         $dining = DiningRoom::find($request->dining_id);
 
         $advertisement = [
-            'title' => $request->title,
-            'description' => $request->description,
+            'title' => $request->title ?? null,
+            'description' => $request->description ?? null,
             'vigencia' => json_encode([
                 'start' => $request->start,
                 'end' => $request->end
