@@ -9,7 +9,7 @@
             @foreach ($advertisements as $anuncio)
                 <div id="slide{{ $loop->iteration }}" class="carousel-item relative w-full">
                     <div class="relative w-full">
-                        <img src="{{ asset('storage/' . $anuncio->resource) }}" class="w-full object-contain" />
+                        <img src="{{ asset('storage/' . $anuncio->resource) }}" class="w-full object-cover max-h-96" />
                         @if (!($anuncio->title == null && $anuncio->description == null))
                             <div
                                 class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
@@ -36,7 +36,7 @@
                         @foreach ($day->menus($diningRoom->id) as $menu)
                             <div id="menuSlide{{ $loop->iteration }}" class="carousel-item relative w-full">
                                 <div class="relative w-full">
-                                    <img src="{{ asset('storage/' . $menu->image) }}" class="w-full object-contain" />
+                                    <img src="{{ asset('storage/' . $menu->image) }}" class="w-full object-cover h-72" />
                                     {{-- <div
                                         class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#7bdac22e] p-5 rounded-md">
                                         <h3 class="text-center pb-3 text-white text-2xl font-bold">{{ $menu->name }}</h3>
