@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class AdvertisementController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
             'file_advertisment' => 'required',
             'start' => 'required',
             'end' => 'required',
@@ -23,8 +27,8 @@ class AdvertisementController extends Controller
         $dining = DiningRoom::find($request->dining_id);
 
         $advertisement = [
-            'title' => $request->title,
-            'description' => $request->description,
+            'title' => $request->title ?? null,
+            'description' => $request->description ?? null,
             'vigencia' => json_encode([
                 'start' => $request->start,
                 'end' => $request->end
@@ -34,7 +38,7 @@ class AdvertisementController extends Controller
 
         $file = $request->file('file_advertisment');
 
-        $nameFile = date('Y-m-d') . '_anuncio.' . $file->getClientOriginalExtension();
+        $nameFile = date('Y-m-d-s') . '_anuncio.' . $file->getClientOriginalExtension();
         $path = 'dining_room/' . $dining->slug . "/anuncio/";
 
         $advertisement['resource'] = $path . $nameFile;

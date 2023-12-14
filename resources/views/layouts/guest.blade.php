@@ -22,6 +22,12 @@
     <main class="max-w-sm mx-auto shadow-lg rounded-lg px-8 py-4">
         @yield('content')
     </main>
+    <script>
+        var es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+        if (es_firefox) {
+            alert("El navegador que se está utilizando es Firefox");
+        }
+    </script>
 </body>
 
 </html>
