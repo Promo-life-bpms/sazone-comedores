@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+@extends('layouts.app')
 
 @section('content')
     <h1 class="text-3xl font-semibold my-5">Comedores</h1>
@@ -71,8 +71,39 @@
                         </div>
                     @enderror
                 </div>
-                <br><br>
+                {{-- Crear campos de mision y vision --}}
+                <div class="space-y-2">
+                    <label for="" class="text-lg font-semibold">Mision</label>
+                    <textarea name="mision" class="w-full textarea textarea-bordered h-16 @error('mision') input-error @enderror"
+                        placeholder="Ingrese la mision de la empresa"></textarea>
+                    @error('email')
+                        <div class="text-red-500">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="space-y-2">
+                    <label for="" class="text-lg font-semibold">Vision</label>
+                    <textarea name="vision" class="w-full textarea textarea-bordered h-16 @error('vision') input-error @enderror"
+                        placeholder="Ingrese la vision de la empresa"></textarea>
+                    @error('email')
+                        <div class="text-red-500">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="space-y-2">
+                    <label for="" class="text-lg font-semibold">Valores</label>
+                    <textarea name="valores" class="w-full textarea textarea-bordered h-16 @error('valores') input-error @enderror"
+                        placeholder="Ingrese los valores de la empresa separados por comas"></textarea>
+                    @error('email')
+                        <div class="text-red-500">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
+                <br><br>
                 <div class="space-y-2">
                     <button class="btn btn-primary w-full uppercase" type="submit">Crear comedor</button>
                 </div>

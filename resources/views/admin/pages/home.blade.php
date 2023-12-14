@@ -1,10 +1,10 @@
-@extends('layouts.admin-layout')
+@extends('layouts.app')
 
 @section('content')
     <div class="pt-14">
         <p class="text-2xl font-bold">{{ $diningRoom->name }}</p>
         <p class="text-lg pb-5">{{ $diningRoom->address }}</p>
-        <div class="collapse collapse-plus bg-base-200">
+        {{-- <div class="collapse collapse-plus bg-base-200">
             <input type="radio" name="my-accordion-3" />
             <div class="collapse-title text-xl font-medium">
                 Detalles Generales
@@ -48,7 +48,7 @@
                     </div>
                 @endif
             </div>
-        </div>
+        </div> --}}
         <div class="collapse collapse-plus bg-base-200">
             <input type="radio" name="my-accordion-3" checked="checked" />
             <div class="collapse-title text-xl font-medium">

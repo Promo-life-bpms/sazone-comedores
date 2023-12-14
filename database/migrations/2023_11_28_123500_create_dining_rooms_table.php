@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('address');
             $table->string('status');
             $table->string('logo');
+            $table->text('mission')->nullable();
+            $table->text('vision')->nullable();
+            $table->text('values')->nullable();
             $table->string('slug');
             $table->text('customization')->nullable();
             $table->timestamps();
