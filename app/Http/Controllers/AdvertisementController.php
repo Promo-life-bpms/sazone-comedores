@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Advertisement;
 use App\Models\DiningRoom;
+use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class AdvertisementController extends Controller
 {
+
     public function store(Request $request)
     {
         $request->validate([
@@ -52,5 +55,32 @@ class AdvertisementController extends Controller
         $advertisement->diningRooms()->attach($dining);
 
         return redirect()->back()->with('success_advertisment', 'Anuncio creado correctamente');
+    }
+    public function editAdvertisement(Request $request)
+    {
+
+        $dining_id = $request->input('dining_id');
+        $edit = Advertisement::find($dining_id);
+
+        if ($edit) {
+
+            $edit->title = $request->input('title');
+            $edit->description = $request->input('description');
+            $edit->vigencia = json_encode([
+                'start' => $request->input('start'),
+                'end' => $request->input('end'),
+            ]);
+            $edit->save();
+            return redirect()->back()->with('success_advertisment', 'editado correctamente');
+        } else {
+            'no se puede editar';
+        }
+    }
+    public function deleteAdvertisement(Request $request)
+    {
+
+        $dining_id = $request->input('dining_id');
+        $edit = Advertisement::find($dining_id);
+        $edit->delete();
     }
 }

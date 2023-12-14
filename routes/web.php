@@ -31,6 +31,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin');
     Route::post('/anuncios', [AdvertisementController::class, 'store'])->name('anuncios.store');
+    Route::post('/anuncios/editAdvertisement', [AdvertisementController::class, 'editAdvertisement'])->name('anuncios.editAdvertisement');
 });
 
 Route::prefix('super')->group(function () {
