@@ -7,6 +7,7 @@
     @foreach ($menuDays as $day)
         <input type="radio" name="tabs_days_menu" role="tab" class="tab" aria-label="{{ $day->day }}"
             {{ $loop->first ? 'checked' : '' }} />
+
         <div role="tabpanel" class="tab-content p-10">
             @if ($day->menus($diningRoom->id)->count() == 0)
                 <div role="alert" class="alert alert-warning">
