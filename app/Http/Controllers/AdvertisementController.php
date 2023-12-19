@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Advertisement;
 use App\Models\DiningRoom;
-use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class AdvertisementController extends Controller
 {
@@ -76,23 +74,23 @@ class AdvertisementController extends Controller
         $validator = Validator::make($request->all(), [
             'start_date_edit' => 'required',
             'end_date_edit' => 'required',
-            'advertisment_id_edit' => 'required',
             'advertisement_id_edit' => 'required'
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()
                 ->with('error_edit_advertisment', 'No se ha podido crear el anuncio')
+                ->with('anuncio_id', $request->advertisement_id_edit)
                 ->with('section', 'advertisements')
                 ->withErrors($validator->getMessageBag());
         }
 
-        $edit = Advertisement::find($request->input('advertisment_id_edit'));
+        $edit = Advertisement::find($request->input('advertisement_id_edit'));
         $dining = $edit->diningRooms()->first();
 
         if ($edit) {
-            $edit->title = $request->input('title_edit');
-            $edit->description = $request->input('description_edit');
+            $edit->title = $request->title_edit ?? $edit->title;
+            $edit->description = $request->description_edit ?? $edit->description;
             $edit->vigencia = json_encode([
                 'start' => $request->input('start_date_edit'),
                 'end' => $request->input('end_date_edit'),

@@ -31,8 +31,8 @@
                 @enderror
             </div>
             <div class="space-y-2">
-                <label for="" class="text-lg font-semibold">Video o Imagen</label>
-                <input type="file" name="file_advertisment"
+                <label for="" class="text-lg font-semibold">Imagen</label>
+                <input type="file" name="file_advertisment" accept="image/*"
                     class="file-input file-input-primary file-input-bordered w-full @error('file_advertisment') input-error @enderror" />
                 @error('file_advertisment')
                     <div class="text-red-500">

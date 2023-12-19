@@ -61,7 +61,9 @@
             </div>
         </div>
         <div class="collapse collapse-plus bg-base-200">
-            <input type="radio" name="my-accordion-3" />
+            <input type="radio" name="my-accordion-3"
+            @if (session('section')) {{ session('section') == 'cupones' ? 'checked' : '' }} @endif
+            />
             <div class="collapse-title text-xl font-medium">
                 Cupones
             </div>
@@ -70,7 +72,9 @@
             </div>
         </div>
         <div class="collapse collapse-plus bg-base-200">
-            <input type="radio" name="my-accordion-3" />
+            <input type="radio" name="my-accordion-3"
+            @if (session('section')) {{ session('section') == 'menu' ? 'checked' : '' }} @endif
+            />
             <div class="collapse-title text-xl font-medium">
                 Menu
             </div>
@@ -79,7 +83,9 @@
             </div>
         </div>
         <div class="collapse collapse-plus bg-base-200">
-            <input type="radio" name="my-accordion-3" />
+            <input type="radio" name="my-accordion-3"
+            @if (session('section')) {{ session('section') == 'usuarios' ? 'checked' : '' }} @endif
+            />
             <div class="collapse-title text-xl font-medium">
                 Usuarios
             </div>

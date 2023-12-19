@@ -81,7 +81,7 @@
     let anuncios = @json($advertisements);
     document.addEventListener("DOMContentLoaded", function() {
         let showModalAdvertisment = {{ session('error_advertisment') ? 'my_modal_anuncio.showModal()' : 0 }}
-        {{ session('error_edit_advertisment') ? 'editarAnunucio(' . old('advertisement_id_edit') . ')' : 0 }}
+        {{ session('error_edit_advertisment') ? 'editarAnunucio(' . session('anuncio_id') . ')' : 0 }}
         const alertAdvertisment = document.getElementById('alert_advertisment');
         if (alertAdvertisment) {
             setTimeout(() => {

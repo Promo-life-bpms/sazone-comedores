@@ -37,7 +37,7 @@
             </div>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Imagen</label>
-                <input type="file" name="file_advertisment_edit"
+                <input type="file" name="file_advertisment_edit" accept="image/*"
                     class="file-input file-input-primary file-input-bordered w-full @error('file_advertisment_edit') input-error @enderror" />
                 @error('file_advertisment_edit')
                     <div class="text-red-500">
