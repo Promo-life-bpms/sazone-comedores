@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -28,7 +30,7 @@
         @yield('content')
     </div>
     @if (!Auth::user()->hasRole(['super-admin', 'master-admin']))
-        @include('shared.soporte')
+        {{-- @include('shared.soporte') --}}
     @endif
     <script>
         var es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;

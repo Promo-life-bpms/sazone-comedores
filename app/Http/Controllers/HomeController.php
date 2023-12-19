@@ -25,18 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->hasRole(['super-admin', 'master-admin'])) {
+         if (auth()->user()->hasRole(['super-admin', 'master-admin'])) {
             return redirect()->route('dining.index');
         }
-        if (auth()->user()->hasRole('admin')) {
-            return redirect()->route('admin');
-        }
-        if (auth()->user()->hasRole('user')) {
+
+        if (auth()->user()->hasRole(['user', 'admin'])) {
             if (auth()->user()->profile ? auth()->user()->profile->diningRoom : false) {
                 return redirect()->route('dining.showUser');
             }
         }
-        // Return 404
+
         return abort(404, 'No tienes permisos para acceder a esta página o no tienes un comedor asignado');
     }
 

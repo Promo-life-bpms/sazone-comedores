@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\DiningRoom;
 use App\Models\Menu;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -19,26 +21,6 @@ class MenuController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -46,15 +28,23 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name_food' => 'required',
-            'description_food' => 'required',
-            'dining_id' => 'required',
-            'time_food' => 'required|in:desayuno,comida,cena',
-            'image_food' => 'required',
-            'availability_food' => 'required'
-        ]);
-
+        $validator =  Validator::make(
+            $request->all(),
+            [
+                'name_food' => 'required',
+                'description_food' => 'required',
+                'dining_id' => 'required',
+                'time_food' => 'required|in:desayuno,comida,cena',
+                'image_food' => 'required',
+                'availability_food' => 'required'
+            ]
+        );
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('error_menu', 'No se ha podido crear el anuncio')
+                ->with('section', 'menu')
+                ->withErrors($validator->getMessageBag());
+        }
         $dining = DiningRoom::find($request->dining_id);
 
         $menu = [
@@ -75,36 +65,18 @@ class MenuController extends Controller
         if ($file->isValid()) {
             Storage::putFileAs('public/' . $path, $file, $nameFile);
         } else {
-            return redirect()->back()->with('error', 'No se ha podido crear el platillo por un problema con la imagen');
+            return redirect()->back()
+                ->with('error_menu', 'No se ha podido crear el platillo por un problema con la imagen')
+                ->with('section', 'menu');
         }
 
         $menu = Menu::create($menu);
 
         $menu->daysAvailable()->attach($request->availability_food);
 
-        return redirect()->back()->with('success_food', 'Platillo creado correctamente');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Menu $menu)
-    {
-      
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Menu $menu)
-    {
-        //
+        return redirect()->back()
+            ->with('success_menu', 'Platillo creado correctamente')
+            ->with('section', 'menu');
     }
 
     /**
@@ -114,9 +86,61 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request)
     {
-        //
+        $validator =  Validator::make(
+            $request->all(),
+            [
+                'name_food_edit' => 'required',
+                'description_food_edit' => 'required',
+                'dining_id' => 'required',
+                'food_id' => 'required',
+                'time_food_edit' => 'required|in:desayuno,comida,cena',
+                'availability_food_edit' => 'required'
+            ]
+        );
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('error_menu_edit', 'No se ha podido editar el platillo')
+                ->with('section', 'menu')
+                ->with('menu_id', $request->food_id)
+                ->withErrors($validator->getMessageBag());
+        }
+        $menu = Menu::find($request->food_id);
+        $dining = DiningRoom::find($request->dining_id);
+
+        $menu->name = $request->name_food;
+        $menu->description = $request->description_food;
+        $menu->dining_room_id = $request->dining_id;
+        $menu->time = $request->time_food;
+        $menu->slug = Str::slug($request->name_food);
+
+        if ($request->hasFile('image_food_edit')) {
+            $file = $request->file('image_food_edit');
+
+            $nameFile = $menu->slug . '_menu.' . $file->getClientOriginalExtension();
+            $path = 'dining_room/' . $dining->slug . "/menu/";
+
+            $menu->image = $path . $nameFile;
+
+            if ($file->isValid()) {
+                //delete old file
+                Storage::delete('public/' . $menu->image);
+                Storage::putFileAs('public/' . $path, $file, $nameFile);
+            } else {
+                return redirect()->back()
+                    ->with('error_menu', 'No se ha podido crear el platillo por un problema con la imagen')
+                    ->with('section', 'menu');
+            }
+        }
+
+        $menu->save();
+
+        $menu->daysAvailable()->sync($request->availability_food);
+
+        return redirect()->back()
+            ->with('success_menu', 'Platillo actualizado correctamente')
+            ->with('section', 'menu');
     }
 
     /**
@@ -125,9 +149,13 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy(Request $request)
     {
-        //
+        $dining_id = $request->menu_id;
+        $menu = Menu::find($dining_id);
+        $menu->daysAvailable()->detach();
+        $menu->delete();
+        return response()->json(['success' => 'Eliminado correctaente'], 200);
     }
 
     public function import(Request $request)
@@ -156,13 +184,6 @@ class MenuController extends Controller
             $numeroMayorDeFila = $hojaActual->getHighestRow();
 
             $menus = [];
-            $menu = [
-                'name' => $request->name_food,
-                'description' => $request->description_food,
-                'dining_room_id' => $request->dining_id,
-                'time' => $request->time_food,
-                'slug' => Str::slug($request->name_food),
-            ];
 
             $errors = [];
             for ($indiceFila = 3; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
