@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\DiningRoomController;
 use App\Http\Controllers\MenuController;
+use App\Models\Advertisement;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,9 +32,11 @@ Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])
 
 Route::prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
+    Route::post('/user/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin');
     Route::post('/anuncios', [AdvertisementController::class, 'store'])->name('anuncios.store');
     Route::post('/anuncios/editAdvertisement', [AdvertisementController::class, 'editAdvertisement'])->name('anuncios.editAdvertisement');
+    Route::delete('/anuncios/delete', [AdvertisementController::class, 'deleteAdvertisement'])->name('anuncios.delete');
 });
 
 Route::prefix('super')->group(function () {
