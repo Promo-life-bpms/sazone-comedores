@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -22,6 +24,12 @@
     <main class="max-w-sm mx-auto shadow-lg rounded-lg px-8 py-4">
         @yield('content')
     </main>
+    <script>
+        var es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+        if (es_firefox) {
+            alert("El navegador que se está utilizando es Firefox");
+        }
+    </script>
 </body>
 
 </html>

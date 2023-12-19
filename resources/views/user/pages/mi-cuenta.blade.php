@@ -11,8 +11,20 @@
     </div>
     <div class="mt-32 space-y-5">
         <p><strong>Nombre: </strong> {{ auth()->user()->name }} </p>
-        <p><strong>Apellidos: </strong> {{ auth()->user()->name }} </p>
-        <p><strong>Puesto: </strong> {{ auth()->user()->name }} </p>
-        <button class="btn btn-primary w-full btn-outline">CERRAR SESION</button>
+        {{-- <p><strong>Puesto: </strong> {{ auth()->user()->name }} </p> --}}
+        {{-- Cerrar sesion --}}
+        <button class="btn btn-primary w-full btn-outline" onclick="cerrarSesion()">CERRAR SESION</button>
+        <form action="{{ route('logout') }}" method="POST" id="logout-form">
+            @csrf
+            @method('POST')
+        </form>
+
     </div>
+    <script>
+        function cerrarSesion() {
+            if (confirm('¿Estas seguro de cerrar sesion?')) {
+                document.getElementById('logout-form').submit();
+            }
+        }
+    </script>
 @endsection

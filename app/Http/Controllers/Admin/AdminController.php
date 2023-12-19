@@ -22,6 +22,6 @@ class AdminController extends Controller
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
 
-        return view('admin.pages.home', compact('diningRoom', 'users', 'menuDays', 'advertisements'));
+        return view('admin.home', compact('diningRoom', 'users', 'menuDays', 'advertisements'));
     }
 }

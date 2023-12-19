@@ -25,30 +25,57 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $diningRoom = DiningRoom::first();
-        $menuDays = DayFood::all();
+         if (auth()->user()->hasRole(['super-admin', 'master-admin'])) {
+            return redirect()->route('dining.index');
+        }
+
+        if (auth()->user()->hasRole(['user', 'admin'])) {
+            if (auth()->user()->profile ? auth()->user()->profile->diningRoom : false) {
+                return redirect()->route('dining.showUser');
+            }
+        }
+
+        return abort(404, 'No tienes permisos para acceder a esta página o no tienes un comedor asignado');
+    }
+
+    public function comedor()
+    {
+        $diningRoom = auth()->user()->profile->diningRoom;
+        // Obtener el dia de hoy entre moday y friday con su nombre
+        $today = date('l');
+        $today = strtolower($today);
+        $today = ucfirst($today);
+        $day = DayFood::where('slug', $today)->first();
         $advertisements = $diningRoom->advertisements;
 
-        return view('user.pages.home', compact('diningRoom', 'menuDays', 'advertisements'));
+        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements'));
     }
 
     public function cupones()
     {
-        return view('user.pages.cupones');
+        $diningRoom = auth()->user()->profile->diningRoom;
+        return view('user.pages.cupones', compact('diningRoom'));
     }
 
     public function menu()
     {
-        return view('user.pages.menu');
+        $menuDays = DayFood::all();
+        $diningRoom = auth()->user()->profile->diningRoom;
+        return view('user.pages.menu', compact('menuDays', 'diningRoom'));
     }
 
     public function acerca()
     {
-        return view('user.pages.acerca-de');
+        $diningRoom = auth()->user()->profile->diningRoom;
+        return view('user.pages.acerca-de', compact('diningRoom'));
     }
 
     public function cuenta()
     {
-        return view('user.pages.mi-cuenta');
+        $diningRoom = '';
+        if (!(auth()->user()->hasRole(['super-admin', 'master-admin']))) {
+            $diningRoom = auth()->user()->profile->diningRoom;
+        }
+        return view('user.pages.mi-cuenta', compact('diningRoom'));
     }
 }

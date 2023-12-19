@@ -15,6 +15,9 @@ class DiningRoom extends Model
         'status',
         'logo',
         'slug',
+        'mission',
+        'vision',
+        'values',
         'customization',
     ];
 
