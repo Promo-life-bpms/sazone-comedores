@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -82,7 +83,6 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**
@@ -91,9 +91,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
 
+        $user_id = $request->input('dining_id');
+        DB::table('users')->where('id', $user_id)->update(['name' => $request->name]);
+        return redirect()->back()->with('success_advertisment', 'editado correctamente');
     }
 
     /**

@@ -12,14 +12,11 @@ use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 class AdvertisementController extends Controller
 {
 
-<<<<<<< HEAD
-=======
     public function __construct()
     {
         $this->middleware('auth');
     }
 
->>>>>>> 6ec5eba2888611ca73f820708bc404362198011e
     public function store(Request $request)
     {
         $request->validate([
@@ -84,9 +81,16 @@ class AdvertisementController extends Controller
     }
     public function deleteAdvertisement(Request $request)
     {
-
+        dd(1);
         $dining_id = $request->input('dining_id');
         $edit = Advertisement::find($dining_id);
-        $edit->delete();
+
+        if ($edit) {
+            $edit->delete();
+
+            return response()->json(['success' => true, 'message' => 'Anuncio eliminado correctamente']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'No se pudo encontrar el anuncio']);
+        }
     }
 }
