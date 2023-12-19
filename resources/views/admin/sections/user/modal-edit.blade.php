@@ -15,15 +15,15 @@
                 <span>{{ session('success_user_create') }}</span>
             </div>
         @endif
-        <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data" class="space-y-3">
-            @method('POST')
+        <form method="POST" action="{{ route('users.update') }}" enctype="multipart/form-data" class="space-y-3">
+            @method('PUT')
             @csrf
-            <input type="hidden" name="dining_id" value="{{ $diningRoom->id }}">
+            <input type="hidden" name="user_id" value="{{ $user->id }}">
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Nombre</label>
-                <input type="text" name="name" placeholder="Ingrese el nombre del colaborador"
-                    class="input input-bordered w-full @error('email') input-error @enderror" />
-                @error('name')
+                <input type="text" name="name_user_edit" placeholder="Ingrese el nombre del colaborador"
+                    class="input input-bordered w-full @error('name_user_edit') input-error @enderror" />
+                @error('name_user_edit')
                     <div class="text-red-500">
                         {{ $message }}
                     </div>
@@ -31,19 +31,10 @@
             </div>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Correo</label>
-                <input type="email" name="email" placeholder="Ingrese el correo del colaborador" autocomplete="off"
-                    class="input input-bordered w-full @error('email') input-error @enderror" />
-                @error('email')
-                    <div class="text-red-500">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="space-y-2">
-                <label for="" class="text-lg font-semibold">Establecer Contraseña</label>
-                <input type="password" name="password" placeholder="Ingrese la contraseña del colaborador"
-                    autocomplete="off" class="input input-bordered w-full @error('email') input-error @enderror" />
-                @error('password')
+                <input type="email" name="email_user_edit" placeholder="Ingrese el correo del colaborador"
+                    autocomplete="off"
+                    class="input input-bordered w-full @error('email_user_edit') input-error @enderror" />
+                @error('email_user_edit')
                     <div class="text-red-500">
                         {{ $message }}
                     </div>
@@ -54,18 +45,18 @@
                 <div class="grid grid-cols-2">
                     <div class="col-span-1">
                         <label class="label justify-start gap-1 cursor-pointer">
-                            <input type="checkbox" name="type" value="dining_manager" ch
+                            <input type="checkbox" name="type_user_edit" value="dining_manager" ch
                                 class="checkbox h-4 w-4 rounded-md" />
                             <span class="label-text">Administrador</span>
                         </label>
                         <label class="label justify-start gap-1 cursor-pointer">
-                            <input type="checkbox" name="type" value="collaborator" ch
+                            <input type="checkbox" name="type_user_edit" value="collaborator" ch
                                 class="checkbox h-4 w-4 rounded-md" />
                             <span class="label-text">Colaborador</span>
                         </label>
                     </div>
                 </div>
-                @error('type')
+                @error('type_user_edit')
                     <div class="text-red-500">
                         {{ $message }}
                     </div>
@@ -74,8 +65,21 @@
             <br><br>
 
             <div class="space-y-2">
-                <button class="btn btn-primary w-full uppercase" type="submit">Guardar</button>
+                <button class="btn btn-primary w-full uppercase" type="submit">Editar</button>
             </div>
         </form>
     </div>
 </dialog>
+<script>
+    function editUser(id) {
+        // Obtener el anuncio
+        let user = users.find((user) => user.id == id);
+        // abrir el modal
+        modal_edit_user.showModal();
+
+        // llenar los campos
+        document.querySelector('input[name="name_user_edit"]').value = user.name;
+        document.querySelector('input[name="email_user_edit"]').value = user.email;
+        document.querySelector('input[name="type_user_edit"]').value = user.profile.type;
+    }
+</script>

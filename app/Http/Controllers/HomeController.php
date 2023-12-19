@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->hasRole(['super-admin', 'master-admin'])) {
+         if (auth()->user()->hasRole(['super-admin', 'master-admin'])) {
             return redirect()->route('dining.index');
         }
 

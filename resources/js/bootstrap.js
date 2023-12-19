@@ -36,7 +36,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // });
 
 // main.js
-if ('serviceWorker' in navigator) {
+/* if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js')
         .then((registration) => {
             console.log('Service Worker registrado con éxito:', registration);
@@ -45,3 +45,4 @@ if ('serviceWorker' in navigator) {
             console.log('Error al registrar el Service Worker:', error);
         });
 }
+ */
