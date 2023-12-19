@@ -18,7 +18,7 @@
         <form method="POST" action="{{ route('users.update') }}" enctype="multipart/form-data" class="space-y-3">
             @method('PUT')
             @csrf
-            <input type="hidden" name="user_id" value="{{ $user->id }}">
+            <input type="hidden" name="user_id" value="">
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Nombre</label>
                 <input type="text" name="name_user_edit" placeholder="Ingrese el nombre del colaborador"
@@ -78,6 +78,7 @@
         modal_edit_user.showModal();
 
         // llenar los campos
+        document.querySelector('input[name="user_id"]').value = user.id;
         document.querySelector('input[name="name_user_edit"]').value = user.name;
         document.querySelector('input[name="email_user_edit"]').value = user.email;
         document.querySelector('input[name="type_user_edit"]').value = user.profile.type;

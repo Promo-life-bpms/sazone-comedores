@@ -39,7 +39,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="space-y-2">
+            {{-- <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Establecer Contraseña</label>
                 <input type="password" name="password" placeholder="Ingrese la contraseña del colaborador"
                     autocomplete="off" class="input input-bordered w-full @error('email') input-error @enderror" />
@@ -48,7 +48,7 @@
                         {{ $message }}
                     </div>
                 @enderror
-            </div>
+            </div> --}}
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Tipo de usuario</label>
                 <div class="grid grid-cols-2">

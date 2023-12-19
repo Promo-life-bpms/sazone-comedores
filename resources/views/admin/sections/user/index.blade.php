@@ -5,6 +5,16 @@
     {{-- <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" /> --}}
 </div>
 <br>
+@if (session('success_user_create'))
+    <div role="alert" class="alert alert-success" id="alert_advertisment">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>{{ session('success_user_create') }}</span>
+    </div>
+@endif
 <div class="overflow-x-auto">
     <table class="table">
         <!-- head -->
@@ -42,13 +52,13 @@
                                         d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                                 </svg>
                             </button>
-                            <button class="btn btn-circle btn-ghost btn-xs" onclick="editUser({{ $user->id }})">
+                            {{-- <button class="btn btn-circle btn-ghost btn-xs" onclick="editUser({{ $user->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                 </svg>
-                            </button>
+                            </button> --}}
                             <button class="btn btn-circle btn-ghost btn-xs" onclick="deleteUser({{ $user->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -69,8 +79,12 @@
 <script>
     let users = @json($users);
     document.addEventListener("DOMContentLoaded", function(event) {
-
+        let showModalUser = {{ session('error_user') ? 'modal_add_user.showModal()' : 0 }}
+        // {{ session('error_user_edit') ? 'editarMenu(' . session('menu_id') . ')' : 0 }}
+        /* modal_add_food.showModal() */
+        let errorImport = {{ session('error_user_import') ? 'modal_import_user.showModal()' : 0 }}
     });
+
     function deleteUser(id) {
         Swal.fire({
             title: "¿Estas seguro de que quieres eliminar este usuario?",

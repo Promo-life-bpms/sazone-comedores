@@ -158,7 +158,7 @@ class MenuController extends Controller
         return response()->json(['success' => 'Eliminado correctaente'], 200);
     }
 
-    public function importMenu(Request $request)
+    public function import(Request $request)
     {
         $request->validate([
             'file_food' => 'required|mimes:xlsx,xls,csv',

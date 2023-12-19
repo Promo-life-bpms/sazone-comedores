@@ -37,7 +37,7 @@ Route::prefix('admin')->group(function () {
     Route::put('/users/update', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/delete', [UserController::class, 'destroy'])->name('users.deleteUser');
     Route::post('/users/send-access', [UserController::class, 'sendAccess'])->name('users.sendAccess');
-    Route::get('/users/import', [UserController::class, 'import'])->name('users.import');
+    Route::post('/users/import', [UserController::class, 'import'])->name('users.import');
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     Route::post('/anuncios', [AdvertisementController::class, 'store'])->name('anuncios.store');
     Route::post('/anuncios/editAdvertisement', [AdvertisementController::class, 'editAdvertisement'])->name('anuncios.editAdvertisement');

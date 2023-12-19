@@ -1,5 +1,5 @@
 <div class="flex justify-end gap-3">
-    <button class="btn btn-primary" onclick="modal_import_food.showModal()">Importar Archivo</button>
+    {{-- <button class="btn btn-primary" onclick="modal_import_food.showModal()">Importar Archivo</button> --}}
     <button class="btn btn-primary" onclick="modal_add_food.showModal()">Agregar Platillo</button>
 </div>
 <br>

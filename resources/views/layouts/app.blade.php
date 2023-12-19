@@ -30,7 +30,7 @@
         @yield('content')
     </div>
     @if (!Auth::user()->hasRole(['super-admin', 'master-admin']))
-        @include('shared.soporte')
+        {{-- @include('shared.soporte') --}}
     @endif
     <script>
         var es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;

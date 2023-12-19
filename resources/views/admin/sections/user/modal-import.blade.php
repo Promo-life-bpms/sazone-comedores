@@ -4,14 +4,14 @@
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
         <h3 class="font-bold text-lg text-center">Importar Archivo de Usuarios</h3>
-        @if (session('success_import_create'))
-            <div role="alert" class="alert alert-success">
+        @if (session('error_user_import'))
+            <div role="alert" class="alert alert-error" id="alert_advertisment">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>{{ session('success_user_create') }}</span>
+                <span>{{ session('error_user_import') }}</span>
             </div>
         @endif
         <form method="POST" action="{{ route('users.import') }}" enctype="multipart/form-data" class="space-y-3">

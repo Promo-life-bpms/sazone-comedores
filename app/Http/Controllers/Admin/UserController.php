@@ -34,7 +34,6 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email',
-            'password' => 'required',
             'type' => 'required|in:dining_manager,collaborator',
             'dining_id' => 'required'
         ]);
@@ -42,7 +41,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt("defaultpass")
         ]);
 
         $user->profile()->create([
@@ -59,7 +58,9 @@ class UserController extends Controller
             $user->attachRole($role);
         }
 
-        return redirect()->back()->with('success_user_create', 'Usuario creado correctamente');
+        return redirect()->back()
+            ->with('section', 'usuarios')
+            ->with('success_user_create', 'Usuario creado correctamente');
     }
 
     /**
@@ -110,13 +111,18 @@ class UserController extends Controller
     // Importtar usuarios, similar a importar menu
     public function import(Request $request)
     {
-        $request->validate([
-            'file_user' => 'required|mimes:xlsx,xls,csv',
+        $validator = Validator::make($request->all(), [
+            'file_users' => 'required|mimes:xlsx,xls,csv',
             'dining_id' => 'required'
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('section', 'usuarios')
+                ->with('error_user_import', 'No se ha podido importar el archivo por un problema con los datos');
+        }
 
         $dining = DiningRoom::find($request->dining_id);
-        $file = $request->file('file_user');
+        $file = $request->file('file_users');
         $nameFile = $dining->slug . (string)(date('Ymd')) . '_import.' . $file->getClientOriginalExtension();
         $path = 'dining_room/' . $dining->slug . "/";
 
@@ -131,12 +137,12 @@ class UserController extends Controller
             $numeroMayorDeFila = $hojaActual->getHighestRow();
             $users = [];
             $errors = [];
-            for ($indiceFila = 3; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
+            for ($indiceFila = 2; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
                 $user['name'] = $hojaActual->getCell('A' . $indiceFila)->getValue();
                 $user['email'] = $hojaActual->getCell('B' . $indiceFila)->getValue();
-                $user['password'] = $hojaActual->getCell('C' . $indiceFila)->getValue();
-                $user['dining_room_id'] = $request->dining_id;
-                $user['type'] = $hojaActual->getCell('D' . $indiceFila)->getValue();
+                $user['dining_room_id'] = $dining->id;
+                $user['password'] = "DefaultPass";
+                $user['type'] = $hojaActual->getCell('C' . $indiceFila)->getValue();
 
                 // Validar con Validator
                 $validator = Validator::make($user, [
@@ -157,13 +163,15 @@ class UserController extends Controller
             }
 
             if (count($errors) > 0) {
-                return redirect()->back()->with('error_user', 'No se ha podido importar el archivo por un problema con los datos');
+                return redirect()->back()
+                    ->with('section', 'usuarios')
+                    ->with('error_user_import', 'No se ha podido importar el archivo por un problema con los datos');
             }
 
             foreach ($users as $userData) {
                 $user = User::create($userData);
                 $user->profile()->create([
-                    'dining_room_id' => $request->dining_id,
+                    'dining_room_id' => $dining->id,
                     'type' => $userData['type'],
                 ]);
 
@@ -179,7 +187,9 @@ class UserController extends Controller
 
             // Delete file
             Storage::delete('public/' . $path . $nameFile);
-            return redirect()->back()->with('success_user_import', 'Se ha importado correctamente el archivo');
+            return redirect()->back()
+                ->with('section', 'usuarios')
+                ->with('success_user_create', 'Se ha importado correctamente el archivo');
         }
     }
 }
