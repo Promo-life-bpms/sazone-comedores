@@ -21,8 +21,8 @@
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Nombre</label>
                 <input type="text" name="name_food" placeholder="Taquitos al pastor"
-                    class="input input-bordered w-full @error('name') input-error @enderror" />
-                @error('name')
+                    class="input input-bordered w-full @error('name_food') input-error @enderror" />
+                @error('name_food')
                     <div class="text-red-500">
                         {{ $message }}
                     </div>
@@ -41,7 +41,7 @@
             </div>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Imagen</label>
-                <input type="file" name="image_food"
+                <input type="file" name="image_food" accept="image/*"
                     class="file-input file-input-primary file-input-bordered w-full @error('image_food') input-error @enderror" />
                 @error('image_food')
                     <div class="text-red-500">

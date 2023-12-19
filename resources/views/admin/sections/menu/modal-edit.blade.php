@@ -18,9 +18,10 @@
             @method('PUT')
             @csrf
             <input type="hidden" name="food_id" value="" id="food_id" autocomplete="off">
+            <input type="hidden" name="food_id" value="{{ $diningRoom->id }}" id="dining_id" autocomplete="off">
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Nombre</label>
-                <input type="text" name="name_food_edit" placeholder="Taquitos al pastor"
+                <input type="text" name="name_food_edit" id="name_food_edit" placeholder="Taquitos al pastor"
                     class="input input-bordered w-full @error('name_food_edit') input-error @enderror" />
                 @error('name_food_edit')
                     <div class="text-red-500">
@@ -123,11 +124,11 @@
 </dialog>
 <script>
     function editarMenu(id) {
-        console.log(id);
         // Obtener el anuncio
         let menu = allMenu.find((menu) => menu.id == id);
+        console.log(id, menu);
         // abrir el modal
-        edit_modal_anuncio.showModal();
+        modal_edit_food.showModal();
 
         // llenar los campos
         document.getElementById('food_id').value = menu.id;
@@ -135,7 +136,13 @@
         document.getElementById('description_food_edit').value = menu.description;
         document.getElementById('time_food_edit').value = menu.time;
         document.getElementById('image_food_edit').src = "/storage/" + menu.image;
-        let availability = JSON.parse(menu.availability);
-
+        let checkDays = document.querySelectorAll('.check-days');
+        checkDays.forEach((checkDay) => {
+            menu.days_available.forEach((day) => {
+                if (checkDay.value == day.id) {
+                    checkDay.checked = true;
+                }
+            });
+        });
     }
 </script>

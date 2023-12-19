@@ -32,6 +32,7 @@ class DiningRoomController extends Controller
         $allFood = [];
         foreach ($menuDays as $day) {
             foreach ($day->menus($diningRoom->id) as $food) {
+                $food->daysAvailable;
                 $allFood[] = $food;
             }
         }

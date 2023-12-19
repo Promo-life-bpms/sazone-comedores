@@ -3,6 +3,16 @@
     <button class="btn btn-primary" onclick="modal_add_food.showModal()">Agregar Platillo</button>
 </div>
 <br>
+@if (session('success_menu'))
+    <div role="alert" class="alert alert-success" id="alert_advertisment">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>{{ session('success_menu') }}</span>
+    </div>
+@endif
 <div role="tablist" class="tabs tabs-bordered grid grid-cols-6">
     @foreach ($menuDays as $day)
         <input type="radio" name="tabs_days_menu" role="tab" class="tab" aria-label="{{ $day->day }}"
@@ -25,20 +35,18 @@
                         <div class="rounded-xl relative cursor-pointer ">
                             <img src="{{ asset('storage/' . $food->image) }}"
                                 class="object-cover w-full h-40 rounded-xl" alt="">
-                            <div
-                                class="absolute bottom-0 rounded-xl h-40 bg-[#00000075] w-full p-2 text-white">
+                            <div class="absolute bottom-0 rounded-xl h-40 bg-[#00000075] w-full p-2 text-white">
                                 <div class="flex w-full justify-between flex-col h-full">
                                     {{-- Boton de eliminar y editar --}}
                                     <div class="flex justify-end">
-                                        <button class="btn btn-circle btn-ghost btn-xs"
-                                            onclick="editarAnunucio({{ $food->id }})">
-
+                                        {{-- <button class="btn btn-circle btn-ghost btn-xs"
+                                            onclick="editarMenu({{ $food->id }})">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                             </svg>
-                                        </button>
+                                        </button> --}}
                                         <button class="btn btn-circle btn-ghost btn-xs"
                                             onclick="deleteFood({{ $food->id }})">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -66,16 +74,10 @@
 <script>
     let allMenu = @json($allFood);
     document.addEventListener("DOMContentLoaded", function() {
+        let showModalMenu = {{ session('error_menu') ? 'modal_add_food.showModal()' : 0 }}
+        {{ session('error_menu_edit') ? 'editarMenu(' . session('menu_id') . ')' : 0 }}
         /* modal_add_food.showModal() */
-        let errorImport = {{ session('error_food') ? 1 : 0 }}
-        let successImport = {{ session('success_import') ? 1 : 0 }}
-        if (errorImport) {
-            modal_import_food.showModal()
-        }
-
-        if (successImport) {
-            modal_import_food.showModal()
-        }
+        let errorImport = {{ session('error_food') ? modal_import_food . showModal() : 0 }}
     });
 
     function deleteFood(id) {
