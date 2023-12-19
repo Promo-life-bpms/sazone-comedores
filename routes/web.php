@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DiningRoomController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 Auth::routes();
+Route::get('/loginEmail', [LoginController::class, 'loginWithLink'])->name('loginWithLink');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/mi-comedor', [App\Http\Controllers\HomeController::class, 'comedor'])->name('dining.showUser');
@@ -30,10 +33,13 @@ Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])
 
 Route::prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
+    Route::delete('/users/delete', [UserController::class, 'destroy'])->name('users.deleteUser');
+    Route::post('/users/send-access', [UserController::class, 'sendAccess'])->name('users.sendAccess');
     Route::get('/users/import', [UserController::class, 'import'])->name('users.import');
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin');
     Route::post('/anuncios', [AdvertisementController::class, 'store'])->name('anuncios.store');
     Route::post('/anuncios/editAdvertisement', [AdvertisementController::class, 'editAdvertisement'])->name('anuncios.editAdvertisement');
+    Route::delete('/anuncios/delete', [AdvertisementController::class, 'deleteAdvertisement'])->name('anuncios.deleteAdvertisement');
 });
 
 Route::prefix('super')->group(function () {
@@ -45,5 +51,5 @@ Route::prefix('super')->group(function () {
     Route::post('/menus', [MenuController::class, 'store'])->name('menu.store');
     Route::put('/menus/update', [MenuController::class, 'store'])->name('menu.update');
     Route::post('/menus/import', [MenuController::class, 'import'])->name('menu.import');
-    Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
+    Route::delete('/menus/delete', [MenuController::class, 'destroy'])->name('menu.destroy');
 });

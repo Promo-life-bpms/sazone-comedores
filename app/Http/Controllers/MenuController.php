@@ -85,9 +85,13 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy(Request $request)
     {
-        //
+        $dining_id = $request->menu_id;
+        $menu = Menu::find($dining_id);
+        $menu->daysAvailable()->detach();
+        $menu->delete();
+        return response()->json(['success' => 'Eliminado correctaente'], 200);
     }
 
     public function importMenu(Request $request)

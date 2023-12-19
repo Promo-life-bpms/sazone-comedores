@@ -101,13 +101,36 @@
             confirmButtonText: "Eliminar"
         }).then((result) => {
             if (result.isConfirmed) {
-                eliminarAnuncio();
+                elminarAnuncio(id)
+            }
+        });
+    }
+
+    async function elminarAnuncio(id) {
+        let url = "{{ route('anuncios.deleteAdvertisement') }}";
+        await axios.delete(url, {
+            data: {
+                anuncio_id: id
+            }
+        }).then((response) => {
+            console.log(response);
+            if (response.status == 200) {
                 Swal.fire({
                     title: "Eliminado!",
                     text: "Se ha eliminiado correctamente el anuncio",
                     icon: "success"
                 });
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
             }
+        }).catch((error) => {
+            console.error(error);
+            Swal.fire({
+                title: "Error!",
+                text: "No se ha podido eliminar el anuncio",
+                icon: "error"
+            });
         });
     }
 </script>

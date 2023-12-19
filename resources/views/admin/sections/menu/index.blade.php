@@ -40,7 +40,7 @@
                                             </svg>
                                         </button>
                                         <button class="btn btn-circle btn-ghost btn-xs"
-                                            onclick="deleteAnuncio({{ $food->id }})">
+                                            onclick="deleteFood({{ $food->id }})">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -77,4 +77,48 @@
             modal_import_food.showModal()
         }
     });
+
+    function deleteFood(id) {
+        Swal.fire({
+            title: "¿Estas seguro de que quieres eliminar este platillo?",
+            text: "Se eliminara de los dias que hayan seleccionado",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Eliminar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                elminarFood(id)
+            }
+        });
+    }
+
+    async function elminarFood(id) {
+        let url = "{{ route('menu.destroy') }}";
+        await axios.delete(url, {
+            data: {
+                menu_id: id
+            }
+        }).then((response) => {
+            console.log(response);
+            if (response.status == 200) {
+                Swal.fire({
+                    title: "Eliminado!",
+                    text: "Se ha eliminiado correctamente el platillo",
+                    icon: "success"
+                });
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }
+        }).catch((error) => {
+            console.error(error);
+            Swal.fire({
+                title: "Error!",
+                text: "No se ha podido eliminar el platillo",
+                icon: "error"
+            });
+        });
+    }
 </script>

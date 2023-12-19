@@ -125,8 +125,10 @@ class AdvertisementController extends Controller
     }
     public function deleteAdvertisement(Request $request)
     {
-        $dining_id = $request->input('dining_id');
-        $edit = Advertisement::find($dining_id);
-        $edit->delete();
+        $dining_id = $request->anuncio_id;
+        $anuncio = Advertisement::find($dining_id);
+        $anuncio->diningRooms()->detach();
+        $anuncio->delete();
+        return response()->json(['success' => 'Eliminado correctaente'], 200);
     }
 }
