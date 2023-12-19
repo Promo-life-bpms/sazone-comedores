@@ -12,14 +12,11 @@ use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 class AdvertisementController extends Controller
 {
 
-<<<<<<< HEAD
-=======
     public function __construct()
     {
         $this->middleware('auth');
     }
 
->>>>>>> 6ec5eba2888611ca73f820708bc404362198011e
     public function store(Request $request)
     {
         $request->validate([

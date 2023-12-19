@@ -138,8 +138,8 @@
     </div>
 </dialog>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    /* document.addEventListener("DOMContentLoaded", function() {
         let showModalUser = {{ session('success_user_create') ? 'my_modal_4.showModal()' : false }}
 
-    });
+    }); */
 </script>
