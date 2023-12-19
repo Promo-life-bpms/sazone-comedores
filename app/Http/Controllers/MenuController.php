@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\DiningRoom;
 use App\Models\Menu;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -16,26 +18,6 @@ class MenuController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -86,28 +68,6 @@ class MenuController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Menu $menu)
-    {
-      
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Menu $menu)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -130,7 +90,7 @@ class MenuController extends Controller
         //
     }
 
-    public function import(Request $request)
+    public function importMenu(Request $request)
     {
         $request->validate([
             'file_food' => 'required|mimes:xlsx,xls,csv',
@@ -156,13 +116,6 @@ class MenuController extends Controller
             $numeroMayorDeFila = $hojaActual->getHighestRow();
 
             $menus = [];
-            $menu = [
-                'name' => $request->name_food,
-                'description' => $request->description_food,
-                'dining_room_id' => $request->dining_id,
-                'time' => $request->time_food,
-                'slug' => Str::slug($request->name_food),
-            ];
 
             $errors = [];
             for ($indiceFila = 3; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {

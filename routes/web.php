@@ -30,6 +30,7 @@ Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])
 
 Route::prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
+    Route::get('/users/import', [UserController::class, 'import'])->name('users.import');
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin');
     Route::post('/anuncios', [AdvertisementController::class, 'store'])->name('anuncios.store');
     Route::post('/anuncios/editAdvertisement', [AdvertisementController::class, 'editAdvertisement'])->name('anuncios.editAdvertisement');
@@ -40,6 +41,9 @@ Route::prefix('super')->group(function () {
     Route::get('/dinings/{diningRoom}', [DiningRoomController::class, 'show'])->name('dining.show');
     Route::post('/dinings', [DiningRoomController::class, 'store'])->name('dining.store');
     Route::put('/dinings/{dining}/update-details-general', [DiningRoomController::class, 'updateGeneralDetails'])->name('dining.updateDetailsGeneral');
+
     Route::post('/menus', [MenuController::class, 'store'])->name('menu.store');
+    Route::put('/menus/update', [MenuController::class, 'store'])->name('menu.update');
     Route::post('/menus/import', [MenuController::class, 'import'])->name('menu.import');
+    Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
 });
