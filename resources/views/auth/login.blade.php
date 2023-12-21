@@ -25,14 +25,8 @@
                     {{ $message }}
                 </div>
             @enderror
-            @if (Route::has('password.request'))
-                <div class="text-right h-16">
-                    <a class="" href="{{ route('password.request') }}">
-                        ¿Olvidaste tu contraseña?
-                    </a>
-                </div>
-            @endif
         </div>
+        <div class="g-recaptcha" data-sitekey="{{ env('KEY_CAPTCHA_SITE_KEY', 0) }}" data-size="invisible"></div>
         <div class="space-y-2">
             <button class="btn btn-primary w-full" type="submit">INICIAR SESION</button>
         </div>
