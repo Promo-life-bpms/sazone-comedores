@@ -94,8 +94,10 @@ class UserController extends Controller
     public function edit(Request $request)
     {
 
-        $user_id = $request->input('dining_id');
-        DB::table('users')->where('id', $user_id)->update(['name' => $request->name]);
+        $user_id = $request->input('user_id');
+
+        DB::table('users')->where('id', $user_id)->update(['name' => $request->name, 'email' => $request->email]);
+
         return redirect()->back()->with('success_advertisment', 'editado correctamente');
     }
 
@@ -120,5 +122,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function deleteUser(Request $request, $user_id)
+    {
+        $edit = User::find($user_id);
+
+        if ($edit !== 1) {
+            $d =  $edit->status = 0;
+            $edit->save();
+        }
+        return redirect()->back()->with('success_advertisment', 'eliminado correctamente');
     }
 }

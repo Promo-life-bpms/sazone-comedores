@@ -19,6 +19,7 @@ return new class extends Migration
             $table->mediumText('description')->nullable();
             $table->mediumText('resource');
             $table->mediumText('vigencia');
+            $table->integer('status');
             $table->timestamps();
         });
     }

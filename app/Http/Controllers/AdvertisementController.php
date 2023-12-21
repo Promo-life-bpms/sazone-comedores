@@ -35,6 +35,7 @@ class AdvertisementController extends Controller
                 'start' => $request->start,
                 'end' => $request->end
             ]),
+            'status' => $request->status,
             'dining_room_id' => $request->dining_id,
         ];
 
@@ -79,18 +80,18 @@ class AdvertisementController extends Controller
             'no se puede editar';
         }
     }
-    public function deleteAdvertisement(Request $request)
+
+
+
+
+    public function deleteAdvertisement(Request $request, $advertisement_id)
     {
-        dd(1);
-        $dining_id = $request->input('dining_id');
-        $edit = Advertisement::find($dining_id);
+        $edit = Advertisement::find($advertisement_id);
 
-        if ($edit) {
-            $edit->delete();
-
-            return response()->json(['success' => true, 'message' => 'Anuncio eliminado correctamente']);
-        } else {
-            return response()->json(['success' => false, 'message' => 'No se pudo encontrar el anuncio']);
+        if ($edit !== 1) {
+            $d =  $edit->status = 0;
+            $edit->save();
         }
+        return redirect()->back()->with('success_advertisment', 'eliminado correctamente');
     }
 }

@@ -14,6 +14,7 @@ class Advertisement extends Model
         'description',
         'resource',
         'vigencia',
+        'status'
     ];
 
     public function diningRooms()
