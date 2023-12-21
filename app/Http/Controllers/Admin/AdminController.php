@@ -17,11 +17,19 @@ class AdminController extends Controller
 
     public function index()
     {
-        $diningRoom = DiningRoom::first();
+        $diningRoom = DiningRoom::find(auth()->user()->profile->dining_room_id);
         $users = $diningRoom->users;
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
+        $allFood = [];
+        foreach ($menuDays as $day) {
+            foreach ($day->menus($diningRoom->id) as $food) {
+                $food->daysAvailable;
+                $allFood[] = $food;
+            }
+        }
 
-        return view('admin.home', compact('diningRoom', 'users', 'menuDays', 'advertisements'));
+
+        return view('admin.home', compact('diningRoom', 'users', 'menuDays', 'advertisements', 'allFood'));
     }
 }
