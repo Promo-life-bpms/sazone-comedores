@@ -16,6 +16,8 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -24,6 +26,8 @@
     <main class="max-w-sm mx-auto shadow-lg rounded-lg px-8 py-4">
         @yield('content')
     </main>
+    @yield('scripts')
+
     <script>
         var es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
         if (es_firefox) {

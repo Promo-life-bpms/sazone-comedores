@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
 
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -17,6 +16,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -31,6 +31,8 @@
     <div class="max-w-7xl mx-auto w-[95%]">
         @yield('content')
     </div>
+    @yield('scripts')
+
     @if (!Auth::user()->hasRole(['super-admin', 'master-admin']))
         {{-- @include('shared.soporte') --}}
     @endif
