@@ -18,7 +18,7 @@
                         <div class="col-span-1">
                             <a href="{{ route('dining.show', ['dining' => $dr->id]) }}"
                                 class="rounded-xl relative cursor-pointer">
-                                <img src="{{ asset('storage/' . $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
+                                <img src="{{ asset( $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
                                     alt="">
                                 <div class="absolute bottom-2 right-0 bg-primary w-3/5 p-2 text-white">
                                     <p class="font-bold text-sm">{{ $dr->name }}</p>

@@ -42,14 +42,16 @@ class DiningRoomController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'logo' => 'required',
             'mision' => 'required',
             'vision' => 'required',
             "valores" => 'required',
         ]);
+
+
 
         $diningRoom = [
             'name' => $request->name,
@@ -62,7 +64,25 @@ class DiningRoomController extends Controller
         ];
 
 
-        $file = $request->file('logo');
+        if ($request->hasFile('logo')) {
+
+            $request->validate([
+                'logo' => 'required|image|mimes:jpg,jpeg,png,gif',
+            ]);
+
+            $filenameWithExt = $request->file('logo')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('logo')->clientExtension();
+            $fileNameToStore = time() . $filename . '.' . $extension;
+            $path = 'storage/dining_room/' . $fileNameToStore;
+
+            $request->file('logo')->move('storage/dining_room/', $fileNameToStore);
+            
+        } else {
+            $path = '';
+        }
+
+        /* $file = $request->file('logo');
 
         $nameFile = $diningRoom['slug'] . '_logo.' . $file->getClientOriginalExtension();
         $path = 'dining_room/' . Str::slug($request->name) . '/';
@@ -73,9 +93,18 @@ class DiningRoomController extends Controller
             Storage::putFileAs('public/' . $path, $file, $nameFile);
         } else {
             return redirect()->back()->with('error', 'No se ha podido crear el restaurante por un problema con la imagen');
-        }
+        } */
 
-        $diningRoom = DiningRoom::create($diningRoom);
+        $diningRoom = DiningRoom::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'logo' => $path,
+            'status' => "created",
+            'slug' => Str::slug($request->name),
+            "mission" => $request->mision,
+            "vision" => $request->vision,
+            "values" => $request->valores,
+        ]);
 
         return redirect()->route('dining.show', $diningRoom);
     }

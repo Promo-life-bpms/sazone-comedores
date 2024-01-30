@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Auth::routes();
 Route::get('/loginEmail', [LoginController::class, 'loginWithLink'])->name('loginWithLink');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
