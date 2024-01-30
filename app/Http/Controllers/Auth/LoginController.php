@@ -45,7 +45,7 @@ class LoginController extends Controller
         return redirect('/home');
     }
 
-    public function logout(Request $request) {
+    public function logoutUser(Request $request) {
         $this->guard()->logout();
 
         $request->session()->invalidate();
