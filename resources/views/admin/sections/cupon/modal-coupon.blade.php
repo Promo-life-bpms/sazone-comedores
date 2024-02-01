@@ -11,13 +11,14 @@
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Nombre</label>
                 <input type="text" name="name" placeholder="Ingrese el nombre del comedor"
-                    class="input input-bordered w-full @error('email') input-error @enderror" />
+                    class="input input-bordered w-full @error('email') input-error @enderror"  required />
                 @error('email')
                     <div class="text-red-500">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
+            <br>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Imagen</label>
                 <input type="file" name="logo"
@@ -28,23 +29,25 @@
                     </div>
                 @enderror
             </div>
+            <br>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Porcentaje de descuento</label>
-                <input type="text" name="name" placeholder="Ingrese el nombre del comedor"
-                    class="input input-bordered w-full @error('email') input-error @enderror" />
+                <input type="text" name="name" placeholder="Ingrese el porcentaje de descuento"
+                    class="input input-bordered w-full @error('email') input-error @enderror" required/>
                 @error('email')
                     <div class="text-red-500">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
+            <br>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Vigencia</label>
                 <div class="grid grid-cols-2 gap-3">
                     <div class="col-span-1 space-y-2">
-                        <label for="" class="text-sm font-semibold">Porcentaje de descuento</label>
+                        <label for="" class="text-sm font-semibold">Fecha de inicio</label>
                         <input type="date" name="name" placeholder="Ingrese el nombre del comedor"
-                            class="input input-bordered w-full @error('email') input-error @enderror" />
+                            class="input input-bordered w-full @error('email') input-error @enderror" required/>
                         @error('email')
                             <div class="text-red-500">
                                 {{ $message }}
@@ -52,7 +55,7 @@
                         @enderror
                     </div>
                     <div class="col-span-1 space-y-2">
-                        <label for="" class="text-sm font-semibold">Porcentaje de descuento</label>
+                        <label for="" class="text-sm font-semibold">Fecha de fin</label>
                         <input type="date" name="name" placeholder="Ingrese el nombre del comedor"
                             class="input input-bordered w-full @error('email') input-error @enderror" />
                         @error('email')
@@ -63,6 +66,7 @@
                     </div>
                 </div>
             </div>
+            <br>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Dias activos de cupon</label>
                 <div class="grid grid-cols-2">
