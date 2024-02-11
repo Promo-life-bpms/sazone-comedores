@@ -55,6 +55,8 @@
                     <option value="">Seleccionar...</option>
                     <option value="desayuno">Desayuno</option>
                     <option value="comida">Comida</option>
+                    <option value="cena">Cena</option>
+                    <option value="especial">Eventos especiales</option>
                 </select>
                 @error('time_food')
                     <div class="text-red-500">
@@ -105,6 +107,13 @@
                             <input type="checkbox" name="availability_food[]" value="6"
                                 class="checkbox h-4 w-4 rounded-md" />
                             <span class="label-text">Sabado</span>
+                        </label>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="label justify-start gap-1 cursor-pointer">
+                            <input type="checkbox" name="availability_food[]" value="7"
+                                class="checkbox h-4 w-4 rounded-md" />
+                            <span class="label-text">Domingo</span>
                         </label>
                     </div>
                 </div>
