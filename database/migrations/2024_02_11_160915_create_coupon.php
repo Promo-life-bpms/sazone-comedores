@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('coupon', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->text('img');
@@ -31,13 +31,14 @@ return new class extends Migration
             $table->tinyInteger('only_one_use')->default(0);
             $table->tinyInteger('one_use_peer_day')->default(0);
             $table->text('other')->nullable();
+            $table->foreignId('dining_room_id')->constrained('dining_rooms');
             $table->timestamps();
         });
 
 
         Schema::create('user_has_coupons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('coupon_id')->constrained('coupon');
+            $table->foreignId('coupon_id')->constrained('coupons');
             $table->foreignId('user_id')->constrained('users');
             $table->tinyText('status')->default('no used');
             $table->timestamps();
@@ -46,7 +47,7 @@ return new class extends Migration
 
         Schema::create('coupon_used', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('coupon_id')->constrained('coupon');
+            $table->foreignId('coupon_id')->constrained('coupons');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
@@ -61,6 +62,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('coupon_used');
         Schema::dropIfExists('user_has_coupons');
-        Schema::dropIfExists('coupon');
+        Schema::dropIfExists('coupons');
     }
 };

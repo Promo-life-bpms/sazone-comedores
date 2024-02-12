@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DiningRoomController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
@@ -32,6 +33,9 @@ Route::get('/cupones', [App\Http\Controllers\HomeController::class, 'cupones'])-
 Route::get('/menu', [App\Http\Controllers\HomeController::class, 'menu'])->name('menu');
 Route::get('/acerca-de', [App\Http\Controllers\HomeController::class, 'acerca'])->name('acerca');
 Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])->name('mi-cuenta');
+
+
+Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');
 
 Route::prefix('admin')->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
