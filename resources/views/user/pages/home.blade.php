@@ -65,7 +65,16 @@
                     @endif
                 </div>
             </div>
-            <div class="col-span-1 md:col-span-2">
+           
+
+            <div class="col-span-2">
+
+                
+                <div class="flex flex-col">
+                   <div class="mb-4">
+                        <video src="{{ asset('assets/welcome.mp4')}}" alt="" controls>
+
+                   </div>
                 <p class="text-lg font-semibold mb-3">Mis Cupones</p>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-7">
                     <a href="{{ route('cupones') }}">
@@ -84,8 +93,24 @@
                         <img src="{{ asset('assets/cupones/Promociones_4.jpg') }}"
                             class="w-full object-cover col-span-1" />
                     </a>
+
+                    <a href="{{ route('cupones') }}">
+                        <img src="{{ asset('assets/cupones/Promociones_4.jpg') }}"
+                            class="w-full object-cover col-span-1" />
+                    </a>
+
+                    <a href="{{ route('cupones') }}">
+                        <img src="{{ asset('assets/cupones/Promociones_4.jpg') }}"
+                            class="w-full object-cover col-span-1" />
+                    </a>
+
+                    <a href="{{ route('cupones') }}">
+                        <img src="{{ asset('assets/cupones/Promociones_4.jpg') }}"
+                            class="w-full object-cover col-span-1" />
+                    </a>
                 </div>
             </div>
+            
         </div>
     </div>
 @endsection
