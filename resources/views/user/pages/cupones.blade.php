@@ -2,10 +2,10 @@
 
 @section('content')
     <div>
-        <img src="https://images.pexels.com/photos/1060468/pexels-photo-1060468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        <img src="https://png.pngtree.com/background/20210711/original/pngtree-food-festival-food-promotion-banner-poster-picture-image_1092303.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt="" class="object-cover w-full h-52">
     </div>
-    <div class="pt-5">
+    {{-- <div class="pt-5">
         <h1 class="text-3xl font-semibold mb-5">Mis Cupones</h1>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
             <a href="#" onclick="my_modal_3.showModal()">
@@ -25,7 +25,7 @@
                     class="w-full object-cover col-span-1 md:col-span-2" />
             </a>
         </div>
-    </div>
+    </div> --}}
     <!-- You can open the modal using ID.showModal() method -->
     <dialog id="my_modal_3" class="modal">
         <div class="modal-box space-y-3">
