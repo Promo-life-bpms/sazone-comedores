@@ -75,7 +75,7 @@
                         <video src="{{ asset('assets/welcome.mp4')}}" alt="" controls>
 
                    </div>
-                <p class="text-lg font-semibold mb-3">Mis Cupones</p>
+                {{-- <p class="text-lg font-semibold mb-3">Mis Cupones</p>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-7">
                     <a href="{{ route('cupones') }}">
                         <img src="{{ asset('assets/cupones/Promociones_1.jpg') }}"
@@ -108,7 +108,7 @@
                         <img src="{{ asset('assets/cupones/Promociones_4.jpg') }}"
                             class="w-full object-cover col-span-1" />
                     </a>
-                </div>
+                </div> --}}
             </div>
             
         </div>

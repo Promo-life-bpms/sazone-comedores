@@ -1,4 +1,4 @@
-<dialog id="my_modal_3" class="modal">
+{{-- <dialog id="my_modal_3" class="modal">
     <div class="modal-box space-y-3 px-8">
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -129,4 +129,4 @@
             </div>
         </form>
     </div>
-</dialog>
+</dialog> --}}

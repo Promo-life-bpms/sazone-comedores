@@ -1,4 +1,4 @@
-@include('admin.sections.cupon.modal-coupon')
+{{-- @include('admin.sections.cupon.modal-coupon')
                 <h1 class="text-lg font-semibold my-2">Agregar nuevo cupon</h1>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-y-8">
                     <div class="col-span-1 h-32 rounded-xl border-2 flex justify-center items-center cursor-pointer"
@@ -29,4 +29,4 @@
                     @endforeach
                 </div>
                 <div class="flex justify-center">
-                </div>
+                </div> --}}

@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="mt-6"></div>
-        <div class="collapse collapse-plus bg-stone-100">
+        {{-- <div class="collapse collapse-plus bg-stone-100">
             <input type="radio" name="my-accordion-3"
             @if (session('section')) {{ session('section') == 'cupones' ? 'checked' : '' }} @endif
             />
@@ -71,7 +71,7 @@
             <div class="collapse-content">
                 @include('admin.sections.cupon.index')
             </div>
-        </div>
+        </div> --}}
         <div class="mt-6"></div>
         <div class="collapse collapse-plus bg-stone-100">
             <input type="radio" name="my-accordion-3"
