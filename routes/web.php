@@ -54,6 +54,7 @@ Route::prefix('super')->group(function () {
     Route::get('/dinings/{diningRoom}', [DiningRoomController::class, 'show'])->name('dining.show');
     Route::post('/dinings', [DiningRoomController::class, 'store'])->name('dining.store');
     Route::put('/dinings/{dining}/update-details-general', [DiningRoomController::class, 'updateGeneralDetails'])->name('dining.updateDetailsGeneral');
+    Route::post('/dining/editDiningRoom', [DiningRoomController::class, 'editDiningRoom'])->name('dining.editDiningRoom');
 
     Route::post('/menus', [MenuController::class, 'store'])->name('menu.store');
     Route::put('/menus/update', [MenuController::class, 'update'])->name('menu.update');

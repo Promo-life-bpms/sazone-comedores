@@ -96,14 +96,16 @@
                 @include('admin.sections.user.index')
             </div>
         </div>
-        {{-- <div class="collapse collapse-plus bg-base-200">
+        <div class="mt-6"></div>
+        <div class="collapse collapse-plus bg-base-200">
             <input type="radio" name="my-accordion-3" />
+            @if (session('section')) {{ session('section') == 'opcionesAvanzadas' ? 'checked' : '' }} @endif
             <div class="collapse-title text-xl font-medium">
                 Opciones avanzadas
             </div>
             <div class="collapse-content">
-                <p>1</p>
+                @include('admin.sections.opcAvanzadas.index')
             </div>
-        </div> --}}
+        </div>
     </div>
 @endsection
