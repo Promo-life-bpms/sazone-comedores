@@ -7,6 +7,7 @@ use App\Models\DiningRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class DiningRoomController extends Controller
 {
@@ -42,14 +43,16 @@ class DiningRoomController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'logo' => 'required',
             'mision' => 'required',
             'vision' => 'required',
             "valores" => 'required',
         ]);
+
+
 
         $diningRoom = [
             'name' => $request->name,
@@ -62,7 +65,24 @@ class DiningRoomController extends Controller
         ];
 
 
-        $file = $request->file('logo');
+        if ($request->hasFile('logo')) {
+
+            $request->validate([
+                'logo' => 'required|image|mimes:jpg,jpeg,png,gif',
+            ]);
+
+            $filenameWithExt = $request->file('logo')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('logo')->clientExtension();
+            $fileNameToStore = time() . $filename . '.' . $extension;
+            $path = 'storage/dining_room/' . $fileNameToStore;
+
+            $request->file('logo')->move('storage/dining_room/', $fileNameToStore);
+        } else {
+            $path = '';
+        }
+
+        /* $file = $request->file('logo');
 
         $nameFile = $diningRoom['slug'] . '_logo.' . $file->getClientOriginalExtension();
         $path = 'dining_room/' . Str::slug($request->name) . '/';
@@ -73,9 +93,18 @@ class DiningRoomController extends Controller
             Storage::putFileAs('public/' . $path, $file, $nameFile);
         } else {
             return redirect()->back()->with('error', 'No se ha podido crear el restaurante por un problema con la imagen');
-        }
+        } */
 
-        $diningRoom = DiningRoom::create($diningRoom);
+        $diningRoom = DiningRoom::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'logo' => $path,
+            'status' => "created",
+            'slug' => Str::slug($request->name),
+            "mission" => $request->mision,
+            "vision" => $request->vision,
+            "values" => $request->valores,
+        ]);
 
         return redirect()->route('dining.show', $diningRoom);
     }
@@ -104,5 +133,53 @@ class DiningRoomController extends Controller
         $dining->save();
 
         return redirect()->back()->with('success', 'Se han actualizado los colores correctamente');
+    }
+
+    public function editDiningRoom(Request $request)
+    {
+        
+        $validator = Validator::make($request->all(), [
+            'name_edit' => 'required',
+            'address_edit' => 'required',
+            'mision_edit' => 'required',
+            'vision_edit' => 'required',
+            'valores_edit' => 'required',
+            'dining_room_id_edit' => 'required',
+            'logo_edit' => 'nullable|image|mimes:jpg,jpeg,png,gif',
+        ]);
+        
+        $diningRoom = DiningRoom::find($request->dining_rooms_id_edit);
+
+        if ($diningRoom) {
+            $diningRoom->name = $request->name_edit;
+            $diningRoom->address = $request->address_edit;
+            $diningRoom->mission = $request->mision_edit;
+            $diningRoom->vision = $request->vision_edit;
+            $diningRoom->values = $request->valores_edit;
+            $diningRoom->logo = $request->logo_edit;
+
+        if ($request->hasFile('logo_edit')) {
+            $file = $request->file('logo_edit');
+            $filenameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $fileNameToStore = time() . '_' . Str::slug($filename) . '.' . $extension;
+            $path = 'storage/dining_room/' . $fileNameToStore;
+            
+            $file->move('storage/dining_room/', $fileNameToStore);
+            
+            $diningRoom->logo = $path;
+        }
+
+            try {
+                $diningRoom->save();
+                return redirect()->route('dining.show', $diningRoom)->with('success', 'Comedor editado correctamente');
+            } catch (\Exception $exception) {
+
+                return redirect()->back()->with('error', 'Error al editar comedor');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Comedor no encontrado');
+        }
     }
 }

@@ -19,9 +19,9 @@
             @csrf
             <input type="hidden" name="dining_id" value="{{ $diningRoom->id }}" autocomplete="off">
             <div class="space-y-2">
-                <label for="" class="text-lg font-semibold">Nombre</label>
+                <label for="" class="text-lg font-semibold">Nombre <span style="color: red; margin-left: 2px;">*</span></label>
                 <input type="text" name="name_food" placeholder="Taquitos al pastor"
-                    class="input input-bordered w-full @error('name_food') input-error @enderror" />
+                    class="input input-bordered w-full @error('name_food') input-error @enderror" required/>
                 @error('name_food')
                     <div class="text-red-500">
                         {{ $message }}
@@ -29,10 +29,10 @@
                 @enderror
             </div>
             <div class="space-y-2">
-                <label for="" class="text-lg font-semibold">Descripcion</label>
+                <label for="" class="text-lg font-semibold">Descripcion <span style="color: red; margin-left: 2px;">*</span></label>
                 <textarea name="description_food"
                     class="textarea textarea-bordered w-full @error('description_food') input-error @enderror"
-                    placeholder="Carne de cerdo adobada, tortillas de maíz, cebolla, piña, cilantro, salsa de tomate y chiles"></textarea>
+                    placeholder="Carne de cerdo adobada, tortillas de maíz, cebolla, piña, cilantro, salsa de tomate y chiles" required></textarea>
                 @error('description_food')
                     <div class="text-red-500">
                         {{ $message }}
@@ -40,9 +40,9 @@
                 @enderror
             </div>
             <div class="space-y-2">
-                <label for="" class="text-lg font-semibold">Imagen</label>
+                <label for="" class="text-lg font-semibold">Imagen <span style="color: red; margin-left: 2px;">*</span></label>
                 <input type="file" name="image_food" accept="image/*"
-                    class="file-input file-input-primary file-input-bordered w-full @error('image_food') input-error @enderror" />
+                    class="file-input file-input-primary file-input-bordered w-full @error('image_food') input-error @enderror" required/>
                 @error('image_food')
                     <div class="text-red-500">
                         {{ $message }}
@@ -50,11 +50,13 @@
                 @enderror
             </div>
             <div class="space-y-2">
-                <label for="" class="text-lg font-semibold">Tiempo</label>
+                <label for="" class="text-lg font-semibold">Tiempo<span style="color: red; margin-left: 2px;">*</span></label>
                 <select name="time_food" id="" class="select select-bordered w-full">
                     <option value="">Seleccionar...</option>
                     <option value="desayuno">Desayuno</option>
                     <option value="comida">Comida</option>
+                    <option value="cena">Cena</option>
+                    <option value="especial">Eventos especiales</option>
                 </select>
                 @error('time_food')
                     <div class="text-red-500">
@@ -63,7 +65,7 @@
                 @enderror
             </div>
             <div class="space-y-2">
-                <label for="" class="text-lg font-semibold">Disponibilidad del platillo</label>
+                <label for="" class="text-lg font-semibold">Disponibilidad del platillo<span style="color: red; margin-left: 2px;">*</span></label>
                 <div class="grid grid-cols-3">
                     <div class="col-span-1">
                         <label class="label justify-start gap-1 cursor-pointer">
@@ -105,6 +107,13 @@
                             <input type="checkbox" name="availability_food[]" value="6"
                                 class="checkbox h-4 w-4 rounded-md" />
                             <span class="label-text">Sabado</span>
+                        </label>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="label justify-start gap-1 cursor-pointer">
+                            <input type="checkbox" name="availability_food[]" value="7"
+                                class="checkbox h-4 w-4 rounded-md" />
+                            <span class="label-text">Domingo</span>
                         </label>
                     </div>
                 </div>

@@ -17,7 +17,7 @@
         @foreach ($diningRooms as $dr)
             <div class="col-span-1">
                 <a href="{{ route('dining.show', ['diningRoom' => $dr->id]) }}" class="rounded-xl relative cursor-pointer">
-                    <img src="{{ asset('storage/' . $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
+                    <img src="{{ asset( $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
                         alt="">
                     <div class="absolute bottom-2 right-0 bg-primary w-3/5 p-2 text-white">
                         <p class="font-bold text-sm">{{ $dr->name }}</p>
@@ -45,7 +45,7 @@
                 <div class="space-y-2">
                     <label for="" class="text-lg font-semibold">Nombre del Comedor</label>
                     <input type="text" name="name" placeholder="Ingrese el nombre del comedor"
-                        class="input input-bordered w-full @error('email') input-error @enderror" />
+                        class="input input-bordered w-full @error('email') input-error @enderror" required/>
                     @error('email')
                         <div class="text-red-500">
                             {{ $message }}
@@ -55,7 +55,7 @@
                 <div class="space-y-2">
                     <label for="" class="text-lg font-semibold">Direccion o ubicacion</label>
                     <input type="text" name="address" placeholder="Ingrese la direccion del comedor"
-                        class="input input-bordered w-full @error('email') input-error @enderror" />
+                        class="input input-bordered w-full @error('email') input-error @enderror" required/>
                     @error('email')
                         <div class="text-red-500">
                             {{ $message }}
@@ -64,7 +64,7 @@
                 </div>
                 <div class="space-y-2">
                     <label for="" class="text-lg font-semibold">Logo</label>
-                    <input type="file" name="logo" class="file-input file-input-primary file-input-bordered w-full" />
+                    <input type="file" name="logo" class="file-input file-input-primary file-input-bordered w-full"/>
                     @error('email')
                         <div class="text-red-500">
                             {{ $message }}
@@ -75,7 +75,7 @@
                 <div class="space-y-2">
                     <label for="" class="text-lg font-semibold">Mision</label>
                     <textarea name="mision" class="w-full textarea textarea-bordered h-16 @error('mision') input-error @enderror"
-                        placeholder="Ingrese la mision de la empresa"></textarea>
+                        placeholder="Ingrese la mision de la empresa" required></textarea>
                     @error('email')
                         <div class="text-red-500">
                             {{ $message }}
@@ -85,7 +85,7 @@
                 <div class="space-y-2">
                     <label for="" class="text-lg font-semibold">Vision</label>
                     <textarea name="vision" class="w-full textarea textarea-bordered h-16 @error('vision') input-error @enderror"
-                        placeholder="Ingrese la vision de la empresa"></textarea>
+                        placeholder="Ingrese la vision de la empresa" required></textarea>
                     @error('email')
                         <div class="text-red-500">
                             {{ $message }}
@@ -95,7 +95,7 @@
                 <div class="space-y-2">
                     <label for="" class="text-lg font-semibold">Valores</label>
                     <textarea name="valores" class="w-full textarea textarea-bordered h-16 @error('valores') input-error @enderror"
-                        placeholder="Ingrese los valores de la empresa separados por comas"></textarea>
+                        placeholder="Ingrese los valores de la empresa separados por comas" required></textarea>
                     @error('email')
                         <div class="text-red-500">
                             {{ $message }}

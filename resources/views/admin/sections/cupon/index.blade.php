@@ -1,4 +1,4 @@
-@include('admin.sections.cupon.modal-coupon')
+{{-- @include('admin.sections.cupon.modal-coupon')
                 <h1 class="text-lg font-semibold my-2">Agregar nuevo cupon</h1>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-y-8">
                     <div class="col-span-1 h-32 rounded-xl border-2 flex justify-center items-center cursor-pointer"
@@ -18,7 +18,7 @@
                         <div class="col-span-1">
                             <a href="{{ route('dining.show', ['dining' => $dr->id]) }}"
                                 class="rounded-xl relative cursor-pointer">
-                                <img src="{{ asset('storage/' . $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
+                                <img src="{{ asset( $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
                                     alt="">
                                 <div class="absolute bottom-2 right-0 bg-primary w-3/5 p-2 text-white">
                                     <p class="font-bold text-sm">{{ $dr->name }}</p>
@@ -29,4 +29,4 @@
                     @endforeach
                 </div>
                 <div class="flex justify-center">
-                </div>
+                </div> --}}

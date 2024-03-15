@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->mediumText('description')->nullable();
+            $table->tinyText('type')->nullable();
             $table->mediumText('resource');
             $table->mediumText('vigencia');
             $table->timestamps();

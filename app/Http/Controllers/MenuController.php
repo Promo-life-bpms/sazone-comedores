@@ -34,7 +34,7 @@ class MenuController extends Controller
                 'name_food' => 'required',
                 'description_food' => 'required',
                 'dining_id' => 'required',
-                'time_food' => 'required|in:desayuno,comida,cena',
+                'time_food' => 'required|in:desayuno,comida,cena,especial',
                 'image_food' => 'required',
                 'availability_food' => 'required'
             ]
@@ -95,7 +95,7 @@ class MenuController extends Controller
                 'description_food_edit' => 'required',
                 'dining_id' => 'required',
                 'food_id' => 'required',
-                'time_food_edit' => 'required|in:desayuno,comida,cena',
+                'time_food_edit' => 'required|in:desayuno,comida,cena,especial',
                 'availability_food_edit' => 'required'
             ]
         );
