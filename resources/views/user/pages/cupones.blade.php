@@ -1,11 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto mt-8">
-    <h1 class="text-2xl font-bold mb-4">Página Web Incrustada</h1>
-    <div class="aspect-w-16 aspect-h-9">
-        <iframe class="w-full h-screen" src="https://cupones.alsea.com.mx/CuponeraAlsea/WalletSazone"></iframe>
-
-    </div>
+<div class="container mx-auto mt-10">
+    <iframe src="https://stage.cupones.alsea.com.mx/CuponeraAlsea/WalletSazone" 
+    style="position:fixed; top:80px; left:0px; bottom:0px; right:0px; width:100%; height:calc(100% - 80px); border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>
 </div>
 @endsection
