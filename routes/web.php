@@ -51,6 +51,9 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('super')->group(function () {
     Route::get('/', [DiningRoomController::class, 'index'])->name('dining.index');
+    Route::get('/admins', [DiningRoomController::class, 'admins'])->name('dining.admins');
+    Route::post('/admins/create', [DiningRoomController::class, 'storeUserAdmin'])->name('admin.store.admin');
+
     Route::get('/dinings/{diningRoom}', [DiningRoomController::class, 'show'])->name('dining.show');
     Route::post('/dinings', [DiningRoomController::class, 'store'])->name('dining.store');
     Route::put('/dinings/{dining}/update-details-general', [DiningRoomController::class, 'updateGeneralDetails'])->name('dining.updateDetailsGeneral');

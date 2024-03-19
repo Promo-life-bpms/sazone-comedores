@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\DayFood;
 use App\Models\DiningRoom;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\UserHasDiningRooms;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +24,18 @@ class DiningRoomController extends Controller
 
     public function index()
     {
-        $diningRooms = DiningRoom::orderBy('created_at', 'DESC')->paginate(15);
+        $user = Auth::user();
+
+        if ($user->hasRole('master-admin')) {
+            $diningRooms = DiningRoom::orderBy('created_at', 'DESC')->paginate(15);
+        }elseif ($user->hasRole('super-admin')) {
+            $diningRoomIds = UserHasDiningRooms::where('user_id', $user->id)->pluck('dining_room_id');
+            $diningRooms = DiningRoom::whereIn('id', $diningRoomIds)->orderBy('created_at', 'DESC')->paginate(15);
+        }else{
+            $diningRooms = [];
+
+        }
+        
         return view('super.pages.dining-room.index', compact('diningRooms'));
     }
 
@@ -181,5 +197,43 @@ class DiningRoomController extends Controller
         } else {
             return redirect()->back()->with('error', 'Comedor no encontrado');
         }
+    }
+
+    public function admins() {
+        $userIds = UserRole::whereIn('role_id', [1, 2])->pluck('user_id')->toArray();
+        $users = User::whereIn('id', $userIds)->get();
+        $diningRooms = DiningRoom::all();
+        return view('super.pages.dining-room.users',compact('users', 'diningRooms'));
+    }
+
+    public function storeUserAdmin(Request $request)  {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+        ]);
+        
+        $create_user = new User();
+        $create_user->name = $request->name;
+        $create_user->email = $request->email;
+        $create_user->password = bcrypt("defaultpass");
+        $create_user->save();
+
+        $diningRooms = DiningRoom::all();
+        foreach ($diningRooms as $diningRoom) {
+         
+            if (isset($request->dining_rooms[$diningRoom->id])) {
+                $userHasDiningRoom = new UserHasDiningRooms();
+                $userHasDiningRoom->user_id = $create_user->id;
+                $userHasDiningRoom->dining_room_id = $diningRoom->id;
+                $userHasDiningRoom->save();
+            }
+        }
+
+        $role = Role::where('name', 'super-admin')->first();
+        $create_user->attachRole($role);
+
+        return redirect()->back()->with('success', 'Administrador creado correctamente');
+
     }
 }
