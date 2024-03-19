@@ -39,5 +39,9 @@ class DayFoodSeeder extends Seeder
             'day' => 'Sabado',
             'slug' => 'saturday'
         ]);
+        DayFood::create([
+            'day' => 'Domingo',
+            'slug' => 'sunday'
+        ]);
     }
 }

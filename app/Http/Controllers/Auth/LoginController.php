@@ -44,4 +44,12 @@ class LoginController extends Controller
         $this->login($request);
         return redirect('/home');
     }
+
+    public function logoutUser(Request $request) {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect('/');
+    }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DiningRoomController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Auth::routes();
 Route::get('/loginEmail', [LoginController::class, 'loginWithLink'])->name('loginWithLink');
+Route::get('/logoutUser', [LoginController::class, 'logoutUser'])->name('logoutUser');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -31,6 +33,9 @@ Route::get('/cupones', [App\Http\Controllers\HomeController::class, 'cupones'])-
 Route::get('/menu', [App\Http\Controllers\HomeController::class, 'menu'])->name('menu');
 Route::get('/acerca-de', [App\Http\Controllers\HomeController::class, 'acerca'])->name('acerca');
 Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])->name('mi-cuenta');
+
+
+Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');
 
 Route::prefix('admin')->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
@@ -46,9 +51,13 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('super')->group(function () {
     Route::get('/', [DiningRoomController::class, 'index'])->name('dining.index');
+    Route::get('/admins', [DiningRoomController::class, 'admins'])->name('dining.admins');
+    Route::post('/admins/create', [DiningRoomController::class, 'storeUserAdmin'])->name('admin.store.admin');
+
     Route::get('/dinings/{diningRoom}', [DiningRoomController::class, 'show'])->name('dining.show');
     Route::post('/dinings', [DiningRoomController::class, 'store'])->name('dining.store');
     Route::put('/dinings/{dining}/update-details-general', [DiningRoomController::class, 'updateGeneralDetails'])->name('dining.updateDetailsGeneral');
+    Route::post('/dining/editDiningRoom', [DiningRoomController::class, 'editDiningRoom'])->name('dining.editDiningRoom');
 
     Route::post('/menus', [MenuController::class, 'store'])->name('menu.store');
     Route::put('/menus/update', [MenuController::class, 'update'])->name('menu.update');

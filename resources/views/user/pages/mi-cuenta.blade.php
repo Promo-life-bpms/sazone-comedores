@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="relative">
-        <img src="https://images.pexels.com/photos/1060468/pexels-photo-1060468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        <img src="https://img.freepik.com/vector-premium/banner-fondo-tecnologia-azul-moderna-cuadrado-linea-semitono_181182-19741.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt="" class="object-cover w-full h-52">
         <div class="absolute right-0 left-0 -bottom-20 flex justify-center">
-            <img src="https://images.pexels.com/photos/1060468/pexels-photo-1060468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            <img src="https://w7.pngwing.com/pngs/262/907/png-transparent-login-user-avatar-person-users-profile-free-system-and-user-interface-icon.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="" class="w-40 h-40 object-cover rounded-full">
         </div>
     </div>

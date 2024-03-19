@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('status');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->text('mission')->nullable();
             $table->text('vision')->nullable();
             $table->text('values')->nullable();

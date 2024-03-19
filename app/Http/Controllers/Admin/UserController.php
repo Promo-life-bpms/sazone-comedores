@@ -111,7 +111,7 @@ class UserController extends Controller
     // Importtar usuarios, similar a importar menu
     public function import(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+       /*  $validator = Validator::make($request->all(), [
             'file_users' => 'required|mimes:xlsx,xls,csv',
             'dining_id' => 'required'
         ]);
@@ -119,7 +119,7 @@ class UserController extends Controller
             return redirect()->back()
                 ->with('section', 'usuarios')
                 ->with('error_user_import', 'No se ha podido importar el archivo por un problema con los datos');
-        }
+        } */
 
         $dining = DiningRoom::find($request->dining_id);
         $file = $request->file('file_users');
@@ -138,11 +138,11 @@ class UserController extends Controller
             $users = [];
             $errors = [];
             for ($indiceFila = 2; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
-                $user['name'] = $hojaActual->getCell('A' . $indiceFila)->getValue();
-                $user['email'] = $hojaActual->getCell('B' . $indiceFila)->getValue();
+                $user['name'] = trim($hojaActual->getCell('B' . $indiceFila)->getValue());
+                $user['email'] = strtolower(trim(str_replace(' ', '', $hojaActual->getCell('C' . $indiceFila)->getValue())));
                 $user['dining_room_id'] = $dining->id;
                 $user['password'] = "DefaultPass";
-                $user['type'] = $hojaActual->getCell('C' . $indiceFila)->getValue();
+                $user['type'] = 'collaborator';
 
                 // Validar con Validator
                 $validator = Validator::make($user, [
@@ -162,11 +162,11 @@ class UserController extends Controller
                 }
             }
 
-            if (count($errors) > 0) {
+           /*  if (count($errors) > 0) {
                 return redirect()->back()
                     ->with('section', 'usuarios')
                     ->with('error_user_import', 'No se ha podido importar el archivo por un problema con los datos');
-            }
+            } */
 
             foreach ($users as $userData) {
                 $user = User::create($userData);
