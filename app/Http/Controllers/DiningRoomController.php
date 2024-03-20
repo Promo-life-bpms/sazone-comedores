@@ -28,14 +28,13 @@ class DiningRoomController extends Controller
 
         if ($user->hasRole('master-admin')) {
             $diningRooms = DiningRoom::orderBy('created_at', 'DESC')->paginate(15);
-        }elseif ($user->hasRole('super-admin')) {
+        } elseif ($user->hasRole('super-admin')) {
             $diningRoomIds = UserHasDiningRooms::where('user_id', $user->id)->pluck('dining_room_id');
             $diningRooms = DiningRoom::whereIn('id', $diningRoomIds)->orderBy('created_at', 'DESC')->paginate(15);
-        }else{
+        } else {
             $diningRooms = [];
-
         }
-        
+
         return view('super.pages.dining-room.index', compact('diningRooms'));
     }
 
@@ -153,7 +152,7 @@ class DiningRoomController extends Controller
 
     public function editDiningRoom(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'name_edit' => 'required',
             'address_edit' => 'required',
@@ -163,7 +162,7 @@ class DiningRoomController extends Controller
             'dining_room_id_edit' => 'required',
             'logo_edit' => 'nullable|image|mimes:jpg,jpeg,png,gif',
         ]);
-        
+
         $diningRoom = DiningRoom::find($request->dining_rooms_id_edit);
 
         if ($diningRoom) {
@@ -174,18 +173,18 @@ class DiningRoomController extends Controller
             $diningRoom->values = $request->valores_edit;
             $diningRoom->logo = $request->logo_edit;
 
-        if ($request->hasFile('logo_edit')) {
-            $file = $request->file('logo_edit');
-            $filenameWithExt = $file->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $file->getClientOriginalExtension();
-            $fileNameToStore = time() . '_' . Str::slug($filename) . '.' . $extension;
-            $path = 'storage/dining_room/' . $fileNameToStore;
-            
-            $file->move('storage/dining_room/', $fileNameToStore);
-            
-            $diningRoom->logo = $path;
-        }
+            if ($request->hasFile('logo_edit')) {
+                $file = $request->file('logo_edit');
+                $filenameWithExt = $file->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $fileNameToStore = time() . '_' . Str::slug($filename) . '.' . $extension;
+                $path = 'storage/dining_room/' . $fileNameToStore;
+
+                $file->move('storage/dining_room/', $fileNameToStore);
+
+                $diningRoom->logo = $path;
+            }
 
             try {
                 $diningRoom->save();
@@ -199,20 +198,22 @@ class DiningRoomController extends Controller
         }
     }
 
-    public function admins() {
+    public function admins()
+    {
         $userIds = UserRole::whereIn('role_id', [1, 2])->pluck('user_id')->toArray();
         $users = User::whereIn('id', $userIds)->get();
         $diningRooms = DiningRoom::all();
-        return view('super.pages.dining-room.users',compact('users', 'diningRooms'));
+        return view('super.pages.dining-room.users', compact('users', 'diningRooms'));
     }
 
-    public function storeUserAdmin(Request $request)  {
+    public function storeUserAdmin(Request $request)
+    {
 
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
         ]);
-        
+
         $create_user = new User();
         $create_user->name = $request->name;
         $create_user->email = $request->email;
@@ -221,7 +222,7 @@ class DiningRoomController extends Controller
 
         $diningRooms = DiningRoom::all();
         foreach ($diningRooms as $diningRoom) {
-         
+
             if (isset($request->dining_rooms[$diningRoom->id])) {
                 $userHasDiningRoom = new UserHasDiningRooms();
                 $userHasDiningRoom->user_id = $create_user->id;
@@ -234,6 +235,25 @@ class DiningRoomController extends Controller
         $create_user->attachRole($role);
 
         return redirect()->back()->with('success', 'Administrador creado correctamente');
-
     }
+
+    public function updateUserAdmin(Request $request)
+    {
+        $update_user = User::find($request->id);
+        
+        UserHasDiningRooms::where('user_id', $update_user->id)->delete();
+    
+        $diningRooms = DiningRoom::all();
+        foreach ($diningRooms as $diningRoom) {
+            if (isset($request->dining_rooms[$diningRoom->id])) {
+                $userHasDiningRoom = new UserHasDiningRooms();
+                $userHasDiningRoom->user_id = $update_user->id;
+                $userHasDiningRoom->dining_room_id = $diningRoom->id;
+                $userHasDiningRoom->save();
+            }
+        }
+    
+        return redirect()->back()->with('success', 'Relación usuario-comedor actualizada correctamente');
+    }
+    
 }
