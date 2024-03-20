@@ -8,14 +8,12 @@
 
     </div>
 
-
     @if (session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
             <strong class="font-bold">Exito!</strong>
             <span class="block sm:inline">{{ session('success') }}</span>
         </div>
     @endif
-
 
     <dialog id="my_modal_2" class="modal">
         <div class="modal-box">
@@ -84,6 +82,47 @@
         </form>
     </dialog>
 
+
+    <dialog id="my_modal_5" class="modal">
+        <div class="modal-box">
+            <h4 class="font-bold text-lg">Editar relación usuario-comedor</h4>
+            <form method="POST" action="{{ route('admin.update.admin') }}" class="space-y-3">
+            @method('PUT')
+            @csrf
+    
+            <input type="hidden" name="id" value="id" id="user_id"> 
+    
+            <div class="space-y-2">
+                <label for="" class="text-lg font-semibold">Comedores que administrará</label>
+                <div class="grid grid-cols-2">
+                    <div class="col-span-1">
+                        @foreach($diningRooms as $diningRoom)
+                            <label>
+                                <input type="checkbox" name="dining_rooms[{{ $diningRoom->id }}]" value="{{ $diningRoom->id }}">
+                                {{ $diningRoom->name }}
+                            </label><br>
+                        @endforeach
+                    </div>
+                </div>
+                @error('type')
+                    <div class="text-red-500">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <br><br>
+    
+            <div class="space-y-2">
+                <button class="btn btn-primary w-full uppercase" type="submit">Guardar</button>
+            </div>
+        </form>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+    
+
     <div class="overflow-x-auto">
     <table class="table">
         <!-- head -->
@@ -114,6 +153,15 @@
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                             </button> --}}
+                            <button class="btn btn-circle btn-ghost btn-xs" onclick="openModal({{ $user->id }})">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                    </svg>
+                                  
+                            </button>
+                            
                             <button class="btn btn-circle btn-ghost btn-xs" onclick="sendAccess({{ $user->id }})">
                                 <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Lock Reset</title><path d="M13.16,3.17A8.83,8.83,0,1,1,5.76,16.8l1.4-1.11a7.05,7.05,0,1,0-1-4.57H8.6L5.3,14.41,2,11.12H4.38a8.83,8.83,0,0,1,8.78-7.95m2.57,7.21a.81.81,0,0,1,.81.81v3.9a.82.82,0,0,1-.82.82H11a.79.79,0,0,1-.75-.82V11a.79.79,0,0,1,.74-.81V9.46a2.39,2.39,0,0,1,2.71-2.37A2.47,2.47,0,0,1,15.8,9.57v.81m-1.11-.84A1.22,1.22,0,0,0,14,8.4a1.29,1.29,0,0,0-1.86,1.09v.89h2.57Z"/></svg>
                             </button>
@@ -230,5 +278,11 @@
             });
         });
     }
+
+    function openModal(userId) {
+    document.getElementById('user_id').value = userId;
+    my_modal_5.showModal();
+}
+
 </script>
 @endsection
