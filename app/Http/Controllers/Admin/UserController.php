@@ -111,7 +111,7 @@ class UserController extends Controller
     // Importtar usuarios, similar a importar menu
     public function import(Request $request)
     {
-       /*  $validator = Validator::make($request->all(), [
+        /*  $validator = Validator::make($request->all(), [
             'file_users' => 'required|mimes:xlsx,xls,csv',
             'dining_id' => 'required'
         ]);
@@ -162,7 +162,7 @@ class UserController extends Controller
                 }
             }
 
-           /*  if (count($errors) > 0) {
+            /*  if (count($errors) > 0) {
                 return redirect()->back()
                     ->with('section', 'usuarios')
                     ->with('error_user_import', 'No se ha podido importar el archivo por un problema con los datos');
@@ -191,5 +191,25 @@ class UserController extends Controller
                 ->with('section', 'usuarios')
                 ->with('success_user_create', 'Se ha importado correctamente el archivo');
         }
+    }
+
+    // Enviar acceso a todos los usuarios
+    public function sendAccessAll()
+    {
+        $users = User::all();
+        foreach ($users as $user) {
+            $pass = Str::random(8);
+            $user->password = Hash::make($pass);
+            $user->save();
+            $dataNotification = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => $pass,
+                'urlEmail' => url('/loginEmail?email=' . $user->email . '&password=' . $pass)
+            ];
+            $mailSend = new SendAccessMail($dataNotification);
+            Mail::mailer('smtp')->to($user->email)->send($mailSend);
+        }
+        return response()->json(['success' => 'Se han enviado los accesos correctamente a todos los usuarios'], 200);
     }
 }
