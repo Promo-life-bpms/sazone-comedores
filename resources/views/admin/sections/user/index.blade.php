@@ -2,6 +2,7 @@
     {{-- <div class="btn btn-primary">Asignar Cupones</div> --}}
     <button class="btn btn-primary" onclick="modal_import_user.showModal()">Importar Archivo</button>
     <button class="btn btn-primary" onclick="modal_add_user.showModal()">Agregar Usuario</button>
+    <button class="btn btn-primary" onclick="sendAccessAll({{ $diningRoom->id }})">Enviar Accesos</button>
     {{-- <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" /> --}}
 </div>
 <br>
@@ -125,6 +126,45 @@
         });
     }
 
+    function sendAccessAll(id) {
+        Swal.fire({
+            title: "¿Estas seguro de que quieres enviar el acceso a todos los usuarios?",
+            text: "Esta accion no se puede deshacer",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Enviar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                enviarAccesosATodos(id)
+            }
+        });
+    }
+
+        async function enviarAccesosATodos(id) {
+        let url = "{{ route('users.sendAccessAll') }}";
+        await axios.post(url, {
+            dining_id: id
+        }).then((response) => {
+            console.log(response);
+            if (response.status == 200) {
+                Swal.fire({
+                    title: "Enviado!",
+                    text: "Se han enviado correctamente los accesos a todos los usuarios",
+                    icon: "success"
+                });
+            }
+        }).catch((error) => {
+            console.error(error);
+            Swal.fire({
+                title: "Error!",
+                text: "No se han podido enviar los accesos a todos los usuarios",
+                icon: "error"
+            });
+        });
+    }   
+
     function sendAccess(id) {
         Swal.fire({
             title: "¿Estas seguro de que quieres enviar el acceso a este usuario?",
@@ -162,5 +202,7 @@
                 icon: "error"
             });
         });
-    }
+
+        
+}
 </script>
