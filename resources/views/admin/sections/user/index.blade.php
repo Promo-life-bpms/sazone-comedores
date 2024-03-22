@@ -2,7 +2,7 @@
     {{-- <div class="btn btn-primary">Asignar Cupones</div> --}}
     <button class="btn btn-primary" onclick="modal_import_user.showModal()">Importar Archivo</button>
     <button class="btn btn-primary" onclick="modal_add_user.showModal()">Agregar Usuario</button>
-    <button class="btn btn-primary" onclick="sendAccessAll()">Enviar Accesos</button>
+    <button class="btn btn-primary" onclick="sendAccessAll({{ $diningRoom->id }})">Enviar Accesos</button>
     {{-- <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" /> --}}
 </div>
 <br>
@@ -126,7 +126,7 @@
         });
     }
 
-    function sendAccessAll() {
+    function sendAccessAll(id) {
         Swal.fire({
             title: "¿Estas seguro de que quieres enviar el acceso a todos los usuarios?",
             text: "Esta accion no se puede deshacer",
@@ -137,14 +137,16 @@
             confirmButtonText: "Enviar"
         }).then((result) => {
             if (result.isConfirmed) {
-                enviarAccesosATodos()
+                enviarAccesosATodos(id)
             }
         });
     }
 
-        async function enviarAccesosATodos() {
+        async function enviarAccesosATodos(id) {
         let url = "{{ route('users.sendAccessAll') }}";
-        await axios.post(url).then((response) => {
+        await axios.post(url, {
+            dining_id: id
+        }).then((response) => {
             console.log(response);
             if (response.status == 200) {
                 Swal.fire({

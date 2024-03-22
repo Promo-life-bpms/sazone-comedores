@@ -194,22 +194,27 @@ class UserController extends Controller
     }
 
     // Enviar acceso a todos los usuarios
-    public function sendAccessAll()
+    public function sendAccessAll(Request $request)
     {
-        $users = User::all();
-        foreach ($users as $user) {
-            $pass = Str::random(8);
-            $user->password = Hash::make($pass);
-            $user->save();
-            $dataNotification = [
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => $pass,
-                'urlEmail' => url('/loginEmail?email=' . $user->email . '&password=' . $pass)
-            ];
-            $mailSend = new SendAccessMail($dataNotification);
-            Mail::mailer('smtp')->to($user->email)->send($mailSend);
+        $diningRoom = DiningRoom::find($request->dining_id);
+        if ($diningRoom) {
+            $users = $diningRoom->users()->get();
+            foreach ($users as $user) {
+                if (filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
+                    $pass = Str::random(8);
+                    $user->password = Hash::make($pass);
+                    $user->save();
+                    $dataNotification = [
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'password' => $pass,
+                        'urlEmail' => url('/loginEmail?email=' . $user->email . '&password=' . $pass)
+                    ];
+                    $mailSend = new SendAccessMail($dataNotification);
+                    Mail::mailer('smtp')->to($user->email)->send($mailSend);
+                }
+            }
         }
-        return response()->json(['success' => 'Se han enviado los accesos correctamente a todos los usuarios'], 200);
+        return response()->json(['success' => 'Se han enviado los accesos correctamente a todos los usuarios del comedor'], 200);
     }
 }
