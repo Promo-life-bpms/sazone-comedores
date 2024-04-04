@@ -191,7 +191,11 @@ class MenuController extends Controller
                 $menu['description'] = $hojaActual->getCell('B' . $indiceFila)->getValue();
                 $menu['time'] = $hojaActual->getCell('C' . $indiceFila)->getValue();
                 $menu['slug'] = Str::slug($menu['name']);
-                $menu['image'] = $hojaActual->getCell('D' . $indiceFila)->getValue();
+                $imageUrl = $hojaActual->getCell('D' . $indiceFila)->getValue();
+                $imageContents = file_get_contents($imageUrl);
+                $imageName = $menu['slug'] . '.png';
+                Storage::put('public/images/' . $imageName, $imageContents);
+                $menu['image'] = 'images/' . $imageName;
                 $menu['availability'] = [
                     trim($hojaActual->getCell('E' . $indiceFila)->getValue()),
                     trim($hojaActual->getCell('F' . $indiceFila)->getValue()),
@@ -234,6 +238,7 @@ class MenuController extends Controller
 
 
             foreach ($menus as $menuData) {
+                $menuData['dining_room_id'] = $dining->id;
                 $menu = Menu::create($menuData);
                 $menu->daysAvailable()->attach($menuData['availability']);
             }

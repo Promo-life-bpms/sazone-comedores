@@ -15,6 +15,7 @@
     <h1 class="text-lg font-semibold my-2">Comedores Disponibles</h1>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-y-8">
         @foreach ($diningRooms as $dr)
+        @if($dr->statusV == 1)
             <div class="col-span-1">
                 <a href="{{ route('dining.show', ['diningRoom' => $dr->id]) }}" class="rounded-xl relative cursor-pointer">
                     <img src="{{ asset( $dr->logo) }}" class="object-cover w-full h-32 rounded-xl"
@@ -25,6 +26,7 @@
                     </div>
                 </a>
             </div>
+            @endif
         @endforeach
     </div>
     <div class="flex justify-center">

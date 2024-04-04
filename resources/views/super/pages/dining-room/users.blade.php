@@ -132,6 +132,7 @@
                 <th>Nombre</th>
                 <th>Correo</th>
                 <th>Tipo</th>
+                <th>Estatus</th>
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -142,6 +143,14 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->roles->first()->display_name }}</td>
+                    <td>
+                        @if($user->status == 1)
+                            Activo
+                        @else
+                            Inactivo
+                        @endif
+                    </td>
+                    
                     <td>
                         <div class="flex justify-end gap-3">
                             {{-- <button class="btn btn-circle btn-ghost btn-xs">
