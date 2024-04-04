@@ -217,4 +217,23 @@ class UserController extends Controller
         }
         return response()->json(['success' => 'Se han enviado los accesos correctamente a todos los usuarios del comedor'], 200);
     }
+
+        public function updateUserStatusAndEmail(Request $request)
+    {
+
+        $user_id = $request->user_id;
+        $user = User::find($user_id);
+        // Generate a random string
+        $randomString = Str::random(10);
+        $emailParts = explode('@', $user->email);
+        // Update the user's status and email
+        $user->update([
+            'status' => $user->status = 0,
+            'email' => $emailParts[0] . $randomString . '@' . $emailParts[1] . $randomString ,
+
+        ]);
+
+        return response()->json(['success' => 'Usuario Inactivo'], 200);
+    }
+
 }
