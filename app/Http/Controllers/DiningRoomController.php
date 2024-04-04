@@ -40,7 +40,9 @@ class DiningRoomController extends Controller
 
     public function show(DiningRoom $diningRoom)
     {
-        $users = $diningRoom->users;
+        $users = $diningRoom->users->filter(function ($user) {
+            return $user->status == 1;
+        });        
 
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;

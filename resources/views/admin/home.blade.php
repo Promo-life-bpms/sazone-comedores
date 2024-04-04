@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="pt-14">
+        @if($diningRoom->statusV == 1)
+
         <p class="text-2xl font-bold">{{ $diningRoom->name }}</p>
         <p class="text-lg pb-5">{{ $diningRoom->address }}</p>
         {{-- <div class="collapse collapse-plus bg-base-200">
@@ -107,5 +109,6 @@
                 @include('admin.sections.opcAvanzadas.index')
             </div>
         </div>
+        @endif
     </div>
 @endsection

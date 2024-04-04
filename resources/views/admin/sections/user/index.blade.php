@@ -25,6 +25,7 @@
                 <th>Nombre</th>
                 <th>Correo</th>
                 <th>Tipo</th>
+                <th>Estatus</th>
                 <th>...</th>
             </tr>
         </thead>
@@ -35,6 +36,13 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ Str::ucfirst($user->profile->type) }}</td>
+                    <td>
+                        @if($user->status == 1)
+                            Activo
+                        @else
+                            Inactivo
+                        @endif
+                    </td>
                     <td>
                         <div class="flex justify-end gap-3">
                             {{-- <button class="btn btn-circle btn-ghost btn-xs">
