@@ -192,7 +192,7 @@ class MenuController extends Controller
                 $menu['time'] = $hojaActual->getCell('C' . $indiceFila)->getValue();
                 $menu['slug'] = Str::slug($menu['name']);
                 $imageUrl = $hojaActual->getCell('D' . $indiceFila)->getValue();
-                $imageContents = file_get_contents($imageUrl);
+                $imageContents = $this->curl_get_file_contents($imageUrl); // Usar la función curl_get_file_contents()
                 $imageName = $menu['slug'] . '.png';
                 Storage::put('public/images/' . $imageName, $imageContents);
                 $menu['image'] = 'images/' . $imageName;
@@ -249,5 +249,17 @@ class MenuController extends Controller
         } else {
             return redirect()->back()->with('error', 'No se ha podido crear el platillo por un problema con el archivo');
         }
+    }
+
+    function curl_get_file_contents($URL)
+    {
+        $c = curl_init();
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($c, CURLOPT_URL, $URL);
+        $contents = curl_exec($c);
+        curl_close($c);
+
+        if ($contents) return $contents;
+        else return FALSE;
     }
 }

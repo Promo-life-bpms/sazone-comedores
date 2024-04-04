@@ -205,9 +205,53 @@
         let errorImport = {{ session('error_user_import') ? 'modal_import_user.showModal()' : 0 }}
     });
 
+    // function deleteUser(id) {
+    //     Swal.fire({
+    //         title: "¿Estas seguro de que quieres eliminar este usuario?",
+    //         text: "Esta accion no se puede deshacer",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Eliminar"
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             elminarUser(id)
+    //         }
+    //     });
+    // }
+
+    // async function elminarUser(id) {
+    //     let url = "{{ route('users.deleteUser') }}";
+    //     await axios.delete(url, {
+    //         data: {
+    //             user_id: id
+    //         }
+    //     }).then((response) => {
+    //         console.log(response);
+    //         if (response.status == 200) {
+    //             Swal.fire({
+    //                 title: "Eliminado!",
+    //                 text: "Se ha eliminiado correctamente el usuario",
+    //                 icon: "success"
+    //             });
+    //             setTimeout(() => {
+    //                 location.reload();
+    //             }, 1000);
+    //         }
+    //     }).catch((error) => {
+    //         console.error(error);
+    //         Swal.fire({
+    //             title: "Error!",
+    //             text: "No se ha podido eliminar el usurio",
+    //             icon: "error"
+    //         });
+    //     });
+    // }
+
     function deleteUser(id) {
         Swal.fire({
-            title: "¿Estas seguro de que quieres eliminar este usuario?",
+            title: "¿Estas seguro de que quieres dar de baja este usuario?",
             text: "Esta accion no se puede deshacer",
             icon: "warning",
             showCancelButton: true,
@@ -216,23 +260,21 @@
             confirmButtonText: "Eliminar"
         }).then((result) => {
             if (result.isConfirmed) {
-                elminarUser(id)
+                updateUserStatusAndEmail(id)
             }
         });
     }
 
-    async function elminarUser(id) {
-        let url = "{{ route('users.deleteUser') }}";
-        await axios.delete(url, {
-            data: {
-                user_id: id
-            }
+        async function updateUserStatusAndEmail(id) {
+        let url = "{{ route('users.updateUserStatusAndEmail') }}";
+        await axios.put(url, { 
+            user_id: id
         }).then((response) => {
             console.log(response);
             if (response.status == 200) {
                 Swal.fire({
-                    title: "Eliminado!",
-                    text: "Se ha eliminiado correctamente el usuario",
+                    title: "Actualizado!",
+                    text: "Se ha actualizado correctamente el usuario",
                     icon: "success"
                 });
                 setTimeout(() => {
@@ -243,7 +285,7 @@
             console.error(error);
             Swal.fire({
                 title: "Error!",
-                text: "No se ha podido eliminar el usurio",
+                text: "No se ha podido actualizar el usurio",
                 icon: "error"
             });
         });

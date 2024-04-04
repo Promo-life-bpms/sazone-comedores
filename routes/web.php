@@ -41,6 +41,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::put('/users/update', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/delete', [UserController::class, 'destroy'])->name('users.deleteUser');
+    Route::put('/users/updateUserStatusAndEmail', [UserController::class, 'updateUserStatusAndEmail'])->name('users.updateUserStatusAndEmail');
     Route::post('/users/send-access', [UserController::class, 'sendAccess'])->name('users.sendAccess');
     // Route::post('/users/send-accessAll', [UserController::class, 'sendAccessAll'])->name('users.sendAccessAll');
     Route::post('/users/send-accessAll', [UserController::class, 'sendAccessAll'])->name('users.sendAccessAll');
