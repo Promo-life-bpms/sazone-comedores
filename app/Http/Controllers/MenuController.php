@@ -203,6 +203,7 @@ class MenuController extends Controller
                     trim($hojaActual->getCell('H' . $indiceFila)->getValue()),
                     trim($hojaActual->getCell('I' . $indiceFila)->getValue()),
                     trim($hojaActual->getCell('J' . $indiceFila)->getValue()),
+                    trim($hojaActual->getCell('K' . $indiceFila)->getValue()),
                 ];
                 // Obtener los indices que no estan vacios de $menu['availability']
                 $menu['availability'] = array_filter($menu['availability'], function ($value) {
