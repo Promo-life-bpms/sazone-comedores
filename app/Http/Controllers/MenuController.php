@@ -191,7 +191,11 @@ class MenuController extends Controller
                 $menu['description'] = $hojaActual->getCell('B' . $indiceFila)->getValue();
                 $menu['time'] = $hojaActual->getCell('C' . $indiceFila)->getValue();
                 $menu['slug'] = Str::slug($menu['name']);
-                $menu['image'] = $hojaActual->getCell('D' . $indiceFila)->getValue();
+                $imageUrl = $hojaActual->getCell('D' . $indiceFila)->getValue();
+                $imageContents = $this->curl_get_file_contents($imageUrl); // Usar la función curl_get_file_contents()
+                $imageName = $menu['slug'] . '.png';
+                Storage::put('public/images/' . $imageName, $imageContents);
+                $menu['image'] = 'images/' . $imageName;
                 $menu['availability'] = [
                     trim($hojaActual->getCell('E' . $indiceFila)->getValue()),
                     trim($hojaActual->getCell('F' . $indiceFila)->getValue()),
@@ -199,6 +203,7 @@ class MenuController extends Controller
                     trim($hojaActual->getCell('H' . $indiceFila)->getValue()),
                     trim($hojaActual->getCell('I' . $indiceFila)->getValue()),
                     trim($hojaActual->getCell('J' . $indiceFila)->getValue()),
+                    trim($hojaActual->getCell('K' . $indiceFila)->getValue()),
                 ];
                 // Obtener los indices que no estan vacios de $menu['availability']
                 $menu['availability'] = array_filter($menu['availability'], function ($value) {
@@ -234,6 +239,7 @@ class MenuController extends Controller
 
 
             foreach ($menus as $menuData) {
+                $menuData['dining_room_id'] = $dining->id;
                 $menu = Menu::create($menuData);
                 $menu->daysAvailable()->attach($menuData['availability']);
             }
@@ -244,5 +250,17 @@ class MenuController extends Controller
         } else {
             return redirect()->back()->with('error', 'No se ha podido crear el platillo por un problema con el archivo');
         }
+    }
+
+    function curl_get_file_contents($URL)
+    {
+        $c = curl_init();
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($c, CURLOPT_URL, $URL);
+        $contents = curl_exec($c);
+        curl_close($c);
+
+        if ($contents) return $contents;
+        else return FALSE;
     }
 }
