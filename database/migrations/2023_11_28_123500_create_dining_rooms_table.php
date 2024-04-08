@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('values')->nullable();
             $table->string('slug');
             $table->text('customization')->nullable();
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('statusV')->default(1);
             $table->timestamps();
         });
     }

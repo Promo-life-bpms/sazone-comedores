@@ -3,9 +3,15 @@
 @section('content')
     <div class="pt-14">
         @if($diningRoom->statusV == 1)
+        <div class="flex justify-end gap-3">
+            @if (Auth::user()->hasRole(['master-admin' , 'super-admin']))
+            <a href="{{ route('dining.preview', $diningRoom) }}" class="btn btn-primary">Ver vista preliminar</a>
+            @endif
+        </div>
 
         <p class="text-2xl font-bold">{{ $diningRoom->name }}</p>
         <p class="text-lg pb-5">{{ $diningRoom->address }}</p>
+
         {{-- <div class="collapse collapse-plus bg-base-200">
             <input type="radio" name="my-accordion-3" />
             <div class="collapse-title text-xl font-medium">
