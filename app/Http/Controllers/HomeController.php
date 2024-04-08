@@ -91,7 +91,7 @@ class HomeController extends Controller
     public function cuenta()
     {
         $diningRoom = '';
-        if ((auth()->user()->hasRole(['super-admin', 'master-admin']))) {
+        if (!(auth()->user()->hasRole(['super-admin', 'master-admin']))) {
             $diningRoom = auth()->user()->profile->diningRoom;
         }
         return view('user.pages.mi-cuenta', compact('diningRoom'));
