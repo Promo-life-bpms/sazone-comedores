@@ -65,6 +65,42 @@ class DatabaseSeeder extends Seeder
         ])->attachRole($superAdmin);
 
         User::create([
+            'name' => 'Super Admin',
+            'email' => 'Jose.lopezg@alsea.com.mx',
+            'password' => Hash::make('JoseLog123!'),
+        ])->attachRole($superAdmin);
+
+        User::create([
+            'name' => 'Super Admin',
+            'email' => 'Luis.tapia@alsea.com.mx',
+            'password' => Hash::make('LuisTa123!'),
+        ])->attachRole($superAdmin);
+
+        User::create([
+            'name' => 'Super Admin',
+            'email' => 'Karina.velasco@alsea.com.mx',
+            'password' => Hash::make('KarinaVe123!'),
+        ])->attachRole($superAdmin);
+
+        User::create([
+            'name' => 'Super Admin',
+            'email' => 'Daniel.luna@alsea.com.mx',
+            'password' => Hash::make('DanielLu123!'),
+        ])->attachRole($superAdmin);
+
+        User::create([
+            'name' => 'Super Admin',
+            'email' => 'Jose.lopezg@alsea.com.mx',
+            'password' => Hash::make('JoseLog123!'),
+        ])->attachRole($superAdmin);
+
+        User::create([
+            'name' => 'Super Admin',
+            'email' => 'Selene.luna@alsea.com.mx',
+            'password' => Hash::make('SeleneLu123!'),
+        ])->attachRole($superAdmin);
+
+        User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),

@@ -53,21 +53,39 @@ class HomeController extends Controller
 
     public function cupones()
     {
-        $diningRoom = auth()->user()->profile->diningRoom;
+        if (!(auth()->user()->hasRole(['super-admin', 'master-admin']))) {
+            $diningRoom = auth()->user();
+        } else {
+            // Aquí puedes definir qué DiningRoom deberían ver los 'super-admin' y 'master-admin'
+            $diningRoom = DiningRoom::get(); // Ejemplo
+        }
         return view('user.pages.cupones', compact('diningRoom'));
     }
 
     public function menu()
     {
-        $menuDays = DayFood::all();
-        $diningRoom = auth()->user()->profile->diningRoom;
+        if ((auth()->user()->hasRole(['super-admin', 'master-admin']))) {
+            $menuDays = DayFood::all();
+        $diningRoom = auth()->user();
         return view('user.pages.menu', compact('menuDays', 'diningRoom'));
+        } else {
+            $menuDays = DayFood::all();
+            $diningRoom = auth()->user()->profile->diningRoom;
+            return view('user.pages.menu', compact('menuDays', 'diningRoom'));
+        }
+        
     }
 
     public function acerca()
     {
-        $diningRoom = auth()->user()->profile->diningRoom;
-        return view('user.pages.acerca-de', compact('diningRoom'));
+        if ((auth()->user()->hasRole(['super-admin', 'master-admin']))) {
+            $diningRoom = auth()->user();
+            return view('user.pages.acerca-de', compact('diningRoom'));
+        } else {
+            $diningRoom = auth()->user()->profile->diningRoom;
+            return view('user.pages.acerca-de', compact('diningRoom'));
+        }
+
     }
 
     public function cuenta()
@@ -77,5 +95,26 @@ class HomeController extends Controller
             $diningRoom = auth()->user()->profile->diningRoom;
         }
         return view('user.pages.mi-cuenta', compact('diningRoom'));
+    }
+
+    public function preview(DiningRoom $diningRoom)
+    {
+
+        $users = $diningRoom->users->filter(function ($user) {
+            return $user->status == 1;
+        });
+        // Obtén los datos que necesitas mostrar para la vista preliminar de un usuario normal
+        $menuDays = DayFood::all();
+        $advertisements = $diningRoom->advertisements;
+        $allFood = [];
+
+        foreach ($menuDays as $day) {
+            foreach ($day->menus($diningRoom->id) as $food) {
+                $food->daysAvailable;
+                $allFood[] = $food;
+            }
+        }
+
+        return view('user.pages.home', compact('diningRoom', 'menuDays', 'allFood', 'advertisements', 'users','day'));
     }
 }
