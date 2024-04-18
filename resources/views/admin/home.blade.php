@@ -5,7 +5,7 @@
         @if($diningRoom->statusV == 1)
         <div class="flex justify-end gap-3">
             @if (Auth::user()->hasRole(['master-admin' , 'super-admin']))
-            <a href="{{ route('dining.preview', $diningRoom) }}" class="btn btn-primary">Ver vista preliminar</a>
+            <a href="{{ route('dining.preview', $diningRoom) }}" class="btn text-white bg-pink-600 hover:bg-pink-800">Ver vista preliminar</a>
             @endif
         </div>
 

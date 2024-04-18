@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        <img src="https://images.pexels.com/photos/1060468/pexels-photo-1060468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt="" class="object-cover w-full h-52">
-    </div>
+<div class="flex justify-center">
+    <img src="{{ asset('assets/SazoneLN.png') }}" alt="" class="object-cover w-30 h-52">
+</div>
     <div class="space-y-3 mt-5">
         <p>{{ $diningRoom->address }}</p>
         <p class="font-semibold">Mision</p>
