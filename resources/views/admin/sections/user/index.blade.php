@@ -1,8 +1,8 @@
 <div class="flex justify-end gap-3">
     {{-- <div class="btn btn-primary">Asignar Cupones</div> --}}
-    <button class="btn btn-primary" onclick="modal_import_user.showModal()">Importar Archivo</button>
-    <button class="btn btn-primary" onclick="modal_add_user.showModal()">Agregar Usuario</button>
-    <button class="btn btn-primary" onclick="sendAccessAll({{ $diningRoom->id }})">Enviar Accesos</button>
+    <button class="btn bg-pink-600 hover:bg-pink-800 text-white" onclick="modal_import_user.showModal()">Importar Archivo</button>
+    <button class="btn bg-pink-600 hover:bg-pink-800 text-white" onclick="modal_add_user.showModal()">Agregar Usuario</button>
+    <button class="btn bg-pink-600 hover:bg-pink-800 text-white" onclick="sendAccessAll({{ $diningRoom->id }})">Enviar Accesos</button>
     {{-- <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" /> --}}
 </div>
 <br>

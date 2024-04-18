@@ -4,7 +4,7 @@
     <h1 class="text-3xl font-semibold my-5">Administradores</h1>
     <div class="flex justify-between items-center">
         <h1 class="text-lg font-semibold my-2">Gestionar administradores</h1>
-        <button class="btn text-white bg-green-700 hover:bg-green-800" onclick="my_modal_2.showModal()">Crear nuevo</button>
+        <button class="btn text-white bg-pink-600 hover:bg-pink-800" onclick="my_modal_2.showModal()">Crear nuevo</button>
 
     </div>
 
@@ -73,7 +73,7 @@
             <br><br>
 
             <div class="space-y-2">
-                <button class="btn btn-primary w-full uppercase" type="submit">Guardar</button>
+                <button class="btn bg-pink-600 hover:bg-pink-800 w-full uppercase text-white" type="submit">Guardar</button>
             </div>
         </form>
         </div>
@@ -113,7 +113,7 @@
             <br><br>
     
             <div class="space-y-2">
-                <button class="btn btn-primary w-full uppercase" type="submit">Guardar</button>
+                <button class="btn bg-pink-600 hover:bg-pink-800 text-white w-full uppercase" type="submit">Guardar</button>
             </div>
         </form>
         </div>
