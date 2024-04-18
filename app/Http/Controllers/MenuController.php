@@ -186,7 +186,7 @@ class MenuController extends Controller
             $menus = [];
 
             $errors = [];
-            for ($indiceFila = 3; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
+            for ($indiceFila = 2; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
                 $menu['name'] = $hojaActual->getCell('A' . $indiceFila)->getValue();
                 $menu['description'] = $hojaActual->getCell('B' . $indiceFila)->getValue();
                 $menu['time'] = $hojaActual->getCell('C' . $indiceFila)->getValue();

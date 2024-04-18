@@ -89,7 +89,7 @@
                 </div>
                 <br>
             <div class="space-y-2">
-                <button class="btn btn-primary w-full uppercase" type="submit">Guardar</button>
+                <button class="btn bg-pink-600 hover:bg-pink-800 text-white w-full uppercase" type="submit">Guardar</button>
             </div>
         </form>
     </div>

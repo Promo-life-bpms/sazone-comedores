@@ -1,6 +1,6 @@
 <div class="flex justify-end gap-3">
-    <button class="btn btn-primary" onclick="modal_import_food.showModal()">Importar Archivo</button>
-    <button class="btn btn-primary" onclick="modal_add_food.showModal()">Agregar Platillo</button>
+    <button class="btn bg-pink-600 hover:bg-pink-800 text-white" onclick="modal_import_food.showModal()">Importar Archivo</button>
+    <button class="btn bg-pink-600 hover:bg-pink-800 text-white" onclick="modal_add_food.showModal()">Agregar Platillo</button>
 </div>
 <br>
 @if (session('success_menu'))
