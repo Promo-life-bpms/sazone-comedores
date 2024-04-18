@@ -258,4 +258,19 @@ class DiningRoomController extends Controller
         return redirect()->back()->with('success', 'Relación usuario-comedor actualizada correctamente');
     }
     
+    public function updateDiningStatus(Request $request)
+    {
+        $dining_room_id = $request->dining_room_id;
+    
+        // Busca la sala de comedor por su ID
+        $diningRoom = DiningRoom::findOrFail($dining_room_id);
+    
+        // Actualiza el campo 'statusV' a 0
+        $diningRoom->update([
+            'statusV' => 0,
+        ]);
+    
+        return response()->json(['success' => 'Comedor Inactivo'], 200);
+    }
+    
 }
