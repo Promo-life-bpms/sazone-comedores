@@ -2,7 +2,7 @@
 @include('admin.sections.advertisment.modal-create')
 <div class="space-y-2">
     <div class="flex justify-end gap-3">
-        <button class="btn text-white bg-pink-600 hover:bg-pink-800" onclick="my_modal_anuncio.showModal()">Agregar Anuncio</button>
+        <button class="btn btn-primary" onclick="my_modal_anuncio.showModal()">Agregar Anuncio</button>
         {{-- <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" /> --}}
     </div>
     @if (session('success_advertisment'))
