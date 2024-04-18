@@ -19,6 +19,7 @@ class DiningRoom extends Model
         'vision',
         'values',
         'customization',
+        'statusV',
     ];
 
     public function users()
