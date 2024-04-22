@@ -65,7 +65,7 @@
             <br><br>
 
             <div class="space-y-2">
-                <button class="btn bg-pink-600 hover:bg-pink-800 text-white w-full uppercase" type="submit">Editar</button>
+                <button class="btn text-white w-full uppercase" style="background-color: rgb(48, 79, 157)" type="submit">Editar</button>
             </div>
         </form>
     </div>

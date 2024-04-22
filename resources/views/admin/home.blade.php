@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="pt-14">
-        @if($diningRoom->statusV == 1)
-        <div class="flex justify-end gap-3">
-            @if (Auth::user()->hasRole(['master-admin' , 'super-admin']))
-            <a href="{{ route('dining.preview', $diningRoom) }}" class="btn text-white bg-pink-600 hover:bg-pink-800">Ver vista preliminar</a>
-            @endif
-        </div>
+    <div class="pt-16">
+        @if ($diningRoom->statusV == 1)
+            <div class="flex justify-end gap-3">
+                @if (Auth::user()->hasRole(['master-admin', 'super-admin']))
+                    <a href="{{ route('dining.preview', $diningRoom) }}"
+                        class="btn text-white" style="background-color: rgb(48, 79, 157)">Ver vista preliminar</a>
+                @endif
+            </div>
 
-        <p class="text-2xl font-bold">{{ $diningRoom->name }}</p>
-        <p class="text-lg pb-5">{{ $diningRoom->address }}</p>
+            <p class="text-2xl font-bold">{{ $diningRoom->name }}</p>
+            <p class="text-lg pb-5">{{ $diningRoom->address }}</p>
 
-        {{-- <div class="collapse collapse-plus bg-base-200">
+            {{-- <div class="collapse collapse-plus bg-base-200">
             <input type="radio" name="my-accordion-3" />
             <div class="collapse-title text-xl font-medium">
                 Detalles Generales
@@ -57,19 +58,19 @@
                 @endif
             </div>
         </div> --}}
-        <div class="collapse collapse-plus bg-stone-100">
-            <input type="radio" name="my-accordion-3"
-                @if (session('section')) {{ session('section') == 'advertisements' ? 'checked' : '' }} @endif />
-            <div class="collapse-title text-xl font-medium">
-                Anuncios
+            <div class="collapse collapse-plus bg-stone-100 ">
+                <input type="radio" name="my-accordion-3"
+                    @if (session('section')) {{ session('section') == 'advertisements' ? 'checked' : '' }} @endif />
+                <div class="collapse-title text-xl font-medium">
+                    Anuncios
+                </div>
+                <div class="collapse-content overflow-x-auto">
+                    {{-- Crea una lista con los anuncios de este comedor --}}
+                    @include('admin.sections.advertisment.index')
+                </div>
             </div>
-            <div class="collapse-content">
-                {{-- Crea una lista con los anuncios de este comedor --}}
-                @include('admin.sections.advertisment.index')
-            </div>
-        </div>
-        <div class="mt-6"></div>
-        {{-- <div class="collapse collapse-plus bg-stone-100">
+            <div class="mt-6"></div>
+            {{-- <div class="collapse collapse-plus bg-stone-100">
             <input type="radio" name="my-accordion-3"
             @if (session('section')) {{ session('section') == 'cupones' ? 'checked' : '' }} @endif
             />
@@ -80,41 +81,45 @@
                 @include('admin.sections.cupon.index')
             </div>
         </div> --}}
-        <div class="mt-6"></div>
-        <div class="collapse collapse-plus bg-stone-100">
-            <input type="radio" name="my-accordion-3"
-            @if (session('section')) {{ session('section') == 'menu' ? 'checked' : '' }} @endif
-            />
-            <div class="collapse-title text-xl font-medium">
-                Menu
+            <div class="mt-6">
+                <div class="collapse collapse-plus bg-stone-100">
+                    <input type="radio" name="my-accordion-3"
+                        @if (session('section')) {{ session('section') == 'menu' ? 'checked' : '' }} @endif />
+                    <div class="collapse-title text-xl font-medium">
+                        Menu
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.menu.index')
+                    </div>
+                </div>
             </div>
-            <div class="collapse-content">
-                @include('admin.sections.menu.index')
+            <div class="mt-6">
+                <div class="collapse collapse-plus bg-stone-100 ">
+                    <input type="radio" name="my-accordion-3"
+                        @if (session('section')) {{ session('section') == 'usuarios' ? 'checked' : '' }} @endif />
+                    <div class="collapse-title text-xl font-medium">
+                        Usuarios
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.user.index')
+                        
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="mt-6"></div>
-        <div class="collapse collapse-plus bg-stone-100">
-            <input type="radio" name="my-accordion-3"
-            @if (session('section')) {{ session('section') == 'usuarios' ? 'checked' : '' }} @endif
-            />
-            <div class="collapse-title text-xl font-medium">
-                Usuarios
+            <div class="mt-6">
+                <div class="collapse collapse-plus bg-base-200">
+                    <input type="radio" name="my-accordion-3" />
+                    @if (session('section'))
+                        {{ session('section') == 'opcionesAvanzadas' ? 'checked' : '' }}
+                    @endif
+                    <div class="collapse-title text-xl font-medium">
+                        Opciones avanzadas
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.opcAvanzadas.index')
+                    </div>
+                </div>
             </div>
-            <div class="collapse-content">
-                @include('admin.sections.user.index')
-            </div>
-        </div>
-        <div class="mt-6"></div>
-        <div class="collapse collapse-plus bg-base-200">
-            <input type="radio" name="my-accordion-3" />
-            @if (session('section')) {{ session('section') == 'opcionesAvanzadas' ? 'checked' : '' }} @endif
-            <div class="collapse-title text-xl font-medium">
-                Opciones avanzadas
-            </div>
-            <div class="collapse-content">
-                @include('admin.sections.opcAvanzadas.index')
-            </div>
-        </div>
         @endif
     </div>
 @endsection
