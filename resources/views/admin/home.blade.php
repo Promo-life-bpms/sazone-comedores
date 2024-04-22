@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="pt-16">
+        <img src="{{ asset('assets/SazoneLogo.png') }}" alt="Logo"
+         style="max-width: 350px; max-height: 500px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;">
         @if ($diningRoom->statusV == 1)
             <div class="flex justify-end gap-3">
                 @if (Auth::user()->hasRole(['master-admin', 'super-admin']))
