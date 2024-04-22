@@ -76,7 +76,7 @@
                 <div class="space-y-2">
                     <label for="" class="text-lg font-semibold">Logo</label>
                     <input type="file" name="logo_edit" id="logo_edit"
-                        class="file-input file-input-primary file-input-bordered w-full @error('logo_edit') input-error @enderror" />
+                        class="file-input bg-custom-blue file-input-bordered w-full @error('logo_edit') input-error @enderror" />
                     @error('logo_edit')
                         <div class="text-red-500">
                             {{ $message }}
@@ -89,7 +89,7 @@
                 </div>
                 <br>
             <div class="space-y-2">
-                <button class="btn bg-pink-600 hover:bg-pink-800 text-white w-full uppercase" type="submit">Guardar</button>
+                <button class="btn text-white w-full uppercase" style="background-color: rgb(48, 79, 157)" type="submit">Guardar</button>
             </div>
         </form>
     </div>

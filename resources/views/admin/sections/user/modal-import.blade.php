@@ -21,7 +21,7 @@
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Archivo</label>
                 <input type="file" name="file_users"
-                    class="file-input file-input-primary file-input-bordered w-full @error('file_users') input-error @enderror" />
+                    class="file-input bg-custom-blue file-input-bordered w-full @error('file_users') input-error @enderror" />
                 @error('file_users')
                     <div class="text-red-500">
                         {{ $message }}

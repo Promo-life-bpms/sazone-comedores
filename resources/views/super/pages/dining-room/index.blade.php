@@ -16,12 +16,12 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-y-8">
         @foreach ($diningRooms as $dr)
             @if ($dr->statusV == 1)
-                <div class="col-span-1">
-                    <div class="rounded-xl relative cursor-pointer">
+                <div class="col-span-1 rounded-xl border">
+                    <div class="rounded-xl relative cursor-pointer rounded-xl">
                         <a href="{{ route('dining.show', ['diningRoom' => $dr->id]) }}">
-                            <img src="{{ asset($dr->logo) }}" class="object-cover w-full h-32 rounded-xl" alt="">
-                            <div class="absolute bottom-2 right-0 bg-primary w-3/5 p-2 text-white">
-                                <p class="font-bold text-sm">{{ $dr->name }}</p>
+                            <img src="{{ asset($dr->logo) }}" class="object-cover w-full h-32 rounded-xl " alt="">
+                            <div class="absolute bottom-2 right-0 w-3/5 rounded-xl p-2 text-white" style="background-color: rgb(48, 79, 157)">
+                                <p class="font-bold text-sm bg-blue-700">{{ $dr->name }}</p>
                                 <p class="text-xs">{{ $dr->address }}</p>
                             </div>
                         </a>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="space-y-2">
                     <label for="" class="text-lg font-semibold">Logo</label>
-                    <input type="file" name="logo" class="file-input file-input-primary file-input-bordered w-full" />
+                    <input type="file" name="logo" class="file-input bg-custom-blue file-input-bordered w-full" />
                     @error('email')
                         <div class="text-red-500">
                             {{ $message }}
@@ -118,7 +118,7 @@
 
                 <br><br>
                 <div class="space-y-2">
-                    <button class="btn btn-primary w-full uppercase" type="submit">Crear comedor</button>
+                    <button class="btn btn-primary w-full uppercase" style="background-color: rgb(48, 79, 157)" type="submit">Crear comedor</button>
                 </div>
             </form>
         </div>
