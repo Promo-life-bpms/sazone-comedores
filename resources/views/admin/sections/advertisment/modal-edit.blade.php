@@ -38,7 +38,7 @@
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Imagen</label>
                 <input type="file" name="file_advertisment_edit" accept="image/*"
-                    class="file-input file-input-primary file-input-bordered w-full @error('file_advertisment_edit') input-error @enderror" />
+                    class="file-input bg-custom-blue file-input-bordered w-full @error('file_advertisment_edit') input-error @enderror" />
                 @error('file_advertisment_edit')
                     <div class="text-red-500">
                         {{ $message }}
@@ -76,7 +76,7 @@
             </div>
             <br><br>
             <div class="space-y-2">
-                <button class="btn bg-pink-600 hover:bg-pink-800 text-white w-full uppercase" type="submit">Guardar</button>
+                <button class="btn text-white w-full uppercase" style="background-color: rgb(48, 79, 157)" type="submit">Guardar</button>
             </div>
         </form>
     </div>

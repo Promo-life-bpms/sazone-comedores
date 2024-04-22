@@ -1,10 +1,11 @@
-<div class="flex justify-end gap-3">
-    {{-- <div class="btn btn-primary">Asignar Cupones</div> --}}
-    <button class="btn bg-pink-600 hover:bg-pink-800 text-white" onclick="modal_import_user.showModal()">Importar Archivo</button>
-    <button class="btn bg-pink-600 hover:bg-pink-800 text-white" onclick="modal_add_user.showModal()">Agregar Usuario</button>
-    <button class="btn bg-pink-600 hover:bg-pink-800 text-white" onclick="sendAccessAll({{ $diningRoom->id }})">Enviar Accesos</button>
-    {{-- <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" /> --}}
+<div class="flex justify-end items-center gap-8 overflow-x-auto">
+    <div class="flex gap-3">
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_import_user.showModal()">Importar Archivo</button>
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_add_user.showModal()">Agregar Usuario</button>
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="sendAccessAll({{ $diningRoom->id }})">Enviar Accesos</button>
+    </div>
 </div>
+
 <br>
 @if (session('success_user_create'))
     <div role="alert" class="alert alert-success" id="alert_advertisment">
