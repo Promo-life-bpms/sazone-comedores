@@ -10,38 +10,41 @@
         <div class="tabs tabs-bordered hidden grid-cols-6 sm:grid flex-col">
             @foreach ($menuDays as $day)
                 <input type="radio" name="tabs_days_menu" role="tab" class="tab" aria-label="{{ $day->day }}"
-                       {{ $loop->first ? 'checked' : '' }} />
+                    {{ $loop->first ? 'checked' : '' }} />
                 <div role="tabpanel" class="tab-content p-10 justify-between">
 
                     @if ($day->menus($diningRoom->id)->count() == 0)
                         <div role="alert" class="alert alert-warning">
                             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
-                                 viewBox="0 0 24 24">
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
                             <span>No hay platillos disponibles</span>
                         </div>
                     @endif
 
                     <div class="flex flex-row">
-                        @foreach (['Desayuno', 'Comida', 'Cena', 'Eventos especiales'] as $index => $time)
-                            <div class="flex flex-col w-1/4 {{ $index > 0 ? 'ml-4' : '' }}">
-                                <!-- Agrega un margen izquierdo solo a partir del segundo grupo de menús -->
+                        @foreach (['Desayuno', 'Comida'] as $index => $time)
+                            <div
+                                class="flex flex-col w-1/2 {{ $index > 0 ? 'ml-4' : '' }} border-gray-800 {{ $time == 'Desayuno' ? 'border-r-2 border-gray-800' : '' }}">
                                 <h1 class="text-3xl font-semibold mb-5">{{ $time }}</h1>
                                 <div class="flex flex-col">
                                     @foreach ($day->menus($diningRoom->id) as $menu)
                                         @if ($menu->time == $time)
                                             <div class="mb-6 h-40"> <!-- Establecer una altura fija para la tarjeta -->
-                                                <div class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
+                                                <div
+                                                    class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                     <div class="md:w-6/12 lg:w-5/12">
                                                         <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
-                                                             src="{{ asset('storage/' . $menu->image) }}" />
+                                                            src="{{ asset('storage/' . $menu->image) }}" />
                                                     </div>
-                                                    <div class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
+                                                    <div
+                                                        class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
                                                         <h2 class="text-xl font-semibold text-secondary mb-2">
                                                             {{ $menu->name }}</h2>
-                                                        <p class="text-gray-700 leading-snug overflow-hidden line-clamp-3">{{ $menu->description }}</p>
+                                                        <p class="text-gray-700 leading-snug overflow-hidden line-clamp-3">
+                                                            {{ $menu->description }}</p>
                                                         <!-- Utilizar line-clamp-3 para limitar a 3 líneas de texto -->
                                                     </div>
                                                 </div>
@@ -52,6 +55,37 @@
                             </div>
                         @endforeach
                     </div>
+                    <div class="flex flex-row">
+                        @foreach (['Cena', 'Eventos especiales'] as $index => $time)
+                            <div
+                                class="flex flex-col w-1/2 {{ $index > 0 ? 'ml-4' : '' }} border-gray-800 {{ $time == 'Cena' ? 'border-r-2 border-gray-800' : '' }}">
+                                <h1 class="text-3xl font-semibold mb-5">{{ $time }}</h1>
+                                <div class="flex flex-col">
+                                    @foreach ($day->menus($diningRoom->id) as $menu)
+                                        @if ($menu->time == $time)
+                                            <div class="mb-6 h-40">
+                                                <div
+                                                    class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
+                                                    <div class="md:w-6/12 lg:w-5/12">
+                                                        <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
+                                                            src="{{ asset('storage/' . $menu->image) }}" />
+                                                    </div>
+                                                    <div
+                                                        class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
+                                                        <h2 class="text-xl font-semibold text-secondary mb-2">
+                                                            {{ $menu->name }}</h2>
+                                                        <p class="text-gray-700 leading-snug overflow-hidden line-clamp-3">
+                                                            {{ $menu->description }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
                 </div>
             @endforeach
         </div>
@@ -60,49 +94,96 @@
             @if (count($day->menus($diningRoom->id)) > 0)
                 @foreach ($menuDays as $day)
                     <input type="radio" name="tabs_days_menu" role="tab" class="tab"
-                           aria-label="{{ $day->day }}" {{ $loop->first ? 'checked' : '' }} />
+                        aria-label="{{ $day->day }}" {{ $loop->first ? 'checked' : '' }} />
                     <div role="tabpanel" class="tab-content p-10">
                         @if ($day->menus($diningRoom->id)->count() == 0)
                             <div role="alert" class="alert alert-warning">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6"
-                                     fill="none" viewBox="0 0 24 24">
+                                    fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                 </svg>
                                 <span>No hay platillos disponibles</span>
                             </div>
                         @endif
                         <div class="">
+                            <h1 class="text-3xl mb-5">Desayunos</h1>
                             @foreach ($day->menus($diningRoom->id) as $menu)
-                                @if ($loop->even)
+                                @if ($menu->time == 'Desayuno')
                                     <div class="w-full max-w-4xl mx-auto h-52">
-                                        <div class="w-1/2 text-justify relative py-8">
-                                            <div class="bg-white p-5 shadow-md">
-                                                <p class="text-lg font-semibold">{{ $menu->time }}</p>
+                                        <div class=" text-justify relative py-8">
+                                            <div class="bg-white bg-opacity-50 p-5 shadow-md">
+                                                <p class="text-lg font-semibold">{{ $menu->name }}</p>
                                                 {{ $menu->description }}
                                             </div>
-                                            <div class="absolute top-0 bottom-0 -right-2/3 -z-50">
+                                            <div class="absolute top-0 bottom-10  -z-50">
                                                 <img src="{{ asset('storage/' . $menu->image) }}" alt=""
-                                                     class="h-60 object-cover">
+                                                    class="w-50px h-60 object-cover rounded-lg">
                                             </div>
                                         </div>
                                     </div>
                                     <br>
                                     <br><br>
                                 @endif
-                                @if ($loop->odd)
-                                    <div class="w-full text-right max-w-4xl mx-auto flex justify-end h-52">
-                                        <div class="w-1/2 relative py-8">
-                                            <div class="absolute top-0 bottom-0 -left-2/3 -z-50">
-                                                <img src="{{ asset('storage/' . $menu->image) }}" alt=""
-                                                     class="h-60 object-cover">
-                                            </div>
-                                            <div class="bg-white p-5 shadow-md">
-                                                <p class="text-lg font-semibold">{{ $menu->time }}</p>
+                            @endforeach
+
+                            <h1 class="text-3xl mb-5">Comidas</h1>
+                            @foreach ($day->menus($diningRoom->id) as $menu)
+                                @if ($menu->time == 'Comida')
+                                    <div class="w-full max-w-4xl mx-auto h-52">
+                                        <div class=" text-justify relative py-8">
+                                            <div class="bg-white bg-opacity-50 p-5 shadow-md">
+                                                <p class="text-lg font-semibold">{{ $menu->name }}</p>
                                                 {{ $menu->description }}
+                                            </div>
+                                            <div class="absolute top-0 bottom-10  -z-50">
+                                                <img src="{{ asset('storage/' . $menu->image) }}" alt=""
+                                                    class="w-50px h-60 object-cover rounded-lg">
                                             </div>
                                         </div>
                                     </div>
+                                    <br>
+                                    <br><br>
+                                @endif
+                            @endforeach
+
+                            <h1 class="text-3xl mb-5">Cena</h1>
+                            @foreach ($day->menus($diningRoom->id) as $menu)
+                                @if ($menu->time == 'Cena')
+                                    <div class="w-full max-w-4xl mx-auto h-52">
+                                        <div class=" text-justify relative py-8">
+                                            <div class="bg-white bg-opacity-50 p-5 shadow-md">
+                                                <p class="text-lg font-semibold">{{ $menu->name }}</p>
+                                                {{ $menu->description }}
+                                            </div>
+                                            <div class="absolute top-0 bottom-10  -z-50">
+                                                <img src="{{ asset('storage/' . $menu->image) }}" alt=""
+                                                    class="w-50px h-60 object-cover rounded-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br><br>
+                                @endif
+                            @endforeach
+
+                            <h1 class="text-3xl mb-5">Eventos Especiales</h1>
+                            @foreach ($day->menus($diningRoom->id) as $menu)
+                                @if ($menu->time == 'Eventos especiales')
+                                    <div class="w-full max-w-4xl mx-auto h-52">
+                                        <div class=" text-justify relative py-8">
+                                            <div class="bg-white bg-opacity-50 p-5 shadow-md top-100">
+                                                <p class="text-lg font-semibold ">{{ $menu->name }}</p>
+                                                {{ $menu->description }}
+                                            </div>
+                                            <div class="absolute top-0 bottom-500  -z-50">
+                                                <img src="{{ asset('storage/' . $menu->image) }}" alt=""
+                                                    class="w-50px h-60 object-cover rounded-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br><br>
                                 @endif
                             @endforeach
                         </div>
@@ -113,4 +194,19 @@
             @endif
         </div>
     </div>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap');
+
+        h1 {
+            font-family: "WindSong", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .windsong-medium {
+            font-family: "WindSong", cursive;
+            font-weight: 500;
+            font-style: normal;
+        }
+    </style>
 @endsection
