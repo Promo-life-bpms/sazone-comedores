@@ -8,6 +8,10 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/SazoneIcon.png') }}">
     <link rel="shortcut icon" sizes="192x192" href="{{ asset('assets/SazoneIcon.png') }}">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap" rel="stylesheet">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
