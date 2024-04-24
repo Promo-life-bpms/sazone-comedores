@@ -23,12 +23,12 @@
                         <a href="{{ route('dining.show', ['diningRoom' => $dr->id]) }}">
                             <img src="{{ asset($dr->logo) }}" class="object-cover w-full h-32 rounded-xl " alt="">
                             <div class="absolute bottom-2 right-0 w-3/5 rounded-xl p-2 text-white" style="background-color: rgb(48, 79, 157)">
-                                <p class="font-bold text-sm bg-blue-700">{{ $dr->name }}</p>
+                                <p class="font-bold text-sm ">{{ $dr->name }}</p>
                                 <p class="text-xs">{{ $dr->address }}</p>
                             </div>
                         </a>
                         <button
-                            class="absolute top-2 right-2 bg-red-500 hover:bg-red-700 text-black font-bold py-2 px-4 rounded"
+                            class="absolute top-2 right-2 text-black font-bold py-2 px-4 rounded"
                             onclick="deleteDining(event, {{ $dr->id }})">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">

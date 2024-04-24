@@ -3,12 +3,12 @@
 @section('content')
     <div class="pt-16">
         <img src="{{ asset('assets/SazoneLogo.png') }}" alt="Logo"
-         style="max-width: 350px; max-height: 500px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;">
+            style="max-width: 350px; max-height: 500px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;">
         @if ($diningRoom->statusV == 1)
             <div class="flex justify-end gap-3">
                 @if (Auth::user()->hasRole(['master-admin', 'super-admin']))
-                    <a href="{{ route('dining.preview', $diningRoom) }}"
-                        class="btn text-white" style="background-color: rgb(48, 79, 157)">Ver vista preliminar</a>
+                    <a href="{{ route('dining.preview', $diningRoom) }}" class="btn text-white"
+                        style="background-color: rgb(48, 79, 157)">Ver vista preliminar</a>
                 @endif
             </div>
 
@@ -59,7 +59,7 @@
                     </div>
                 @endif
             </div>
-        </div> --}}
+            </div> --}}
             <div class="collapse collapse-plus bg-stone-100 ">
                 <input type="radio" name="my-accordion-3"
                     @if (session('section')) {{ session('section') == 'advertisements' ? 'checked' : '' }} @endif />
@@ -82,7 +82,7 @@
             <div class="collapse-content">
                 @include('admin.sections.cupon.index')
             </div>
-        </div> --}}
+         </div> --}}
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100">
                     <input type="radio" name="my-accordion-3"
@@ -96,15 +96,17 @@
                 </div>
             </div>
             <div class="mt-6">
-                <div class="collapse collapse-plus bg-stone-100 ">
-                    <input type="radio" name="my-accordion-3"
-                        @if (session('section')) {{ session('section') == 'usuarios' ? 'checked' : '' }} @endif />
+                <div class="collapse collapse-plus bg-stone-100  ">
+                    <input type="radio" name="my-accordion-4"/>
+                        @if (session('section')) {{ session('section') == 'usuarios' ? 'checked' : '' }} @endif 
                     <div class="collapse-title text-xl font-medium">
                         Usuarios
                     </div>
                     <div class="collapse-content overflow-x-auto">
                         @include('admin.sections.user.index')
-                        
+                        {{-- <div class="">
+                            {{ $users->links() }}
+                        </div> --}}
                     </div>
                 </div>
             </div>
