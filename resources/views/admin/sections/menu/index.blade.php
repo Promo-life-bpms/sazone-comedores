@@ -13,7 +13,7 @@
         <span>{{ session('success_menu') }}</span>
     </div>
 @endif
-<div role="tablist" class="tabs tabs-bordered grid grid-cols-1 sm:grid-cols-2 grid-cols-6">
+<div role="tablist" class="tabs tabs-bordered grid grid-cols-6">
     @foreach ($menuDays as $day)
         <input type="radio" name="tabs_days_menu" role="tab" class="tab" aria-label="{{ $day->day }}"
             {{ $loop->first ? 'checked' : '' }} />

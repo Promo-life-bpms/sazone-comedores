@@ -117,4 +117,15 @@ class HomeController extends Controller
 
         return view('user.pages.home', compact('diningRoom', 'menuDays', 'allFood', 'advertisements', 'users','day'));
     }
+
+    public function nutricionVida()
+    {
+        if (!(auth()->user()->hasRole(['super-admin', 'master-admin']))) {
+            $diningRoom = auth()->user();
+        } else {
+            // Aquí puedes definir qué DiningRoom deberían ver los 'super-admin' y 'master-admin'
+            $diningRoom = DiningRoom::get(); // Ejemplo
+        }
+        return view('user.pages.nutricion-vida', compact('diningRoom'));
+    }
 }

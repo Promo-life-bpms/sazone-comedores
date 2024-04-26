@@ -33,6 +33,7 @@ Route::get('/cupones', [App\Http\Controllers\HomeController::class, 'cupones'])-
 Route::get('/menu', [App\Http\Controllers\HomeController::class, 'menu'])->name('menu');
 Route::get('/acerca-de', [App\Http\Controllers\HomeController::class, 'acerca'])->name('acerca');
 Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])->name('mi-cuenta');
+Route::get('/nutricion-vida', [App\Http\Controllers\HomeController::class, 'nutricionVida'])->name('nutricion-vida');
 
 
 Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');

@@ -1,8 +1,7 @@
 <div class="navbar bg-base-100 shadow-lg">
     <div class="flex-1">
-        <a class="btn btn-ghost text-xl" href="{{ route('home') }}">
-            <img class="max-h-10" src="{{ asset($diningRoom->logo) }}" alt="">
-        </a>
+        <a class="btn btn-ghost" href="{{ route('home') }}">
+        <img class="max-h-11" class="rounded-full border w-10 h-10 object-cover" src="{{ asset('assets/SazoneLogo.png') }}" alt=""></a>
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1 py-0 gap-x-3">
