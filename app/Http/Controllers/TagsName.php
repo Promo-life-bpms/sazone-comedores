@@ -24,6 +24,7 @@ class TagsName extends Controller
             'end_date' => 'required',
             'dining_id' => 'required'
         ]);
+        
 
         if ($validator->fails()) {
             return redirect()->back()
