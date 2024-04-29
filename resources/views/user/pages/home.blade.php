@@ -204,6 +204,7 @@
             </button>
             <a href="{{ route('nutricion-vida') }}">
             <img src="{{ asset('assets/cc.png') }}" alt="Informative" class="w-full h-auto" /><div class="flex justify-end gap-3">
+            </a>
             </div>
           </div>
         </div>
