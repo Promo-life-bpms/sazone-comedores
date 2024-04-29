@@ -196,7 +196,7 @@
 
 
     <div class="pt-5 rounded-lg">
-        <p class="text-lg font-semibold mb-3">Capsaulas de Nutricion</p>
+        <p class="text-lg font-semibold mb-3">Tablero saludable</p>
     <div class="grid grid-cols-3 md:grid-cols-3 gap-3 rounded-lg ">
         <div class=" border p-2 relative rounded-lg">
             <button class="absolute top-0 left-0 bg-green-500 text-white py-2 px-4 rounded-lg">
