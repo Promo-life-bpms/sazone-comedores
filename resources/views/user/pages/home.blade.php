@@ -184,7 +184,7 @@
             <div class="col-span-2">
                 <div class="col-span-1">
                     <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
-                    <div id="video-container" class="w-80 h-80 rounded-lg overflow-hidden relative">
+                    <div id="video-container" class="w-full h-80 rounded-lg overflow-hidden relative">
                         <video src="{{ asset('assets/welcome.mp4') }}" alt="" controls
                             class="w-full h-full object-cover"></video>
                     </div>
@@ -273,7 +273,7 @@
 
     <div class="pt-5 bg-base-grey">
         <section class="bg-grey  lg:py-16 antialiased">
-            <div class="w-full max-w-2xl mx-auto px-4">
+            <div class="w-full max-w-7xl mx-auto px-4">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o Comentarios</h2>
                 </div>
