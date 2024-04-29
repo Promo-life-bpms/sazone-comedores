@@ -24,10 +24,10 @@
 
 <body class="h-screen flex items-center bg-[#FBFBFB] relative">
     <img src="{{ asset('assets/MnachaSazone.png') }}" alt="Logo"
-        style="max-width: 300px; max-height: 300px; position: absolute; top: 0; left: 0; ">
+        style="max-width: 400px; max-height: 400px; position: absolute; top: 0; left: 0; ">
 
     <img src="{{ asset('assets/circuloSazone.png') }}" alt="Another Image"
-        style="max-width: 150px; max-height: 300px; position: absolute; bottom: 0; right: 0;">
+        style="max-width: 200px; max-height: 300px; position: absolute; bottom: 0; right: 0;">
 
     <main class="max-w-sm mx-auto shadow-lg rounded-lg px-8 py-4" style="z-index: 9999;">
         @yield('content')
