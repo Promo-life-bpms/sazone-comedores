@@ -2,8 +2,6 @@
 
 @section('content')
     <div class="pt-16">
-        <img src="{{ asset('assets/SazoneLogo.png') }}" alt="Logo"
-            style="max-width: 350px; max-height: 500px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;">
         @if ($diningRoom->statusV == 1)
             <div class="flex justify-end gap-3">
                 @if (Auth::user()->hasRole(['master-admin', 'super-admin']))
@@ -104,6 +102,21 @@
                     </div>
                     <div class="collapse-content overflow-x-auto">
                         @include('admin.sections.user.index')
+                        {{-- <div class="">
+                            {{ $users->links() }}
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6">
+                <div class="collapse collapse-plus bg-stone-100  ">
+                    <input type="radio" name="my-accordion-4"/>
+                        @if (session('section')) {{ session('section') == 'tags' ? 'checked' : '' }} @endif 
+                    <div class="collapse-title text-xl font-medium">
+                        tags
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.tags.index')
                         {{-- <div class="">
                             {{ $users->links() }}
                         </div> --}}
