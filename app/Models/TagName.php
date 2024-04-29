@@ -15,6 +15,7 @@ class TagName extends Model
         'resource',
         'vigencia',
     ];
+    
 
     public function diningRooms()
     {
