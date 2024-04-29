@@ -13,7 +13,7 @@ class CommentaryController extends Controller
 
         $create_commentary = new Commentary();
         $create_commentary->comment = $request->comment; 
-        $create_commentary->user_id = auth()->user->id; 
+        $create_commentary->user_id = auth()->user()->id; 
         $create_commentary->detail = null; 
         $create_commentary->save();
         return Redirect::back()->with('mensaje', 'comentario creado satisfactoriamente');
