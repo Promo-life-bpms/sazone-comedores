@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class TagsName extends Controller
+class TagsNameController extends Controller
 {
     public function __construct()
     {
@@ -35,7 +35,7 @@ class TagsName extends Controller
 
         $dining = DiningRoom::find($request->dining_id);
 
-        $tagname = [
+        $tags = [
             'title' => $request->title ?? null,
             'description' => $request->description ?? null,
             'vigencia' => json_encode([
@@ -50,7 +50,7 @@ class TagsName extends Controller
         $nameFile = date('Y-m-d-s') . '_tagname.' . $file->getClientOriginalExtension();
         $path = 'dining_room/' . $dining->slug . "/tagname/";
 
-        $tagname['resource'] = $path . $nameFile;
+        $tags['resource'] = $path . $nameFile;
 
         if ($file->isValid()) {
             Storage::putFileAs('public/' . $path, $file, $nameFile);
@@ -60,9 +60,9 @@ class TagsName extends Controller
                 ->with('section', 'advertisements');
         }
 
-        $tagname = TagName::create($tagname);
+        $tags = TagName::create($tags);
 
-        $tagname->diningRooms()->attach($dining);
+        $tags->diningRooms()->attach($dining);
 
         return redirect()->back()
             ->with('success_tagname', 'Anuncio creado correctamente')
