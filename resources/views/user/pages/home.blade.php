@@ -273,16 +273,27 @@
 
 
     <div class="pt-5 bg-base-grey">
+
+        @if(session('success'))
+            <div class="alert alert-success text-black" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <section class="bg-grey  lg:py-16 antialiased">
             <div class="w-full max-w-7xl mx-auto px-4">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o Comentarios</h2>
+                    <p class="text-lg font-bold text-gray-900 text-black">Sugerencias o Comentarios</p>
                 </div>
-                <form class="mb-6">
+               
+                <form method="POST" action="{{ route('storeCommentary') }}" enctype="multipart/form-data" class="space-y-3">
+                    @method('POST')
+                    @csrf
+
                     <div
                         class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <label for="comment" class="sr-only">Escribe tu Comentario o Sugerencia</label>
-                        <textarea id="comment" rows="6"
+                        <textarea id="comment" rows="6" name="comment"
                             class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                             placeholder="Write a comment..." required></textarea>
                     </div>
