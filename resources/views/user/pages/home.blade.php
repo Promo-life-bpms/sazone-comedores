@@ -143,7 +143,7 @@
             @endforeach
         </div>
 
-        {{-- <div class="grid md:grid-cols-3 grid-cols-1 mt-5 gap-10">
+        <div class="grid md:grid-cols-3 grid-cols-1 mt-5 gap-10">
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Menu del dia</p>
                 <div class="carousel w-full max-h-72 h-72 rounded-lg">
@@ -183,10 +183,8 @@
 
             <div class="col-span-2">
                 <div class="col-span-1">
-                   
-                    <img src="{{ asset('assets/SazoneLogoDelimania-GranFormatoColor.png') }}"
-                        alt="Imagen de superposición" class="w-10 h-full">
-                    <div id="video-container" class="w-full h-96 rounded-lg overflow-hidden relative">
+                    <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
+                    <div id="video-container" class="w-80 h-80 rounded-lg overflow-hidden relative">
                         <video src="{{ asset('assets/welcome.mp4') }}" alt="" controls
                             class="w-full h-full object-cover"></video>
                     </div>
@@ -194,9 +192,24 @@
             </div>
 
         </div>
-    </div> --}}
+    </div>
 
-    <div class="pt-5">
+
+    <div class="pt-5 rounded-lg">
+        <p class="text-lg font-semibold mb-3">Capsaulas de Nutricion</p>
+    <div class="grid grid-cols-3 md:grid-cols-3 gap-3 rounded-lg ">
+        <div class=" border p-2 relative rounded-lg">
+            <button class="absolute top-0 left-0 bg-green-500 text-white py-2 px-4 rounded-lg">
+            </button>
+            <a href="{{ route('nutricion-vida') }}">
+            <img src="{{ asset('assets/cc.png') }}" alt="Informative" class="w-full h-auto" /><div class="flex justify-end gap-3">
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+    {{-- <div class="pt-5">
         <div class="grid sm:grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="md:col-span-1">
                 <div class="carousel w-full max-h-70 h-full rounded-lg">
@@ -253,7 +266,7 @@
                     class="w-full h-full object-cover"></video>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 
@@ -361,7 +374,7 @@
                 slideIndex = 1
             }
             slides[slideIndex - 1].style.display = "block";
-            setTimeout(showSlides, 2500); // Cambia la imagen cada 2 segundos
+            setTimeout(showSlides, 2000); // Cambia la imagen cada 2 segundos
         }
 
         showSlides2();
