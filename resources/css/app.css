@@ -9,13 +9,13 @@
 
 @font-face {
     font-family: 'Buffalo';
-    src: url('/fonts/Buffalo.otf') format('opentype');
+    src: url('{{ asset('fonts/Buffalo.otf') }}') format('opentype');
     /* Agrega otras propiedades según sea necesario, como font-weight y font-style */
 }
 
 @font-face {
     font-family: 'GothamBook';
-    src: url('/fonts/GothamBook.otf') format('opentype');
+    src: url('{{ asset('fonts/GothamBook.otf') }}') format('opentype');
     /* Agrega otras propiedades según sea necesario, como font-weight y font-style */
 }
 
