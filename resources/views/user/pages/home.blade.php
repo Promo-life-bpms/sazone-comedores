@@ -184,7 +184,7 @@
             <div class="col-span-2">
                 <div class="col-span-1">
                     <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
-                    <div id="video-container" class="w-80 h-80 rounded-lg overflow-hidden relative">
+                    <div id="video-container" class="w-full h-full rounded-lg overflow-hidden relative">
                         <video src="{{ asset('assets/welcome.mp4') }}" alt="" controls
                             class="w-full h-full object-cover"></video>
                     </div>
@@ -201,7 +201,7 @@
         <div class=" border p-2 relative rounded-lg">
             <button class="absolute top-0 left-0 bg-green-500 text-white py-2 px-4 rounded-lg">
             </button>
-            <a href="{{ route('nutricion-vida') }}">
+            <a href="{{ route('nutricion-vida') }}"></a>
             <img src="{{ asset('assets/cc.png') }}" alt="Informative" class="w-full h-auto" /><div class="flex justify-end gap-3">
             </div>
           </div>
