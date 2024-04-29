@@ -195,9 +195,9 @@
     </div>
 
 
-    <div class="pt-5 rounded-lg">
+    <div class="-mt-10 pt-5 rounded-lg">
         <p class="text-lg font-semibold mb-3">Capsaulas de Nutricion</p>
-    <div class="grid grid-cols-3 md:grid-cols-3 gap-3 rounded-lg ">
+    <div class="grid grid-cols-3 md:grid-cols-1 gap-3 rounded-lg ">
         <div class=" border p-2 relative rounded-lg">
             <button class="absolute top-0 left-0 bg-green-500 text-white py-2 px-4 rounded-lg">
             </button>
@@ -272,7 +272,7 @@
 
     <div class="pt-5 bg-base-grey">
         <section class="bg-grey  lg:py-16 antialiased">
-            <div class="max-w-2xl mx-auto px-4">
+            <div class="w-full max-w-2xl mx-auto px-4">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o Comentarios</h2>
                 </div>
