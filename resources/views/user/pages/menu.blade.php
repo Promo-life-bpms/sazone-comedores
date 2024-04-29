@@ -6,13 +6,13 @@
     </div>
     <div class="pt-5">
         <h1 class="text-3xl font-semibold mb-5">Menu Semanal</h1>
-
         <div class="tabs tabs-bordered hidden grid-cols-6 sm:grid flex-col">
+            
             @foreach ($menuDays as $day)
                 <input type="radio" name="tabs_days_menu" role="tab" class="tab" aria-label="{{ $day->day }}"
-                    {{ $loop->first ? 'checked' : '' }} />
-                <div role="tabpanel" class="tab-content p-10 justify-between">
-
+                    {{ $loop->first ? 'checked' : 'text-base' }} />
+                <div role="tabpanel" class="tab-content p-10 justify-between  mt-10">
+               
                     @if ($day->menus($diningRoom->id)->count() == 0)
                         <div role="alert" class="alert alert-warning">
                             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
@@ -41,7 +41,7 @@
                                                     </div>
                                                     <div
                                                         class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
-                                                        <h2 class="text-xl font-semibold text-secondary mb-2">
+                                                        <h2 class="text-xl font-semibold text-primary mb-2">
                                                             {{ $menu->name }}</h2>
                                                         <p class="text-gray-700 leading-snug overflow-hidden line-clamp-3">
                                                             {{ $menu->description }}</p>
