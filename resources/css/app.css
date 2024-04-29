@@ -6,3 +6,24 @@
 /* Import SweetAlert
 @import "sweetalert2/dist/sweetalert2.min.css";
 */
+
+@font-face {
+    font-family: 'Buffalo';
+    src: url('{{ asset('fonts/Buffalo.otf') }}') format('opentype');
+    /* Agrega otras propiedades según sea necesario, como font-weight y font-style */
+}
+
+@font-face {
+    font-family: 'GothamBook';
+    src: url('{{ asset('fonts/GothamBook.otf') }}') format('opentype');
+    /* Agrega otras propiedades según sea necesario, como font-weight y font-style */
+}
+
+h1 {
+    font-family: 'Buffalo', sans-serif;
+}
+
+
+body {
+    font-family: 'Gotham Book', sans-serif;
+}

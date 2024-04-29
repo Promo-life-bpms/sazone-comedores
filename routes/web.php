@@ -35,6 +35,8 @@ Route::get('/acerca-de', [App\Http\Controllers\HomeController::class, 'acerca'])
 Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])->name('mi-cuenta');
 Route::get('/nutricion-vida', [App\Http\Controllers\HomeController::class, 'nutricionVida'])->name('nutricion-vida');
 
+Route::get('/store/commentary', [App\Http\Controllers\CommentaryController::class, 'storeCommentary'])->name('storeCommentary');
+
 
 Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');
 
