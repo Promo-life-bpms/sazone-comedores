@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<img src="{{ asset('assets/SazoneLogo.png') }}" alt="Logo"
-         style="max-width: 350px; max-height: 500px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;">
+{{-- <img src="{{ asset('assets/SazoneLogo.png') }}" alt="Logo"
+         style="max-width: 350px; max-height: 500px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;"> --}}
     <h1 class="text-3xl font-semibold my-5">Comedores</h1>
     <h1 class="text-lg font-semibold my-2">Crear nuevo comedor</h1>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-y-8 background-color: white;">
