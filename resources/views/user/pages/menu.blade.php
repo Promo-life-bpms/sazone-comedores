@@ -32,7 +32,7 @@
                                 <div class="flex flex-col">
                                     @foreach ($day->menus($diningRoom->id) as $menu)
                                         @if ($menu->time == $time)
-                                            <div class="mb-6 h-20"> <!-- Establecer una altura fija para la tarjeta -->
+                                            <div class="mb-6 min-h-40"> <!-- Establecer una altura fija para la tarjeta -->
                                                 <div
                                                     class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                     <div class="md:w-6/12 lg:w-5/12">
@@ -63,7 +63,7 @@
                                 <div class="flex flex-col">
                                     @foreach ($day->menus($diningRoom->id) as $menu)
                                         @if ($menu->time == $time)
-                                            <div class="mb-6 h-20"> <!-- Establecer una altura fija para la tarjeta -->
+                                            <div class="mb-6 min-h-40"> <!-- Establecer una altura fija para la tarjeta -->
                                                 <div
                                                     class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                     <div class="md:w-6/12 lg:w-5/12">
@@ -94,7 +94,7 @@
                                 <div class="flex flex-col">
                                     @foreach ($day->menus($diningRoom->id) as $menu)
                                         @if ($menu->time == $time)
-                                            <div class="mb-6 h-40">
+                                            <div class="mb-6 min-h-40">
                                                 <div
                                                     class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                     <div class="md:w-6/12 lg:w-5/12">
@@ -124,7 +124,7 @@
                                 <div class="flex flex-col">
                                     @foreach ($day->menus($diningRoom->id) as $menu)
                                         @if ($menu->time == $time)
-                                            <div class="mb-6 h-40">
+                                            <div class="mb-6 min-h-40">
                                                 <div
                                                     class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                     <div class="md:w-6/12 lg:w-5/12">
