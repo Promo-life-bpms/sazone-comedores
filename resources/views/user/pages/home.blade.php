@@ -184,7 +184,7 @@
             <div class="col-span-2">
                 <div class="col-span-1">
                     <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
-                    <div id="video-container" class="w-full h-80 rounded-lg overflow-hidden relative">
+                    <div id="video-container" class="w-full h-full rounded-lg overflow-hidden relative">
                         <video src="{{ asset('assets/welcome.mp4') }}" alt="" controls
                             class="w-full h-full object-cover"></video>
                     </div>
@@ -195,16 +195,14 @@
     </div>
 
 
-    <div class="pt-5 rounded-lg">
-        <p class="text-lg font-semibold mb-3">Tablero saludable</p>
-    <div class="grid grid-cols-3 md:grid-cols-3 gap-3 rounded-lg ">
-
+    <div class="-mt-10 pt-5 rounded-lg">
+        <p class="text-lg font-semibold mb-3">Capsaulas de Nutricion</p>
+    <div class="grid grid-cols-3 md:grid-cols-1 gap-3 rounded-lg ">
         <div class=" border p-2 relative rounded-lg">
             <button class="absolute top-0 left-0 bg-green-500 text-white py-2 px-4 rounded-lg">
             </button>
-            <a href="{{ route('nutricion-vida') }}">
+            <a href="{{ route('nutricion-vida') }}"></a>
             <img src="{{ asset('assets/cc.png') }}" alt="Informative" class="w-full h-auto" /><div class="flex justify-end gap-3">
-            </a>
             </div>
           </div>
         </div>
@@ -273,27 +271,16 @@
 
 
     <div class="pt-5 bg-base-grey">
-
-        @if(session('success'))
-            <div class="alert alert-success text-black" role="alert">
-                {{ session('success') }}
-            </div>
-        @endif
-
         <section class="bg-grey  lg:py-16 antialiased">
-            <div class="w-full max-w-7xl mx-auto px-4">
+            <div class="w-full max-w-2xl mx-auto px-4">
                 <div class="flex justify-between items-center mb-6">
-                    <p class="text-lg font-bold text-gray-900 text-black">Sugerencias o Comentarios</p>
+                    <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o Comentarios</h2>
                 </div>
-               
-                <form method="POST" action="{{ route('storeCommentary') }}" enctype="multipart/form-data" class="space-y-3">
-                    @method('POST')
-                    @csrf
-
+                <form class="mb-6">
                     <div
                         class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <label for="comment" class="sr-only">Escribe tu Comentario o Sugerencia</label>
-                        <textarea id="comment" rows="6" name="comment"
+                        <textarea id="comment" rows="6"
                             class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                             placeholder="Write a comment..." required></textarea>
                     </div>
