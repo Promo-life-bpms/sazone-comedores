@@ -69,7 +69,7 @@ class TagsNameController extends Controller
             ->with('section', 'tagname');
     }
 
-    public function editAdvertisement(Request $request)
+    public function editTag(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'start_date_edit' => 'required',
@@ -121,7 +121,7 @@ class TagsNameController extends Controller
                 ->with('section', 'tagname');
         }
     }
-    public function deleteAdvertisement(Request $request)
+    public function deleteTag(Request $request)
     {
         $dining_id = $request->tagname_id;
         $tagname = TagName::find($dining_id);

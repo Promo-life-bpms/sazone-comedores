@@ -108,7 +108,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="mt-6">
+             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
                     <input type="radio" name="my-accordion-4"/>
                         @if (session('section')) {{ session('section') == 'tags' ? 'checked' : '' }} @endif 
@@ -120,7 +120,7 @@
                         
                     </div>
                 </div>
-            </div> --}}
+            </div> 
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-base-200">
                     <input type="radio" name="my-accordion-3" />

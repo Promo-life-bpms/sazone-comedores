@@ -44,6 +44,9 @@ class DiningRoomController extends Controller
        
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
+        $tagnames = $diningRoom->tagnames;
+        $nutritions =  $diningRoom->nutritions;
+        $healths = $diningRoom->healths;
 
         $allFood = [];
         foreach ($menuDays as $day) {
@@ -53,7 +56,7 @@ class DiningRoomController extends Controller
             }
         }
 
-        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood'));
+        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths'));
     }
 
     public function store(Request $request)
