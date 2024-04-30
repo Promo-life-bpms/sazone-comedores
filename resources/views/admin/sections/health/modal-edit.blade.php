@@ -1,16 +1,16 @@
-<dialog id="edit_modal_tarjeta" class="modal">
+<dialog id="edit_modal_saludable" class="modal">
     <div class="modal-box space-y-3 px-8">
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
         <h3 class="font-bold text-lg text-center">Editar Anuncio</h3>
         <br>
-        <form method="POST" action="{{ route('tags.editTag') }}" enctype="multipart/form-data"
+        <form method="POST" action="{{ route('saludable.editHealth') }}" enctype="multipart/form-data"
             class="space-y-3">
             @method('POST')
             @csrf
 
-            <input type="hidden" name="tagname_id_edit" value="" id="tagname_id_edit">
+            <input type="hidden" name="health_id_edit" value="" id="health_id_edit">
 
             <div class="space-y-2">
 
@@ -37,9 +37,9 @@
             </div>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Imagen</label>
-                <input type="file" name="file_tagname_edit" accept="image/*"
-                    class="file-input bg-custom-blue file-input-bordered w-full @error('file_tagname_edit') input-error @enderror" />
-                @error('file_tagname_edit')
+                <input type="file" name="file_health_edit" accept="image/*"
+                    class="file-input bg-custom-blue file-input-bordered w-full @error('file_health_edit') input-error @enderror" />
+                @error('file_health_edit')
                     <div class="text-red-500">
                         {{ $message }}
                     </div>
@@ -82,19 +82,19 @@
     </div>
 </dialog>
 <script>
-    function editarTarjeta(id) {
+    function editarSaludable(id) {
         console.log(id);
         // Obtener el anuncio
-        let tarjeta = tarjetas.find((tarjeta) => tarjeta.id == id);
+        let saludable = saludables.find((saludable) => saludable.id == id);
         // abrir el modal
-        edit_modal_tarjeta.showModal();
-        let vigencia = JSON.parse(tarjeta.vigencia);
+        edit_modal_saludable.showModal();
+        let vigencia = JSON.parse(saludable.vigencia);
         // llenar los campos
-        document.getElementById('tagname_id_edit').value = tarjeta.id;
-        document.getElementById('title_edit').value = tarjeta.title;
-        document.getElementById('description_edit').value = tarjeta.description;
-        document.getElementById('start_date_edit').value = tarjeta.start;
-        document.getElementById('end_date_edit').value = tarjeta.end;
-        document.getElementById('img_edit').src = "/storage/" + tarjeta.resource;
+        document.getElementById('health_id_edit').value = saludable.id;
+        document.getElementById('title_edit').value = saludable.title;
+        document.getElementById('description_edit').value = saludable.description;
+        document.getElementById('start_date_edit').value = saludable.start;
+        document.getElementById('end_date_edit').value = saludable.end;
+        document.getElementById('img_edit').src = "/storage/" + saludable.resource;
     }
 </script>

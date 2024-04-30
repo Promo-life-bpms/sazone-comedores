@@ -1,17 +1,17 @@
-<dialog id="my_modal_tarjeta" class="modal">
+<dialog id="my_modal_nutricion" class="modal">
     <div class="modal-box space-y-3 px-8">
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
-        <h3 class="font-bold text-lg text-center">Agregar Tag</h3>
+        <h3 class="font-bold text-lg text-center">Agregar Imagen Saludable</h3>
         <br>
-        <form method="POST" action="{{ route('tags.store') }}" enctype="multipart/form-data" class="space-y-3">
+        <form method="POST" action="{{ route('nutricion.store') }}" enctype="multipart/form-data" class="space-y-3">
             @method('POST')
             @csrf
             <input type="hidden" name="dining_id" value="{{ $diningRoom->id }}">
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Titulo</label>
-                <input type="text" name="title" placeholder="Ingrese el titulo del tag"
+                <input type="text" name="title" placeholder="Ingrese el titulo"
                     class="input input-bordered w-full @error('title') input-error @enderror" />
                 @error('title')
                     <div class="text-red-500">
@@ -21,7 +21,7 @@
             </div>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Descripcion</label>
-                <input type="text" name="description" placeholder="Ingrese el correo del colaborador"
+                <input type="text" name="description" placeholder="Descripcion"
                     autocomplete="off"
                     class="input input-bordered w-full @error('description') input-error @enderror" />
                 @error('description')
@@ -32,9 +32,9 @@
             </div>
             <div class="space-y-2">
                 <label for="" class="text-lg font-semibold">Imagen</label>
-                <input type="file" name="file_tagname" accept="image/*"
-                    class="file-input bg-custom-blue file-input-bordered w-full @error('file_tagname') input-error @enderror" />
-                @error('file_tagname')
+                <input type="file" name="file_nutrition" accept="image/*"
+                    class="file-input bg-custom-blue file-input-bordered w-full @error('file_nutrition') input-error @enderror" />
+                @error('file_nutrition')
                     <div class="text-red-500">
                         {{ $message }}
                     </div>
