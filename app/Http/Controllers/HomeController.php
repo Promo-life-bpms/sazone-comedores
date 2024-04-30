@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\DayFood;
 use App\Models\DiningRoom;
+use App\Models\Health;
+use App\Models\Nutrition;
+use App\Models\TagName;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -47,8 +50,11 @@ class HomeController extends Controller
         $today = ucfirst($today);
         $day = DayFood::where('slug', $today)->first();
         $advertisements = $diningRoom->advertisements;
+        $tagnames = $diningRoom->tagnames;
+        $nutritions =  $diningRoom->nutritions;
+        $healths = $diningRoom->healths;
 
-        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements'));
+        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements','tagnames', 'nutritions', 'healths'));
     }
 
     public function cupones()
@@ -106,6 +112,9 @@ class HomeController extends Controller
         // Obtén los datos que necesitas mostrar para la vista preliminar de un usuario normal
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
+        $tagnames = $diningRoom->tagnames;
+        $nutritions =  $diningRoom->nutritions;
+        $healths = $diningRoom->healths;
         $allFood = [];
 
         foreach ($menuDays as $day) {
@@ -115,17 +124,16 @@ class HomeController extends Controller
             }
         }
 
-        return view('user.pages.home', compact('diningRoom', 'menuDays', 'allFood', 'advertisements', 'users','day'));
+        return view('user.pages.home', compact('diningRoom', 'menuDays', 'allFood', 'advertisements','tagnames','nutritions','healths', 'users','day'));
     }
 
     public function nutricionVida()
     {
-        if (!(auth()->user()->hasRole(['super-admin', 'master-admin']))) {
-            $diningRoom = auth()->user();
-        } else {
-            // Aquí puedes definir qué DiningRoom deberían ver los 'super-admin' y 'master-admin'
-            $diningRoom = DiningRoom::get(); // Ejemplo
-        }
-        return view('user.pages.nutricion-vida', compact('diningRoom'));
+        $diningRoom = auth()->user()->profile->diningRoom;
+        $advertisements = $diningRoom->advertisements;
+        $tagnames = $diningRoom->tagnames;
+        $nutritions =  $diningRoom->nutritions;
+        $healths = $diningRoom->healths;
+        return view('user.pages.nutricion-vida', compact('diningRoom','tagnames','healths','nutritions'));
     }
 }

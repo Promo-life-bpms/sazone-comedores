@@ -113,10 +113,36 @@
                     <input type="radio" name="my-accordion-4"/>
                         @if (session('section')) {{ session('section') == 'tags' ? 'checked' : '' }} @endif 
                     <div class="collapse-title text-xl font-medium">
-                        tags
+                        Tags
                     </div>
                     <div class="collapse-content overflow-x-auto">
                         @include('admin.sections.tags.index')
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6">
+                <div class="collapse collapse-plus bg-stone-100  ">
+                    <input type="radio" name="my-accordion-4"/>
+                        @if (session('section')) {{ session('section') == 'health' ? 'checked' : '' }} @endif 
+                    <div class="collapse-title text-xl font-medium">
+                        Saludable
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.health.index')
+                        
+                    </div>
+                </div>
+            </div>  
+            <div class="mt-6">
+                <div class="collapse collapse-plus bg-stone-100  ">
+                    <input type="radio" name="my-accordion-4"/>
+                        @if (session('section')) {{ session('section') == 'nutrition' ? 'checked' : '' }} @endif 
+                    <div class="collapse-title text-xl font-medium">
+                        Nutricion
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.nutrition.index')
                         
                     </div>
                 </div>

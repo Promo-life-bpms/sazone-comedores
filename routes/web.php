@@ -6,8 +6,10 @@ use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DiningRoomController;
+use App\Http\Controllers\HealthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\TagsNameController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +59,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/tags', [TagsNameController::class, 'store'])->name('tags.store');
     Route::post('/tags/editTag', [TagsNameController::class, 'editTag'])->name('tags.editTag');
     Route::delete('/tags/delete', [TagsNameController::class, 'deleteTag'])->name('tags.deleteTag');
+    Route::post('/health', [HealthController::class, 'store'])->name('saludable.store');
+    Route::post('/health/editHealth', [HealthController::class, 'editHealth'])->name('saludable.editHealth');
+    Route::delete('/health/delete', [HealthController::class, 'deleteHealth'])->name('saludable.deleteHealth');
+    Route::post('/nutricion', [NutritionController::class, 'store'])->name('nutricion.store');
+    Route::post('/nutricion/editNutrition', [NutritionController::class, 'editNutrition'])->name('nutricion.editNutrition');
+    Route::delete('/nutricion/delete', [NutritionController::class, 'deleteNutrition'])->name('nutricion.deleteNutrition');
 });
 
 Route::prefix('super')->group(function () {

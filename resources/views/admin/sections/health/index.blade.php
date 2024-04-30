@@ -1,18 +1,18 @@
-@include('admin.sections.tags.modal-edit')
-@include('admin.sections.tags.modal-create')
+@include('admin.sections.health.modal-edit')
+@include('admin.sections.health.modal-create')
 <div class="space-y-2">
     <div class="flex justify-end gap-3">
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
-            onclick="my_modal_tarjeta.showModal()">Agregar Tag</button>
+            onclick="my_modal_saludable.showModal()">Agregar Vida Saludable</button>
     </div>
-    @if (session('success_tagname'))
-        <div role="alert" class="alert alert-success" id="alert_tagname">
+    @if (session('success_health'))
+        <div role="alert" class="alert alert-success" id="alert_health">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>{{ session('success_tagname') }}</span>
+            <span>{{ session('success_health') }}</span>
         </div>
     @endif
     <div class="overflow-x-auto">
@@ -27,14 +27,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tagnames as $tagname)
+                @foreach ($healths as $health)
                     @php
-                        $vigencia = (object) json_decode($tagname->vigencia);
+                        $vigencia = (object) json_decode($health->vigencia);
                     @endphp
                     <tr>
                         <th>{{ $loop->iteration }}</th>
-                        <td>{{ $tagname->title }}</td>
-                        <td>{{ $tagname->description }}</td>
+                        <td>{{ $health->title }}</td>
+                        <td>{{ $health->description }}</td>
                         <td>
                             <b>Inicio:</b> {{ $vigencia->start }}
                             <b>Final:</b> {{ $vigencia->end }}
@@ -42,7 +42,7 @@
                         <td>
                             <div class="flex justify-end gap-3">
                                 <button class="btn btn-circle btn-ghost btn-xs"
-                                    onclick="editarTarjeta({{ $tagname->id }})">
+                                    onclick="editarSaludable({{ $health->id }})">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -51,7 +51,7 @@
                                     </svg>
                                 </button>
                                 <button class="btn btn-circle btn-ghost btn-xs"
-                                    onclick="deleteTarjeta({{ $tagname->id }})">
+                                    onclick="deleteSaludable({{ $health->id }})">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -69,19 +69,19 @@
 
 
 <script>
-    let tarjetas = @json($tagnames);
+    let saludables = @json($healths);
     document.addEventListener("DOMContentLoaded", function() {
-        let showModalTagname = {{ session('error_tagname') ? 'my_modal_tarjeta.showModal()' : 0 }}
-        {{ session('error_edit_tagname') ? 'editarTarjeta(' . session('tarjeta_id') . ')' : 0 }}
-        const alertTagname = document.getElementById('alert_tagname');
-        if (alertTagname) {
+        let showModalSaludable = {{ session('error_health') ? 'my_modal_saludable.showModal()' : 0 }}
+        {{ session('error_edit_health') ? 'editarTarjeta(' . session('saludable_id') . ')' : 0 }}
+        const alertSaludable = document.getElementById('alert_health');
+        if (alertSaludable) {
             setTimeout(() => {
-                alertTagname.style.display = 'none';
+                alertSaludable.style.display = 'none';
             }, 3000);
         }
     });
 
-    function deleteTarjeta(id) {
+    function deleteSaludable(id) {
         Swal.fire({
             title: "¿Estas seguro de que quieres eliminar el anuncio?",
             text: "ya no se podra recuperar el anuncio",
@@ -92,16 +92,16 @@
             confirmButtonText: "Eliminar"
         }).then((result) => {
             if (result.isConfirmed) {
-                elminarTarjeta(id)
+                elminarSaludable(id)
             }
         });
     }
 
-    async function elminarTarjeta(id) {
-        let url = "{{ route('tags.deleteTag') }}";
+    async function elminarSaludable(id) {
+        let url = "{{ route('saludable.deleteHealth') }}";
         await axios.delete(url, {
             data: {
-                tarjeta_id: id
+                saludable_id: id
             }
         }).then((response) => {
             console.log(response);
