@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tagsName', function (Blueprint $table) {
+        Schema::create('dining_room_health', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->mediumText('description')->nullable();
-            $table->tinyText('type')->nullable();
-            $table->mediumText('resource');
-            $table->mediumText('vigencia');
+            $table->foreignId('dining_room_id')->constrained();
+            $table->foreignId('health_id')->constrained();
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advertisements');
+        Schema::dropIfExists('dining_room_health');
     }
 };

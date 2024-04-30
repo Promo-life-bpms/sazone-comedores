@@ -8,6 +8,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DiningRoomController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\TagsNameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/anuncios', [AdvertisementController::class, 'store'])->name('anuncios.store');
     Route::post('/anuncios/editAdvertisement', [AdvertisementController::class, 'editAdvertisement'])->name('anuncios.editAdvertisement');
     Route::delete('/anuncios/delete', [AdvertisementController::class, 'deleteAdvertisement'])->name('anuncios.deleteAdvertisement');
+    Route::post('/tags', [TagsNameController::class, 'store'])->name('tags.store');
+    Route::post('/tags/editTag', [TagsNameController::class, 'editTag'])->name('tags.editTag');
+    Route::delete('/tags/delete', [TagsNameController::class, 'deleteTag'])->name('tags.deleteTag');
 });
 
 Route::prefix('super')->group(function () {
