@@ -128,7 +128,7 @@
                         {{ session('section') == 'estres' ? 'checked' : '' }}
                     @endif
                     <div class="collapse-title text-xl font-medium">
-                        Menu Anti-Estres
+                        Delimania del Mes
                     </div>
                     <div class="collapse-content overflow-x-auto">
                         @include('admin.sections.estre.index')

@@ -3,7 +3,7 @@
 <div class="space-y-2">Informacion
     <div class="flex justify-end gap-3">
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
-            onclick="my_modal_tarjeta.showModal()">Agregar Tag</button>
+            onclick="my_modal_tarjeta.showModal()">Agregar Informacion</button>
     </div>
     @if (session('success_tagname'))
         <div role="alert" class="alert alert-success" id="alert_tagname">

@@ -38,7 +38,7 @@
         <div class=" p-4 relative">
             <button class="absolute top-0 left-0 bg-red-600 text-white py-2 px-4 rounded-br-lg z-10"
                 style="background-color: rgb(195, 48, 48)">
-                TagsName
+                Nutricion
             </button>
             <div class="carousel w-full max-h-72 h-72 rounded-lg">
                 @foreach ($tagnames as $tagname)
