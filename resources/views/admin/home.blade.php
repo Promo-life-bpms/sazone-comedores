@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="pt-16">
+    <div class="pt-16 ">
         @if ($diningRoom->statusV == 1)
             <div class="flex justify-end gap-3">
                 @if (Auth::user()->hasRole(['master-admin', 'super-admin']))
@@ -94,24 +94,25 @@
                 </div>
             </div>
             <div class="mt-6">
-                <div class="collapse collapse-plus bg-stone-100  ">
-                    <input type="radio" name="my-accordion-4"/>
-                        @if (session('section')) {{ session('section') == 'usuarios' ? 'checked' : '' }} @endif 
+                <div class="collapse collapse-plus bg-stone-100">
+                    <input type="radio" name="my-accordion-4" />
+                    @if (session('section'))
+                        {{ session('section') == 'usuarios' ? 'checked' : '' }}
+                    @endif
                     <div class="collapse-title text-xl font-medium">
                         Usuarios
                     </div>
                     <div class="collapse-content overflow-x-auto">
                         @include('admin.sections.user.index')
-                        {{-- <div class="">
-                            {{ $users->links() }}
-                        </div> --}}
                     </div>
                 </div>
             </div>
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
-                    <input type="radio" name="my-accordion-4"/>
-                        @if (session('section')) {{ session('section') == 'capsulas' ? 'checked' : '' }} @endif 
+                    <input type="radio" name="my-accordion-4" />
+                    @if (session('section'))
+                        {{ session('section') == 'capsulas' ? 'checked' : '' }}
+                    @endif
                     <div class="collapse-title text-xl font-medium">
                         Capsulas de Nutricion
                     </div>
@@ -122,8 +123,10 @@
             </div>
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
-                    <input type="radio" name="my-accordion-4"/>
-                        @if (session('section')) {{ session('section') == 'estres' ? 'checked' : '' }} @endif 
+                    <input type="radio" name="my-accordion-4" />
+                    @if (session('section'))
+                        {{ session('section') == 'estres' ? 'checked' : '' }}
+                    @endif
                     <div class="collapse-title text-xl font-medium">
                         Menu Anti-Estres
                     </div>
@@ -134,8 +137,10 @@
             </div>
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
-                    <input type="radio" name="my-accordion-4"/>
-                        @if (session('section')) {{ session('section') == 'tags' || session('section') == 'health' || session('section') == 'nutrition' ? 'checked' : '' }} @endif 
+                    <input type="radio" name="my-accordion-4" />
+                    @if (session('section'))
+                        {{ session('section') == 'tags' || session('section') == 'health' || session('section') == 'nutrition' ? 'checked' : '' }}
+                    @endif
                     <div class="collapse-title text-xl font-medium">
                         Vida Saludable
                     </div>
@@ -146,7 +151,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-base-200">
                     <input type="radio" name="my-accordion-3" />

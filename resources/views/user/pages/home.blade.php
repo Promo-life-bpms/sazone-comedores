@@ -184,7 +184,7 @@
 
         <div class="col-span-2">
             <div class="col-span-1">
-                <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
+                <p class="text-lg font-semibold mb-3"> Menu Anti-Estres</p>
                 <div id="video-container" class="w-full h-72 rounded-lg overflow-hidden relative">
                     <video src="{{ asset('assets/welcome.mp4') }}" alt="" controls
                         class="w-full h-full object-cover"></video>
@@ -194,7 +194,7 @@
 
         <div class="col-span-1">
             <div class="col-span-1">
-                <p class="text-lg font-semibold mb-3">Menu Anti-Estres</p>
+                <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
                 <div class="carousel w-full max-h-72 h-72 rounded-lg">
                     @foreach ($estres as $estre)
                         <div id="menuAntiEstresSlide{{ $loop->iteration }}" class="carousel-item-menuEstres relative w-full">
@@ -222,7 +222,7 @@
 
         <div class="col-span-2">
             <div class="col-span-1">
-                <section class="bg-grey  lg:py-16 antialiased">
+                <section class="bg-grey  lg:py-12 antialiased">
                     <div class="w-full max-w-2xl mx-auto px-4">
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
+
 class DiningRoomController extends Controller
 {
 
@@ -38,9 +39,13 @@ class DiningRoomController extends Controller
         return view('super.pages.dining-room.index', compact('diningRooms'));
     }
 
-    public function show(DiningRoom $diningRoom)
+    public function show(DiningRoom $diningRoom, Request $request)
     {
-        $users = $diningRoom->users()->where('status', 1)->get();
+        $search = $request->get('search');
+        $users = $diningRoom->users()
+            ->where('status', 1)
+            ->where('name', 'like', '%' . $search . '%')
+            ->paginate(15);
 
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
