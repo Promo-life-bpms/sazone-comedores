@@ -1,6 +1,6 @@
 <div class="navbar bg-base-100 shadow-lg">
     <div class="flex-1">
-        <a class="btn btn-ghost" href="{{ route('home') }}">
+        <a class="btn btn-square btn-ghost" href="{{ route('home') }}">
             <img class="max-h-11" class="rounded-full border w-10 h-10 object-cover"
                 src="{{ asset('assets/SazoneLogo.png') }}" alt=""></a>
     </div>

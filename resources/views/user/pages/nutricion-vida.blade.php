@@ -12,7 +12,7 @@
             </button>
             <div class="carousel w-full max-h-72 h-72 rounded-lg">
                 @foreach ($nutritions as $nutrition)
-                    <div id="nutritionSlide{{ $loop->iteration }}" class="carousel-item relative w-full">
+                    <div id="infoSlide{{ $loop->iteration }}" class="carousel-item-info relative w-full">
                         <div class="relative w-full">
                             <img src="{{ asset('storage/' . $nutrition->resource) }}" class="w-full object-fit rounded-lg h-72" />
                             @if (!($nutrition->title == null && $nutrition->description == null))
@@ -24,9 +24,9 @@
                             @endif
                         </div>
                         <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#nutritionSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
+                            <a href="#infoSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
                                 class="btn btn-circle">❮</a>
-                            <a href="#nutritionSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
+                            <a href="#infoSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
                                 class="btn btn-circle">❯</a>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
             </button>
             <div class="carousel w-full max-h-72 h-72 rounded-lg">
                 @foreach ($tagnames as $tagname)
-                    <div id="tagnameSlide{{ $loop->iteration }}" class="carousel-item relative w-full">
+                    <div id="nutriSlide{{ $loop->iteration }}" class="carousel-item-nutri relative w-full">
                         <div class="relative w-full">
                             <img src="{{ asset('storage/' . $tagname->resource) }}" class="w-full object-fit h-72" />
                             @if (!($tagname->title == null && $tagname->description == null))
@@ -54,9 +54,9 @@
                             @endif
                         </div>
                         <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#tagnameSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
+                            <a href="#nutriSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
                                 class="btn btn-circle">❮</a>
-                            <a href="#tagnameSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
+                            <a href="#nutriSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
                                 class="btn btn-circle">❯</a>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
             </button>
             <div class="carousel w-full h-full max-h-100 h-100 rounded-lg">
                 @foreach ($healths as $health)
-                    <div id="healthSlide{{ $loop->iteration }}" class="carousel-item relative w-full h-full">
+                    <div id="healthSlide{{ $loop->iteration }}" class="carousel-item-saludable relative w-full h-full">
                         <div class="relative w-full h-full">
                             <img src="{{ asset('storage/' . $health->resource) }}"
                                 class="w-full h-full object-fit h-80" />
@@ -93,4 +93,59 @@
             </div>
         </div>
     </div>
+
+    <script>
+        let slideIndex1 = 0;
+        let slideIndex2 = 0;
+        let slideIndex3 = 0;
+
+        showSlides1();
+
+        function showSlides1() {
+            let i;
+            let slides = document.getElementsByClassName("carousel-item-info");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex1++;
+            if (slideIndex1 > slides.length) {
+                slideIndex1 = 1
+            }
+            slides[slideIndex1 - 1].style.display = "block";
+            setTimeout(showSlides1, 2000); // Cambia la imagen cada 2 segundos
+        }
+
+        showSlides2();
+
+        function showSlides2() {
+            let i;
+            let slides = document.getElementsByClassName("carousel-item-nutri");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex2++;
+            if (slideIndex2 > slides.length) {
+                slideIndex2 = 1
+            }
+            slides[slideIndex2 - 1].style.display = "block";
+            setTimeout(showSlides2, 2200); // Cambia la imagen cada 2 segundos
+        }
+
+        showSlides3();
+
+        function showSlides3() {
+            let i;
+            let slides = document.getElementsByClassName("carousel-item-saludable ");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex3++;
+            if (slideIndex3 > slides.length) {
+                slideIndex3 = 1
+            }
+            slides[slideIndex3 - 1].style.display = "block";
+            setTimeout(showSlides3, 2600); // Cambia la imagen cada 2 segundos
+        }
+
+    </script>
 @endsection

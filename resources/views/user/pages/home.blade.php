@@ -276,55 +276,6 @@
         </div>
     </div>
 
-    {{-- <div class="pt-2 mt-0">
-        <div class="carousel w-full max-h-96 rounded-lg">
-            @foreach ($advertisements as $anuncio)
-                <div id="bannerSlide{{ $loop->iteration }}" class="carousel-item-banner-2 relative w-full">
-                    <div class="relative w-full">
-                        <img src="{{ asset('storage/' . $anuncio->resource) }}" class="w-full object-cover max-h-96" />
-                        @if (!($anuncio->title == null && $anuncio->description == null))
-                            <div
-                                class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                                <h3 class="text-xl text-center pb-3">{{ $anuncio->title }}</h3>
-                                <p class="opacity-100 text-justify">{{ $anuncio->description }}</p>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#bannerSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
-                            class="btn btn-circle">❮</a>
-                        <a href="#bannerSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}" class="btn btn-circle">❯</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div> --}}
-
-
-
-    {{-- <div class="pt-5 bg-base-grey">
-        <section class="bg-grey  lg:py-16 antialiased">
-            <div class="w-full max-w-2xl mx-auto px-4">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o Comentarios</h2>
-                </div>
-                <form class="mb-6">
-                    <div
-                        class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                        <label for="comment" class="sr-only">Escribe tu Comentario o Sugerencia</label>
-                        <textarea id="comment" rows="6"
-                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                            placeholder="Write a comment..." required></textarea>
-                    </div>
-                    <div type="submit" class="flex justify-end gap-3">
-                        <button class="btn text-white inline-flex items-center py-2.5 px-4 text-xs font-medium text-center"
-                            style="background-color: rgb(48, 79, 157)">Enviar Comentarios</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-    </div> --}}
-
     <script>
         let slideIndex1 = 0;
         let slideIndex2 = 0;
