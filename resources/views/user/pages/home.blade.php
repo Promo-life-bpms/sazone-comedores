@@ -222,7 +222,7 @@
 
         <div class="col-span-2">
             <div class="col-span-1">
-                <section class="bg-grey  lg:py-16 antialiased">
+                <section class="bg-grey  lg:py-12 antialiased">
                     <div class="w-full max-w-2xl mx-auto px-4">
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o

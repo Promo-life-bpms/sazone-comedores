@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="pt-16">
+    <div class="pt-16 sm:flex">
         @if ($diningRoom->statusV == 1)
             <div class="flex justify-end gap-3">
                 @if (Auth::user()->hasRole(['master-admin', 'super-admin']))
@@ -93,18 +93,15 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-6">
-                <div class="collapse collapse-plus bg-stone-100  ">
+            <div class="mt-6 sm:flex">
+                <div class="collapse collapse-plus bg-stone-100 sm:flex ">
                     <input type="radio" name="my-accordion-4"/>
                         @if (session('section')) {{ session('section') == 'usuarios' ? 'checked' : '' }} @endif 
                     <div class="collapse-title text-xl font-medium">
                         Usuarios
                     </div>
-                    <div class="collapse-content overflow-x-auto">
+                    <div class="collapse-content overflow-x-auto sm:flex">
                         @include('admin.sections.user.index')
-                        {{-- <div class="">
-                            {{ $users->links() }}
-                        </div> --}}
                     </div>
                 </div>
             </div>
