@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Health;
 use App\Models\DiningRoom;
+use App\Models\Estre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class HealthController extends Controller
+class MAntiEstresController extends Controller
 {
     public function __construct()
     {
@@ -19,7 +19,7 @@ class HealthController extends Controller
     {
         //validate con Validator
         $validator = Validator::make($request->all(), [
-            'file_health' => 'required',
+            'file_mantiestre' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
             'dining_id' => 'required'
@@ -28,14 +28,14 @@ class HealthController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with('error_healths', 'No se ha podido crear la seccion')
-                ->with('section', 'healths')
+                ->with('error_estre', 'No se ha podido crear la seccion')
+                ->with('section', 'estres')
                 ->withErrors($validator->getMessageBag());
         }
 
         $dining = DiningRoom::find($request->dining_id);
 
-        $health = [
+        $estres = [
             'title' => $request->title ?? null,
             'description' => $request->description ?? null,
             'vigencia' => json_encode([
@@ -45,47 +45,47 @@ class HealthController extends Controller
             'dining_room_id' => $request->dining_id,
         ];
 
-        $file = $request->file('file_health');
+        $file = $request->file('file_mantiestre');
 
-        $nameFile = date('Y-m-d-s') . '_health.' . $file->getClientOriginalExtension();
-        $path = 'dining_room/' . $dining->slug . "/health/";
+        $nameFile = date('Y-m-d-s') . '_mantiestre.' . $file->getClientOriginalExtension();
+        $path = 'dining_room/' . $dining->slug . "/mantiestres/";
 
-        $health['resource'] = $path . $nameFile;
+        $estres['resource'] = $path . $nameFile;
 
         if ($file->isValid()) {
             Storage::putFileAs('public/' . $path, $file, $nameFile);
         } else {
             return redirect()->back()
-                ->with('error_healths', 'No se ha podido crear la seccion por un problema con la imagen')
-                ->with('section', 'healths');
+                ->with('error_estre', 'No se ha podido crear la seccion por un problema con la imagen')
+                ->with('section', 'estres');
         }
 
-        $health = Health::create($health);
+        $estres = Estre::create($estres);
 
-        $health->diningRooms()->attach($dining);
+        $estres->diningRooms()->attach($dining);
 
         return redirect()->back()
-            ->with('success_healths', 'Seccion creado correctamente')
-            ->with('section', 'healths');
+            ->with('success_estre', 'Seccion creado correctamente')
+            ->with('section', 'estres');
     }
 
-    public function editHealth(Request $request)
+    public function editMenuEstres(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'start_date_edit' => 'required',
             'end_date_edit' => 'required',
-            'health_id_edit' => 'required'
+            'estre_id_edit' => 'required'
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with('error_edit_healths', 'No se ha podido crear la seccion')
-                ->with('health_id', $request->health_id_edit)
-                ->with('section', 'healths')
+                ->with('error_edit_estre', 'No se ha podido crear la seccion')
+                ->with('estre_id', $request->estre_id_edit)
+                ->with('section', 'estres')
                 ->withErrors($validator->getMessageBag());
         }
 
-        $edit = Health::find($request->input('health_id_edit'));
+        $edit = Estre::find($request->input('estre_id_edit'));
         $dining = $edit->diningRooms()->first();
 
         if ($edit) {
@@ -96,10 +96,10 @@ class HealthController extends Controller
                 'end' => $request->input('end_date_edit'),
             ]);
 
-            if ($request->hasFile('file_health_edit')) {
-                $file = $request->file('file_health_edit');
-                $nameFile = date('Y-m-d-s') . '_health.' . $file->getClientOriginalExtension();
-                $path = 'dining_room/' . $dining->slug . "/health/";
+            if ($request->hasFile('file_estre_edit')) {
+                $file = $request->file('file_estre_edit');
+                $nameFile = date('Y-m-d-s') . '_mantiestre.' . $file->getClientOriginalExtension();
+                $path = 'dining_room/' . $dining->slug . "/mantiestre/";
                 $edit->resource = $path . $nameFile;
                 if ($file->isValid()) {
                     // Eliminar imagen anterior
@@ -107,27 +107,26 @@ class HealthController extends Controller
                     Storage::putFileAs('public/' . $path, $file, $nameFile);
                 } else {
                     return redirect()->back()
-                        ->with('error_edit_healths', 'No se ha podido crear la seccion por un problema con la imagen')
-                        ->with('section', 'healths');
+                        ->with('error_edit_estre', 'No se ha podido crear la seccion por un problema con la imagen')
+                        ->with('section', 'estres');
                 }
             }
 
             $edit->save();
 
-            return redirect()->back()->with('success_health', 'Editado correctamente')
-                ->with('section', 'healths');
+            return redirect()->back()->with('success_estre', 'Editado correctamente')
+                ->with('section', 'estres');
         } else {
-            return redirect()->back()->with('error_edit_health', 'No se ha podido editar la seccion')
-                ->with('section', 'healths');
+            return redirect()->back()->with('error_edit_estre', 'No se ha podido editar la seccion')
+                ->with('section', 'estres');
         }
     }
-    public function deleteHealth(Request $request)
+    public function deleteMenuEstres(Request $request)
     {
-        $dining_id = $request->saludable_id;
-        $saludable = Health::find($dining_id);
-        $saludable->diningRooms()->detach();
-        $saludable->delete();
+        $dining_id = $request->menuAnti_id;
+        $menuAnti = Estre::find($dining_id);
+        $menuAnti->diningRooms()->detach();
+        $menuAnti->delete();
         return response()->json(['success' => 'Eliminado correctaente'], 200);
     }
-
 }

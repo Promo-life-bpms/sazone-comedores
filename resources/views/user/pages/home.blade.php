@@ -125,7 +125,7 @@
             @foreach ($advertisements as $anuncio)
                 <div id="bannerSlide{{ $loop->iteration }}" class="carousel-item-banner relative w-full">
                     <div class="relative w-full">
-                        <img src="{{ asset('storage/' . $anuncio->resource) }}" class="w-full object-fit max-h-96" />
+                        <img src="{{ asset('storage/' . $anuncio->resource) }}" class="w-full object-cover max-h-96" />
                         @if (!($anuncio->title == null && $anuncio->description == null))
                             <div
                                 class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
@@ -152,7 +152,7 @@
                     @foreach ($day->menus($diningRoom->id) as $menu)
                         <div id="menuSlide{{ $loop->iteration }}" class="carousel-item-menu relative w-full">
                             <div class="relative w-full">
-                                <img src="{{ asset('storage/' . $menu->image) }}" class="w-full object-fit h-72" />
+                                <img src="{{ asset('storage/' . $menu->image) }}" class="w-full object-cover h-72" />
                                 <div
                                     class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#7bdac22e] p-5 rounded-md">
                                     <h3 class="text-center pb-3 text-white text-2xl font-bold">{{ $menu->name }}</h3>
@@ -196,22 +196,22 @@
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Menu Anti-Estres</p>
                 <div class="carousel w-full max-h-72 h-72 rounded-lg">
-                    @foreach ($tagnames as $tagname)
-                        <div id="tagSlide{{ $loop->iteration }}" class="carousel-item-tags relative w-full">
+                    @foreach ($estres as $estre)
+                        <div id="menuAntiEstresSlide{{ $loop->iteration }}" class="carousel-item-menuEstres relative w-full">
                             <div class="relative w-full">
-                                <img src="{{ asset('storage/' . $tagname->resource) }}" class="w-full object-fit h-72" />
-                                @if (!($tagname->title == null && $tagname->description == null))
+                                <img src="{{ asset('storage/' . $estre->resource) }}" class="w-full object-fit h-72" />
+                                @if (!($estre->title == null && $estre->description == null))
                                     <div
                                         class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                                        <h3 class="text-xl text-center pb-3">{{ $tagname->title }}</h3>
-                                        <p class="opacity-100 text-justify">{{ $tagname->description }}</p>
+                                        <h3 class="text-xl text-center pb-3">{{ $estre->title }}</h3>
+                                        <p class="opacity-100 text-justify">{{ $estre->description }}</p>
                                     </div>
                                 @endif
                             </div>
                             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#tagSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
+                                <a href="#menuAntiEstresSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
                                     class="btn btn-circle">❮</a>
-                                <a href="#tagSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
+                                <a href="#menuAntiEstresSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
                                     class="btn btn-circle">❯</a>
                             </div>
                         </div>
@@ -244,6 +244,34 @@
                         </form>
                     </div>
                 </section>
+            </div>
+        </div>
+
+        <div class="col-span-1">
+            <div class="col-span-1">
+                <p class="text-lg font-semibold mb-3">Capsulas de Nutricion</p>
+                <div class="carousel w-full max-h-72 h-72 rounded-lg">
+                    @foreach ($capsulas as $capsulas)
+                        <div id="capsulasSlide{{ $loop->iteration }}" class="carousel-item-capsulas relative w-full">
+                            <div class="relative w-full">
+                                <img src="{{ asset('storage/' . $capsulas->resource) }}" class="w-full object-fit h-72" />
+                                @if (!($capsulas->title == null && $capsulas->description == null))
+                                    <div
+                                        class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
+                                        <h3 class="text-xl text-center pb-3">{{ $capsulas->title }}</h3>
+                                        <p class="opacity-100 text-justify">{{ $capsulas->description }}</p>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                <a href="#capsulasSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
+                                    class="btn btn-circle">❮</a>
+                                <a href="#capsulasSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
+                                    class="btn btn-circle">❯</a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
@@ -297,24 +325,12 @@
         </section>
     </div> --}}
 
-    {{-- <style>
-        #video-container {
-            position: relative;
-        }
-
-        #video-container img {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            width: 100px;
-            height: 100px;
-        }
-    </style> --}}
-
     <script>
         let slideIndex1 = 0;
         let slideIndex2 = 0;
         let slideIndex3 = 0;
+        let slideIndex4 = 0;
+        let slideIndex5 = 0;
 
         showSlides1();
 
@@ -345,23 +361,39 @@
                 slideIndex2 = 1
             }
             slides[slideIndex2 - 1].style.display = "block";
-            setTimeout(showSlides2, 2700); // Cambia la imagen cada 2 segundos
+            setTimeout(showSlides2, 2200); // Cambia la imagen cada 2 segundos
         }
 
-        showSlides3();
+        showSlides4();
 
-        function showSlides3() {
+        function showSlides4() {
             let i;
-            let slides = document.getElementsByClassName("carousel-item-tags");
+            let slides = document.getElementsByClassName("carousel-item-menuEstres");
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
-            slideIndex3++;
-            if (slideIndex3 > slides.length) {
-                slideIndex3 = 1
+            slideIndex4++;
+            if (slideIndex4 > slides.length) {
+                slideIndex4 = 1
             }
-            slides[slideIndex3 - 1].style.display = "block";
-            setTimeout(showSlides3, 2800); // Cambia la imagen cada 2 segundos
+            slides[slideIndex4 - 1].style.display = "block";
+            setTimeout(showSlides4, 2600); // Cambia la imagen cada 2 segundos
+        }
+
+        showSlides5();
+
+        function showSlides5() {
+            let i;
+            let slides = document.getElementsByClassName("carousel-item-capsulas");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex5++;
+            if (slideIndex5 > slides.length) {
+                slideIndex5 = 1
+            }
+            slides[slideIndex5 - 1].style.display = "block";
+            setTimeout(showSlides5, 2800); // Cambia la imagen cada 2 segundos
         }
     </script>
 @endsection

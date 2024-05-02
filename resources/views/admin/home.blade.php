@@ -108,45 +108,45 @@
                     </div>
                 </div>
             </div>
-             <div class="mt-6">
+            <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
                     <input type="radio" name="my-accordion-4"/>
-                        @if (session('section')) {{ session('section') == 'tags' ? 'checked' : '' }} @endif 
+                        @if (session('section')) {{ session('section') == 'capsulas' ? 'checked' : '' }} @endif 
                     <div class="collapse-title text-xl font-medium">
-                        Tags
+                        Capsulas de Nutricion
                     </div>
                     <div class="collapse-content overflow-x-auto">
-                        @include('admin.sections.tags.index')
-                        
+                        @include('admin.sections.capsula.index')
                     </div>
                 </div>
             </div>
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
                     <input type="radio" name="my-accordion-4"/>
-                        @if (session('section')) {{ session('section') == 'health' ? 'checked' : '' }} @endif 
+                        @if (session('section')) {{ session('section') == 'estres' ? 'checked' : '' }} @endif 
                     <div class="collapse-title text-xl font-medium">
-                        Saludable
+                        Menu Anti-Estres
                     </div>
                     <div class="collapse-content overflow-x-auto">
-                        @include('admin.sections.health.index')
-                        
+                        @include('admin.sections.estre.index')
                     </div>
                 </div>
-            </div>  
+            </div>
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
                     <input type="radio" name="my-accordion-4"/>
-                        @if (session('section')) {{ session('section') == 'nutrition' ? 'checked' : '' }} @endif 
+                        @if (session('section')) {{ session('section') == 'tags' || session('section') == 'health' || session('section') == 'nutrition' ? 'checked' : '' }} @endif 
                     <div class="collapse-title text-xl font-medium">
-                        Nutricion
+                        Vida Saludable
                     </div>
                     <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.tags.index')
+                        @include('admin.sections.health.index')
                         @include('admin.sections.nutrition.index')
-                        
                     </div>
                 </div>
-            </div> 
+            </div>
+            
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-base-200">
                     <input type="radio" name="my-accordion-3" />

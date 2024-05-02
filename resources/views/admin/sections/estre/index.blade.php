@@ -1,18 +1,18 @@
-@include('admin.sections.nutrition.modal-edit')
-@include('admin.sections.nutrition.modal-create')
-<div class="space-y-2">Nutricion
+@include('admin.sections.estre.modal-edit')
+@include('admin.sections.estre.modal-create')
+<div class="space-y-2">
     <div class="flex justify-end gap-3">
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
-            onclick="my_modal_nutricion.showModal()">Agregar Seccion de Nutricion</button>
+            onclick="my_modal_menuEstres.showModal()">Agregar Menu Anti-Estres</button>
     </div>
-    @if (session('success_nutrition'))
-        <div role="alert" class="alert alert-success" id="alert_nutrition">
+    @if (session('success_estre'))
+        <div role="alert" class="alert alert-success" id="alert_estre">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>{{ session('success_nutrition') }}</span>
+            <span>{{ session('success_estre') }}</span>
         </div>
     @endif
     <div class="overflow-x-auto">
@@ -27,14 +27,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($nutritions as $nutrition)
+                @foreach ($estres as $estre)
                     @php
-                        $vigencia = (object) json_decode($nutrition->vigencia);
+                        $vigencia = (object) json_decode($estre->vigencia);
                     @endphp
                     <tr>
                         <th>{{ $loop->iteration }}</th>
-                        <td>{{ $nutrition->title }}</td>
-                        <td>{{ $nutrition->description }}</td>
+                        <td>{{ $estre->title }}</td>
+                        <td>{{ $estre->description }}</td>
                         <td>
                             <b>Inicio:</b> {{ $vigencia->start }}
                             <b>Final:</b> {{ $vigencia->end }}
@@ -42,7 +42,7 @@
                         <td>
                             <div class="flex justify-end gap-3">
                                 <button class="btn btn-circle btn-ghost btn-xs"
-                                    onclick="editarNutricion({{ $nutrition->id }})">
+                                    onclick="editarMenuEstres({{ $estre->id }})">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -51,7 +51,7 @@
                                     </svg>
                                 </button>
                                 <button class="btn btn-circle btn-ghost btn-xs"
-                                    onclick="deleteNutricion({{ $nutrition->id }})">
+                                    onclick="deleteMenuEstres({{ $estre->id }})">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -69,19 +69,19 @@
 
 
 <script>
-    let nutritiones = @json($nutritions);
+    let estres = @json($estres);
     document.addEventListener("DOMContentLoaded", function() {
-        let showModalNutricion = {{ session('error_nutrition') ? 'my_modal_nutricion.showModal()' : 0 }}
-        {{ session('error_edit_nutrition') ? 'editarNutricion(' . session('nutricion_id') . ')' : 0 }}
-        const alertNutricion = document.getElementById('alert_nutrition');
-        if (alertNutricion) {
+        let showModalEstres = {{ session('error_estre') ? 'my_modal_menuEstres.showModal()' : 0 }}
+        {{ session('error_edit_estre') ? 'editarMenuEstres(' . session('menuAnti_id') . ')' : 0 }}
+        const alertSaludable = document.getElementById('alert_estre');
+        if (alertSaludable) {
             setTimeout(() => {
-                alertNutricion.style.display = 'none';
+                alertSaludable.style.display = 'none';
             }, 3000);
         }
     });
 
-    function deleteNutricion(id) {
+    function deleteMenuEstres(id) {
         Swal.fire({
             title: "¿Estas seguro de que quieres eliminar el anuncio?",
             text: "ya no se podra recuperar el anuncio",
@@ -92,16 +92,16 @@
             confirmButtonText: "Eliminar"
         }).then((result) => {
             if (result.isConfirmed) {
-                elminarNutricion(id)
+                elminarMenuEstres(id)
             }
         });
     }
 
-    async function elminarNutricion(id) {
-        let url = "{{ route('nutricion.deleteNutrition') }}";
+    async function elminarMenuEstres(id) {
+        let url = "{{ route('menuEstres.deleteMenuEstres') }}";
         await axios.delete(url, {
             data: {
-                nutricion_id: id
+                menuAnti_id: id
             }
         }).then((response) => {
             console.log(response);

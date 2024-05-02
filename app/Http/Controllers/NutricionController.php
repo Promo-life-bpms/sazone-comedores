@@ -43,14 +43,14 @@ class NutricionController extends Controller
              $nameFile);
         } else {
             return redirect()->back()
-                ->with('error_nutricion', 'No se ha podido crear el platillo por un problema con la imagen')
+                ->with('error_nutricion', 'No se ha podido crear la seccion por un problema con la imagen')
                 ->with('section', 'nutricion');
         }
 
         $nutricion = Nutricion::create($nutricion);
 
         return redirect()->back()
-            ->with('success_nutricion', 'Platillo creado correctamente')
+            ->with('success_nutricion', 'Seccion creado correctamente')
             ->with('section', 'nutricion');
     }
 

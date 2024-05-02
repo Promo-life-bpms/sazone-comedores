@@ -28,7 +28,7 @@ class TagsNameController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with('error_tags', 'No se ha podido crear el anuncio')
+                ->with('error_tags', 'No se ha podido crear la seccion')
                 ->with('section', 'tags')
                 ->withErrors($validator->getMessageBag());
         }
@@ -56,7 +56,7 @@ class TagsNameController extends Controller
             Storage::putFileAs('public/' . $path, $file, $nameFile);
         } else {
             return redirect()->back()
-                ->with('error_tagnames', 'No se ha podido crear el platillo por un problema con la imagen')
+                ->with('error_tagnames', 'No se ha podido crear la seccion por un problema con la imagen')
                 ->with('section', 'tagnames');
         }
 
@@ -65,7 +65,7 @@ class TagsNameController extends Controller
         $tags->diningRooms()->attach($dining);
 
         return redirect()->back()
-            ->with('success_tagname', 'Anuncio creado correctamente')
+            ->with('success_tagname', 'Seccion creado correctamente')
             ->with('section', 'tagnames');
     }
 
@@ -79,7 +79,7 @@ class TagsNameController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with('error_edit_tagname', 'No se ha podido crear el anuncio')
+                ->with('error_edit_tagname', 'No se ha podido crear la seccion')
                 ->with('tagname_id', $request->tagname_id_edit)
                 ->with('section', 'tagnames')
                 ->withErrors($validator->getMessageBag());
@@ -107,7 +107,7 @@ class TagsNameController extends Controller
                     Storage::putFileAs('public/' . $path, $file, $nameFile);
                 } else {
                     return redirect()->back()
-                        ->with('error_edit_tagnames', 'No se ha podido crear el platillo por un problema con la imagen')
+                        ->with('error_edit_tagnames', 'No se ha podido crear la seccion por un problema con la imagen')
                         ->with('section', 'tagnames');
                 }
             }
@@ -117,7 +117,7 @@ class TagsNameController extends Controller
             return redirect()->back()->with('success_tagname', 'Editado correctamente')
                 ->with('section', 'tagnames');
         } else {
-            return redirect()->back()->with('error_edit_tagname', 'No se ha podido editar el anuncio')
+            return redirect()->back()->with('error_edit_tagname', 'No se ha podido editar la seccion')
                 ->with('section', 'tagnames');
         }
     }
