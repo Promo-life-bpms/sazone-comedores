@@ -15,7 +15,7 @@
         </div>
     </div>
     <h1 class="text-lg font-semibold my-2">Comedores Disponibles</h1>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-y-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-y-55">
         @foreach ($diningRooms as $dr)
             @if ($dr->statusV == 1)
                 <div class="col-span-1 rounded-xl border">

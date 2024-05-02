@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Health;
 use App\Models\DiningRoom;
+use App\Models\Capsula;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class HealthController extends Controller
+class NutriCapsController extends Controller
 {
     public function __construct()
     {
@@ -19,23 +19,23 @@ class HealthController extends Controller
     {
         //validate con Validator
         $validator = Validator::make($request->all(), [
-            'file_health' => 'required',
+            'file_capsula' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
             'dining_id' => 'required'
         ]);
-        
+
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with('error_healths', 'No se ha podido crear la seccion')
-                ->with('section', 'healths')
+                ->with('error_capsula', 'No se ha podido crear la seccion')
+                ->with('section', 'capsulas')
                 ->withErrors($validator->getMessageBag());
         }
 
         $dining = DiningRoom::find($request->dining_id);
 
-        $health = [
+        $capsulas = [
             'title' => $request->title ?? null,
             'description' => $request->description ?? null,
             'vigencia' => json_encode([
@@ -45,47 +45,47 @@ class HealthController extends Controller
             'dining_room_id' => $request->dining_id,
         ];
 
-        $file = $request->file('file_health');
+        $file = $request->file('file_capsula');
 
-        $nameFile = date('Y-m-d-s') . '_health.' . $file->getClientOriginalExtension();
-        $path = 'dining_room/' . $dining->slug . "/health/";
+        $nameFile = date('Y-m-d-s') . '_capsula.' . $file->getClientOriginalExtension();
+        $path = 'dining_room/' . $dining->slug . "/capsulas/";
 
-        $health['resource'] = $path . $nameFile;
+        $capsulas['resource'] = $path . $nameFile;
 
         if ($file->isValid()) {
             Storage::putFileAs('public/' . $path, $file, $nameFile);
         } else {
             return redirect()->back()
-                ->with('error_healths', 'No se ha podido crear la seccion por un problema con la imagen')
-                ->with('section', 'healths');
+                ->with('error_capsula', 'No se ha podido crear la seccion por un problema con la imagen')
+                ->with('section', 'capsulas');
         }
 
-        $health = Health::create($health);
+        $capsulas = Capsula::create($capsulas);
 
-        $health->diningRooms()->attach($dining);
+        $capsulas->diningRooms()->attach($dining);
 
         return redirect()->back()
-            ->with('success_healths', 'Seccion creado correctamente')
-            ->with('section', 'healths');
+            ->with('success_capsula', 'Seccion creado correctamente')
+            ->with('section', 'capsulas');
     }
 
-    public function editHealth(Request $request)
+    public function editNutriCaps(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'start_date_edit' => 'required',
             'end_date_edit' => 'required',
-            'health_id_edit' => 'required'
+            'capsula_id_edit' => 'required'
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with('error_edit_healths', 'No se ha podido crear la seccion')
-                ->with('health_id', $request->health_id_edit)
-                ->with('section', 'healths')
+                ->with('error_edit_capsula', 'No se ha podido crear la seccion')
+                ->with('capsula_id', $request->capsula_id_edit)
+                ->with('section', 'capsulas')
                 ->withErrors($validator->getMessageBag());
         }
 
-        $edit = Health::find($request->input('health_id_edit'));
+        $edit = Capsula::find($request->input('capsula_id_edit'));
         $dining = $edit->diningRooms()->first();
 
         if ($edit) {
@@ -96,10 +96,10 @@ class HealthController extends Controller
                 'end' => $request->input('end_date_edit'),
             ]);
 
-            if ($request->hasFile('file_health_edit')) {
-                $file = $request->file('file_health_edit');
-                $nameFile = date('Y-m-d-s') . '_health.' . $file->getClientOriginalExtension();
-                $path = 'dining_room/' . $dining->slug . "/health/";
+            if ($request->hasFile('file_capsula_edit')) {
+                $file = $request->file('file_capsula_edit');
+                $nameFile = date('Y-m-d-s') . '_capsula.' . $file->getClientOriginalExtension();
+                $path = 'dining_room/' . $dining->slug . "/capsulas/";
                 $edit->resource = $path . $nameFile;
                 if ($file->isValid()) {
                     // Eliminar imagen anterior
@@ -107,27 +107,26 @@ class HealthController extends Controller
                     Storage::putFileAs('public/' . $path, $file, $nameFile);
                 } else {
                     return redirect()->back()
-                        ->with('error_edit_healths', 'No se ha podido crear la seccion por un problema con la imagen')
-                        ->with('section', 'healths');
+                        ->with('error_edit_capsula', 'No se ha podido crear la seccion por un problema con la imagen')
+                        ->with('section', 'capsulas');
                 }
             }
 
             $edit->save();
 
-            return redirect()->back()->with('success_health', 'Editado correctamente')
-                ->with('section', 'healths');
+            return redirect()->back()->with('success_capsula', 'Editado correctamente')
+                ->with('section', 'capsulas');
         } else {
-            return redirect()->back()->with('error_edit_health', 'No se ha podido editar la seccion')
-                ->with('section', 'healths');
+            return redirect()->back()->with('error_edit_capsula', 'No se ha podido editar la seccion')
+                ->with('section', 'capsulas');
         }
     }
-    public function deleteHealth(Request $request)
+    public function deleteNutriCaps(Request $request)
     {
-        $dining_id = $request->saludable_id;
-        $saludable = Health::find($dining_id);
-        $saludable->diningRooms()->detach();
-        $saludable->delete();
+        $dining_id = $request->nutriCaps_id;
+        $nutriCaps = Capsula::find($dining_id);
+        $nutriCaps->diningRooms()->detach();
+        $nutriCaps->delete();
         return response()->json(['success' => 'Eliminado correctaente'], 200);
     }
-
 }

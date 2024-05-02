@@ -28,7 +28,7 @@ class NutritionController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with('error_nutritions', 'No se ha podido crear el anuncio')
+                ->with('error_nutritions', 'No se ha podido crear la seccion')
                 ->with('section', 'nutritions')
                 ->withErrors($validator->getMessageBag());
         }
@@ -56,7 +56,7 @@ class NutritionController extends Controller
             Storage::putFileAs('public/' . $path, $file, $nameFile);
         } else {
             return redirect()->back()
-                ->with('error_nutritions', 'No se ha podido crear el platillo por un problema con la imagen')
+                ->with('error_nutritions', 'No se ha podido crear la seccion por un problema con la imagen')
                 ->with('section', 'nutritions');
         }
 
@@ -65,7 +65,7 @@ class NutritionController extends Controller
         $nutrition->diningRooms()->attach($dining);
 
         return redirect()->back()
-            ->with('success_nutritions', 'Anuncio creado correctamente')
+            ->with('success_nutritions', 'Seccion creado correctamente')
             ->with('section', 'nutritions');
     }
 
@@ -79,7 +79,7 @@ class NutritionController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with('error_edit_nutritions', 'No se ha podido crear el anuncio')
+                ->with('error_edit_nutritions', 'No se ha podido crear la seccion')
                 ->with('nutrition_id', $request->nutrition_id_edit)
                 ->with('section', 'nutritions')
                 ->withErrors($validator->getMessageBag());
@@ -107,7 +107,7 @@ class NutritionController extends Controller
                     Storage::putFileAs('public/' . $path, $file, $nameFile);
                 } else {
                     return redirect()->back()
-                        ->with('error_edit_nutritions', 'No se ha podido crear el platillo por un problema con la imagen')
+                        ->with('error_edit_nutritions', 'No se ha podido crear la seccion por un problema con la imagen')
                         ->with('section', 'nutritions');
                 }
             }
@@ -117,7 +117,7 @@ class NutritionController extends Controller
             return redirect()->back()->with('success_nutritions', 'Editado correctamente')
                 ->with('section', 'nutritions');
         } else {
-            return redirect()->back()->with('error_edit_nutritions', 'No se ha podido editar el anuncio')
+            return redirect()->back()->with('error_edit_nutritions', 'No se ha podido editar la seccion')
                 ->with('section', 'nutritions');
         }
     }

@@ -53,8 +53,10 @@ class HomeController extends Controller
         $tagnames = $diningRoom->tagnames;
         $nutritions =  $diningRoom->nutritions;
         $healths = $diningRoom->healths;
+        $estres = $diningRoom->estres;
+        $capsulas = $diningRoom->capsulas;
 
-        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements','tagnames', 'nutritions', 'healths'));
+        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements','tagnames', 'nutritions', 'healths','estres','capsulas'));
     }
 
     public function cupones()
@@ -115,6 +117,8 @@ class HomeController extends Controller
         $tagnames = $diningRoom->tagnames;
         $nutritions =  $diningRoom->nutritions;
         $healths = $diningRoom->healths;
+        $estres = $diningRoom->estres;
+        $capsulas = $diningRoom->capsulas;
         $allFood = [];
 
         foreach ($menuDays as $day) {
@@ -124,7 +128,7 @@ class HomeController extends Controller
             }
         }
 
-        return view('user.pages.home', compact('diningRoom', 'menuDays', 'allFood', 'advertisements','tagnames','nutritions','healths', 'users','day'));
+        return view('user.pages.home', compact('diningRoom', 'menuDays', 'allFood', 'advertisements','tagnames','nutritions','healths', 'users','day','estres','capsulas'));
     }
 
     public function nutricionVida()

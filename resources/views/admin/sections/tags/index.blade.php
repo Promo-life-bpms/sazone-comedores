@@ -1,6 +1,6 @@
 @include('admin.sections.tags.modal-edit')
 @include('admin.sections.tags.modal-create')
-<div class="space-y-2">
+<div class="space-y-2">Informacion
     <div class="flex justify-end gap-3">
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
             onclick="my_modal_tarjeta.showModal()">Agregar Tag</button>

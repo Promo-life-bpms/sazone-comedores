@@ -1,6 +1,6 @@
 @include('admin.sections.health.modal-edit')
 @include('admin.sections.health.modal-create')
-<div class="space-y-2">
+<div class="space-y-2">Opcion Saludable
     <div class="flex justify-end gap-3">
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
             onclick="my_modal_saludable.showModal()">Agregar Vida Saludable</button>
@@ -72,7 +72,7 @@
     let saludables = @json($healths);
     document.addEventListener("DOMContentLoaded", function() {
         let showModalSaludable = {{ session('error_health') ? 'my_modal_saludable.showModal()' : 0 }}
-        {{ session('error_edit_health') ? 'editarTarjeta(' . session('saludable_id') . ')' : 0 }}
+        {{ session('error_edit_health') ? 'editarSaludable(' . session('saludable_id') . ')' : 0 }}
         const alertSaludable = document.getElementById('alert_health');
         if (alertSaludable) {
             setTimeout(() => {

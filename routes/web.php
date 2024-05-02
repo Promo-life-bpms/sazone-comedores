@@ -8,7 +8,9 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DiningRoomController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MAntiEstresController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\NutriCapsController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\TagsNameController;
 use Illuminate\Support\Facades\Route;
@@ -65,6 +67,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/nutricion', [NutritionController::class, 'store'])->name('nutricion.store');
     Route::post('/nutricion/editNutrition', [NutritionController::class, 'editNutrition'])->name('nutricion.editNutrition');
     Route::delete('/nutricion/delete', [NutritionController::class, 'deleteNutrition'])->name('nutricion.deleteNutrition');
+    Route::post('/menuEstres', [MAntiEstresController::class, 'store'])->name('menuEstres.store');
+    Route::post('/menuEstres/editMenuEstres', [MAntiEstresController::class, 'editMenuEstres'])->name('menuEstres.editMenuEstres');
+    Route::delete('/menuEstres/delete', [MAntiEstresController::class, 'deleteMenuEstres'])->name('menuEstres.deleteMenuEstres');
+    Route::post('/nutriCapsulas', [NutriCapsController::class, 'store'])->name('nutriCapsulas.store');
+    Route::post('/nutriCapsulas/editMenuEstres', [NutriCapsController::class, 'editNutriCaps'])->name('nutriCapsulas.editNutriCaps');
+    Route::delete('/nutriCapsulas/delete', [NutriCapsController::class, 'deleteNutriCaps'])->name('nutriCapsulas.deleteNutriCaps');
 });
 
 Route::prefix('super')->group(function () {

@@ -1,18 +1,18 @@
-@include('admin.sections.nutrition.modal-edit')
-@include('admin.sections.nutrition.modal-create')
-<div class="space-y-2">Nutricion
+@include('admin.sections.capsula.modal-edit')
+@include('admin.sections.capsula.modal-create')
+<div class="space-y-2">
     <div class="flex justify-end gap-3">
-        <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
-            onclick="my_modal_nutricion.showModal()">Agregar Seccion de Nutricion</button>
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="my_modal_capnutri.showModal()">Agregar Capsula</button>
+        {{-- <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" /> --}}
     </div>
-    @if (session('success_nutrition'))
-        <div role="alert" class="alert alert-success" id="alert_nutrition">
+    @if (session('success_capsula'))
+        <div role="alert" class="alert alert-success" id="alert_capsula">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>{{ session('success_nutrition') }}</span>
+            <span>{{ session('success_capsula') }}</span>
         </div>
     @endif
     <div class="overflow-x-auto">
@@ -27,22 +27,31 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($nutritions as $nutrition)
+                @foreach ($capsulas as $capsula)
                     @php
-                        $vigencia = (object) json_decode($nutrition->vigencia);
+                        $vigencia = (object) json_decode($capsula->vigencia);
                     @endphp
                     <tr>
                         <th>{{ $loop->iteration }}</th>
-                        <td>{{ $nutrition->title }}</td>
-                        <td>{{ $nutrition->description }}</td>
+                        <td>{{ $capsula->title }}</td>
+                        <td>{{ $capsula->description }}</td>
                         <td>
                             <b>Inicio:</b> {{ $vigencia->start }}
                             <b>Final:</b> {{ $vigencia->end }}
                         </td>
                         <td>
                             <div class="flex justify-end gap-3">
+                                {{-- <button class="btn btn-circle btn-ghost btn-xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </button> --}}
                                 <button class="btn btn-circle btn-ghost btn-xs"
-                                    onclick="editarNutricion({{ $nutrition->id }})">
+                                    onclick="editNutriCaps({{ $capsula->id }})">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -51,7 +60,7 @@
                                     </svg>
                                 </button>
                                 <button class="btn btn-circle btn-ghost btn-xs"
-                                    onclick="deleteNutricion({{ $nutrition->id }})">
+                                    onclick="deleteNutriCapsulas({{ $capsula->id }})">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -69,19 +78,19 @@
 
 
 <script>
-    let nutritiones = @json($nutritions);
+    let capsulas = @json($capsulas);
     document.addEventListener("DOMContentLoaded", function() {
-        let showModalNutricion = {{ session('error_nutrition') ? 'my_modal_nutricion.showModal()' : 0 }}
-        {{ session('error_edit_nutrition') ? 'editarNutricion(' . session('nutricion_id') . ')' : 0 }}
-        const alertNutricion = document.getElementById('alert_nutrition');
-        if (alertNutricion) {
+        let showModalCapsulas = {{ session('error_capsula') ? 'my_modal_capnutri.showModal()' : 0 }}
+        {{ session('error_edit_capsula') ? 'editNutriCaps(' . session('nutriCaps_id') . ')' : 0 }}
+        const alertCapsula = document.getElementById('alert_capsula');
+        if (alertCapsula) {
             setTimeout(() => {
-                alertNutricion.style.display = 'none';
+                alertCapsula.style.display = 'none';
             }, 3000);
         }
     });
 
-    function deleteNutricion(id) {
+    function deleteNutriCapsulas(id) {
         Swal.fire({
             title: "¿Estas seguro de que quieres eliminar el anuncio?",
             text: "ya no se podra recuperar el anuncio",
@@ -92,16 +101,16 @@
             confirmButtonText: "Eliminar"
         }).then((result) => {
             if (result.isConfirmed) {
-                elminarNutricion(id)
+                elminarNutriCapsulas(id)
             }
         });
     }
 
-    async function elminarNutricion(id) {
-        let url = "{{ route('nutricion.deleteNutrition') }}";
+    async function elminarNutriCapsulas(id) {
+        let url = "{{ route('nutriCapsulas.deleteNutriCaps') }}";
         await axios.delete(url, {
             data: {
-                nutricion_id: id
+                nutriCaps_id: id
             }
         }).then((response) => {
             console.log(response);
