@@ -14,7 +14,7 @@
                 @foreach ($nutritions as $nutrition)
                     <div id="infoSlide{{ $loop->iteration }}" class="carousel-item-info relative w-full">
                         <div class="relative w-full">
-                            <img src="{{ asset('storage/' . $nutrition->resource) }}" class="w-full object-fit rounded-lg h-72" />
+                            <img src="{{ asset('storage/' . $nutrition->resource) }}" class="w-full object-cover rounded-lg h-72" />
                             @if (!($nutrition->title == null && $nutrition->description == null))
                                 <div
                                     class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
@@ -44,7 +44,7 @@
                 @foreach ($tagnames as $tagname)
                     <div id="nutriSlide{{ $loop->iteration }}" class="carousel-item-nutri relative w-full">
                         <div class="relative w-full">
-                            <img src="{{ asset('storage/' . $tagname->resource) }}" class="w-full object-fit h-72" />
+                            <img src="{{ asset('storage/' . $tagname->resource) }}" class="w-full object-cover h-72" />
                             @if (!($tagname->title == null && $tagname->description == null))
                                 <div
                                     class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
@@ -74,7 +74,7 @@
                     <div id="healthSlide{{ $loop->iteration }}" class="carousel-item-saludable relative w-full h-full">
                         <div class="relative w-full h-full">
                             <img src="{{ asset('storage/' . $health->resource) }}"
-                                class="w-full h-full object-fit h-80" />
+                                class="w-full h-full object-cover h-80" />
                             @if (!($health->title == null && $health->description == null))
                                 <div
                                     class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
