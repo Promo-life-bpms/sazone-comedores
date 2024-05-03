@@ -36,9 +36,9 @@
                             </svg>
                         </button>
                     </div> --}}
-                    <div class="rounded-xl relative cursor-pointer rounded-xl flex justify-center items-center w-24">
+                    <div class="rounded-xl relative cursor-pointer rounded-xl flex justify-center items-center w-35">
                         <a href="{{ route('dining.show', ['diningRoom' => $dr->id]) }}">
-                            <img src="{{ asset($dr->logo) }}" class="object-cover w-35px h-40 rounded-xl" alt="">
+                            <img src="{{ asset($dr->logo) }}" class="object-cover w-35 h-40 rounded-xl" alt="">
                         </a>
                         <button class="absolute top-2 right-2 text-black font-bold py-2 px-4 rounded" onclick="deleteDining(event, {{ $dr->id }})">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
