@@ -3,7 +3,7 @@
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
-        <h3 class="font-bold text-lg text-center">Editar Anuncio</h3>
+        <h3 class="font-bold text-lg text-center">Editar Seccionde Capsulas</h3>
         <br>
         <form method="POST" action="{{ route('nutriCapsulas.editNutriCaps') }}" enctype="multipart/form-data"
             class="space-y-3">
