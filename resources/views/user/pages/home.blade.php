@@ -121,66 +121,135 @@
 @section('content')
     <div class="pt-5">
         <h1 class="text-3xl font-semibold mb-5">¡Hola {{ auth()->user()->name }}!</h1>
-        <div class="carousel w-full max-h-96 rounded-lg">
-            @foreach ($advertisements as $anuncio)
-                <div id="bannerSlide{{ $loop->iteration }}" class="carousel-item-banner relative w-full">
-                    <div class="relative w-full">
-                        <img src="{{ asset('storage/' . $anuncio->resource) }}" class="w-full object-cover max-h-96" />
-                        @if (!($anuncio->title == null && $anuncio->description == null))
-                            <div
-                                class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                                <h3 class="text-xl text-center pb-3">{{ $anuncio->title }}</h3>
-                                <p class="opacity-100 text-justify">{{ $anuncio->description }}</p>
+        
+        <div data-hs-carousel='{
+    "loadingClasses": "opacity-0",
+    "isAutoPlay": true
+  }' class="relative">
+            <div class="hs-carousel overflow-hidden w-full min-h-96 bg-white rounded-lg">
+                <div
+                    class="hs-carousel-body  top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                    @foreach ($advertisements as $anuncio)
+                        <div class="hs-carousel-slide">
+                            <div class="flex justify-center h-full">
+                                <img src="{{ asset('storage/' . $anuncio->resource) }}"
+                                    class="w-full object-cover max-h-96" />
+                                @if (!($anuncio->title == null && $anuncio->description == null))
+                                    <div class="self-center text-center p-5 rounded-md"
+                                        style="background-color: rgba(110, 242, 209, 0.18);">
+                                        <h3 class="text-xl pb-3">{{ $anuncio->title }}</h3>
+                                        <p class="opacity-100 text-justify">{{ $anuncio->description }}</p>
+                                    </div>
+                                @endif
                             </div>
-                        @endif
-                    </div>
-                    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#bannerSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
-                            class="btn btn-circle">❮</a>
-                        <a href="#bannerSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}" class="btn btn-circle">❯</a>
-                    </div>
+                        </div>
+                    @endforeach
                 </div>
-            @endforeach
+            </div>
+
+            <button type="button"
+                class="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-s-lg dark:text-white dark:hover:bg-white/10">
+                <span class="text-2xl" aria-hidden="true">
+                    <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6"></path>
+                    </svg>
+                </span>
+                <span class="sr-only">Previous</span>
+            </button>
+            <button type="button"
+                class="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-e-lg dark:text-white dark:hover:bg-white/10">
+                <span class="sr-only">Next</span>
+                <span class="text-2xl" aria-hidden="true">
+                    <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m9 18 6-6-6-6"></path>
+                    </svg>
+                </span>
+            </button>
+
+            <div class="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
+                @foreach ($advertisements as $anuncio)
+                    <span
+                        class="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
+                @endforeach
+            </div>
         </div>
     </div>
 
     <div class="grid md:grid-cols-3 grid-cols-1 mt-0 gap-5">
         <div class="col-span-1">
             <p class="text-lg font-semibold mb-3">Menu del dia</p>
-            <div class="carousel w-full max-h-72 h-72 rounded-lg">
-                @if (count($day->menus($diningRoom->id)) > 0)
-                    @foreach ($day->menus($diningRoom->id) as $menu)
-                        <div id="menuSlide{{ $loop->iteration }}" class="carousel-item-menu relative w-full">
-                            <div class="relative w-full">
-                                <img src="{{ asset('storage/' . $menu->image) }}" class="w-full object-cover h-72" />
-                                <div
-                                    class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#7bdac22e] p-5 rounded-md">
-                                    <h3 class="text-center pb-3 text-white text-2xl font-bold">{{ $menu->name }}</h3>
-                                    <h3 class="text-sm text-center pb-3 text-white">{{ $menu->time }}</h3>
+            <div data-hs-carousel='{
+            "loadingClasses": "opacity-0",
+            "isAutoPlay": true
+          }'
+                class="relative">
+                <div class="hs-carousel overflow-hidden w-full min-h-96 bg-white rounded-lg">
+                    <div
+                        class="hs-carousel-body  top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                        @if (count($day->menus($diningRoom->id)) > 0)
+                            @foreach ($day->menus($diningRoom->id) as $menu)
+                                <div id="menuSlide{{ $loop->iteration }}" class="hs-carousel-slide">
+                                    <div class="relative justify-center h-full">
+                                        <img src="{{ asset('storage/' . $menu->image) }}"
+                                            class="w-full object-cover h-72" />
+                                        <div
+                                            class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#7bdac22e] p-5 rounded-md">
+                                            <h3 class="text-center pb-3 text-white text-2xl font-bold">{{ $menu->name }}
+                                            </h3>
+                                            <h3 class="text-sm text-center pb-3 text-white">{{ $menu->time }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div id="menuSlideNot" class="hs-carousel-slide">
+                                <div class="flex justify-center h-full bg-gray-100 p-6 dark:bg-neutral-900">
+                                    <img src="" class="w-full object-contain" />
+                                    <div
+                                        class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
+                                        <h3 class="text-xl text-center pb-3">Sin Menu Disponible</h3>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#menuSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
-                                    class="btn btn-circle">❮</a>
-                                <a href="#menuSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
-                                    class="btn btn-circle">❯</a>
-                            </div>
-                        </div>
-                    @endforeach
-                @else
-                    <div id="menuSlideNot" class="carousel-item relative w-full border rounded-sm ">
-                        <div class="relative w-full">
-                            <img src="" class="w-full object-contain" />
-                            <div
-                                class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                                <h3 class="text-xl text-center pb-3">Sin Menu Disponible</h3>
-                            </div>
-                        </div>
+                        @endif
                     </div>
-                @endif
+                </div>
+
+                <button type="button"
+                    class="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-s-lg dark:text-white dark:hover:bg-white/10">
+                    <span class="text-2xl" aria-hidden="true">
+                        <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="m15 18-6-6 6-6"></path>
+                        </svg>
+                    </span>
+                    <span class="sr-only">Previous</span>
+                </button>
+                <button type="button"
+                    class="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-e-lg dark:text-white dark:hover:bg-white/10">
+                    <span class="sr-only">Next</span>
+                    <span class="text-2xl" aria-hidden="true">
+                        <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="m9 18 6-6-6-6"></path>
+                        </svg>
+                    </span>
+                </button>
+
+                <div class="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
+                    @foreach ($day->menus($diningRoom->id) as $menu)
+                        <span
+                            class="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
+                    @endforeach
+                </div>
             </div>
         </div>
-
 
         <div class="col-span-2">
             <div class="col-span-1">
@@ -195,27 +264,57 @@
         <div class="col-span-1">
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
-                <div class="carousel w-full max-h-72 h-72 rounded-lg">
-                    @foreach ($estres as $estre)
-                        <div id="menuAntiEstresSlide{{ $loop->iteration }}" class="carousel-item-menuEstres relative w-full">
-                            <div class="relative w-full">
-                                <img src="{{ asset('storage/' . $estre->resource) }}" class="w-full object-fit h-72" />
-                                @if (!($estre->title == null && $estre->description == null))
-                                    <div
-                                        class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                                        <h3 class="text-xl text-center pb-3">{{ $estre->title }}</h3>
-                                        <p class="opacity-100 text-justify">{{ $estre->description }}</p>
+                <div data-hs-carousel='{"loadingClasses": "opacity-0", "isAutoPlay": true}' class="relative">
+                    <div class="hs-carousel overflow-hidden  min-h-96 bg-white rounded-lg">
+                        <div
+                            class="hs-carousel-body top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                            @foreach ($estres as $estre)
+                                <div id="capsulasSlide{{ $loop->iteration }}" class="hs-carousel-slide">
+                                    <div class="flex justify-center h-full">
+                                        <img src="{{ asset('storage/' . $estre->resource) }}"
+                                            class="w-full object-cover h-72" />
+                                        @if (!($estre->title == null && $estre->description == null))
+                                            <div
+                                                class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
+                                                <h3 class="text-xl text-center pb-3">{{ $estre->title }}</h3>
+                                                <p class="opacity-100 text-justify">{{ $estre->description }}</p>
+                                            </div>
+                                        @endif
                                     </div>
-                                @endif
-                            </div>
-                            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#menuAntiEstresSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
-                                    class="btn btn-circle">❮</a>
-                                <a href="#menuAntiEstresSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
-                                    class="btn btn-circle">❯</a>
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+
+                    <button type="button"
+                        class="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-s-lg dark:text-white dark:hover:bg-white/10">
+                        <span class="text-2xl" aria-hidden="true">
+                            <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6"></path>
+                            </svg>
+                        </span>
+                        <span class="sr-only">Previous</span>
+                    </button>
+                    <button type="button"
+                        class="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-e-lg dark:text-white dark:hover:bg-white/10">
+                        <span class="sr-only">Next</span>
+                        <span class="text-2xl" aria-hidden="true">
+                            <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </span>
+                    </button>
+
+                    <div class="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
+                        @for ($i = 0; $i < count($estres); $i++)
+                            <span
+                                class="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
+                        @endfor
+                    </div>
                 </div>
             </div>
         </div>
@@ -250,101 +349,60 @@
         <div class="col-span-1">
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Capsulas de Nutricion</p>
-                <div class="carousel w-full max-h-72 h-72 rounded-lg">
-                    @foreach ($capsulas as $capsulas)
-                        <div id="capsulasSlide{{ $loop->iteration }}" class="carousel-item-capsulas relative w-full">
-                            <div class="relative w-full">
-                                <img src="{{ asset('storage/' . $capsulas->resource) }}" class="w-full object-fit h-72" />
-                                @if (!($capsulas->title == null && $capsulas->description == null))
-                                    <div
-                                        class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                                        <h3 class="text-xl text-center pb-3">{{ $capsulas->title }}</h3>
-                                        <p class="opacity-100 text-justify">{{ $capsulas->description }}</p>
+                <div data-hs-carousel='{"loadingClasses": "opacity-0", "isAutoPlay": true}' class="relative">
+                    <div class="hs-carousel overflow-hidden  min-h-96 bg-white rounded-lg">
+                        <div
+                            class="hs-carousel-body top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                            @foreach ($capsulas as $capsula)
+                                <div id="capsulasSlide{{ $loop->iteration }}" class="hs-carousel-slide">
+                                    <div class="flex justify-center h-full">
+                                        <img src="{{ asset('storage/' . $capsula->resource) }}"
+                                            class="w-full object-cover h-72" />
+                                        @if (!($capsula->title == null && $capsula->description == null))
+                                            <div
+                                                class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
+                                                <h3 class="text-xl text-center pb-3">{{ $capsula->title }}</h3>
+                                                <p class="opacity-100 text-justify">{{ $capsula->description }}</p>
+                                            </div>
+                                        @endif
                                     </div>
-                                @endif
-                            </div>
-                            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#capsulasSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
-                                    class="btn btn-circle">❮</a>
-                                <a href="#capsulasSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
-                                    class="btn btn-circle">❯</a>
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+
+                    <button type="button"
+                        class="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-s-lg dark:text-white dark:hover:bg-white/10">
+                        <span class="text-2xl" aria-hidden="true">
+                            <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6"></path>
+                            </svg>
+                        </span>
+                        <span class="sr-only">Previous</span>
+                    </button>
+                    <button type="button"
+                        class="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-e-lg dark:text-white dark:hover:bg-white/10">
+                        <span class="sr-only">Next</span>
+                        <span class="text-2xl" aria-hidden="true">
+                            <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </span>
+                    </button>
+
+                    <div class="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
+                        @for ($i = 0; $i < count($capsulas); $i++)
+                            <span
+                                class="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
+                        @endfor
+                    </div>
                 </div>
+
             </div>
         </div>
-    </div>
 
-    <script>
-        let slideIndex1 = 0;
-        let slideIndex2 = 0;
-        let slideIndex3 = 0;
-        let slideIndex4 = 0;
-        let slideIndex5 = 0;
-
-        showSlides1();
-
-        function showSlides1() {
-            let i;
-            let slides = document.getElementsByClassName("carousel-item-banner");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex1++;
-            if (slideIndex1 > slides.length) {
-                slideIndex1 = 1
-            }
-            slides[slideIndex1 - 1].style.display = "block";
-            setTimeout(showSlides1, 2000); // Cambia la imagen cada 2 segundos
-        }
-
-        showSlides2();
-
-        function showSlides2() {
-            let i;
-            let slides = document.getElementsByClassName("carousel-item-menu");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex2++;
-            if (slideIndex2 > slides.length) {
-                slideIndex2 = 1
-            }
-            slides[slideIndex2 - 1].style.display = "block";
-            setTimeout(showSlides2, 2200); // Cambia la imagen cada 2 segundos
-        }
-
-        showSlides4();
-
-        function showSlides4() {
-            let i;
-            let slides = document.getElementsByClassName("carousel-item-menuEstres");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex4++;
-            if (slideIndex4 > slides.length) {
-                slideIndex4 = 1
-            }
-            slides[slideIndex4 - 1].style.display = "block";
-            setTimeout(showSlides4, 2600); // Cambia la imagen cada 2 segundos
-        }
-
-        showSlides5();
-
-        function showSlides5() {
-            let i;
-            let slides = document.getElementsByClassName("carousel-item-capsulas");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex5++;
-            if (slideIndex5 > slides.length) {
-                slideIndex5 = 1
-            }
-            slides[slideIndex5 - 1].style.display = "block";
-            setTimeout(showSlides5, 2800); // Cambia la imagen cada 2 segundos
-        }
-    </script>
-@endsection
+    @endsection

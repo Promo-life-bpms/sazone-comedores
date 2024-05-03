@@ -58,7 +58,7 @@
                 @endif
             </div>
             </div> --}}
-            <div class="collapse collapse-plus bg-stone-100 ">
+            <div class="collapse collapse-plus bg-stone-100 " >
                 <input type="radio" name="my-accordion-3"
                     @if (session('section')) {{ session('section') == 'advertisements' ? 'checked' : '' }} @endif />
                 <div class="collapse-title text-xl font-medium">
@@ -95,10 +95,10 @@
             </div>
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100">
-                    <input type="radio" name="my-accordion-4" />
+                    <input type="radio" name="my-accordion-3" 
                     @if (session('section'))
                         {{ session('section') == 'usuarios' ? 'checked' : '' }}
-                    @endif
+                    @endif/>
                     <div class="collapse-title text-xl font-medium">
                         Usuarios
                     </div>
@@ -109,10 +109,10 @@
             </div>
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
-                    <input type="radio" name="my-accordion-4" />
+                    <input type="radio" name="my-accordion-3"
                     @if (session('section'))
                         {{ session('section') == 'capsulas' ? 'checked' : '' }}
-                    @endif
+                    @endif/>
                     <div class="collapse-title text-xl font-medium">
                         Capsulas de Nutricion
                     </div>
@@ -123,10 +123,10 @@
             </div>
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
-                    <input type="radio" name="my-accordion-4" />
+                    <input type="radio" name="my-accordion-3"
                     @if (session('section'))
                         {{ session('section') == 'estres' ? 'checked' : '' }}
-                    @endif
+                    @endif/>
                     <div class="collapse-title text-xl font-medium">
                         Delimania del Mes
                     </div>
@@ -137,10 +137,10 @@
             </div>
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
-                    <input type="radio" name="my-accordion-4" />
+                    <input type="radio" name="my-accordion-3"
                     @if (session('section'))
                         {{ session('section') == 'tags' || session('section') == 'health' || session('section') == 'nutrition' ? 'checked' : '' }}
-                    @endif
+                    @endif/>
                     <div class="collapse-title text-xl font-medium">
                         Vida Saludable
                     </div>
@@ -154,10 +154,10 @@
 
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-base-200">
-                    <input type="radio" name="my-accordion-3" />
+                    <input type="radio" name="my-accordion-3"
                     @if (session('section'))
                         {{ session('section') == 'opcionesAvanzadas' ? 'checked' : '' }}
-                    @endif
+                    @endif/>
                     <div class="collapse-title text-xl font-medium">
                         Opciones avanzadas
                     </div>
