@@ -31,4 +31,29 @@ class DiningRoom extends Model
     {
         return $this->belongsToMany(Advertisement::class);
     }
+
+    public function tagnames()
+    {
+        return $this->belongsToMany(TagName::class);
+    }
+
+    public function nutritions()
+    {
+        return $this->belongsToMany(Nutrition::class);
+    }
+
+    public function healths()
+    {
+        return $this->belongsToMany(Health::class);
+    }
+
+    public function estres()
+    {
+        return $this->belongsToMany(Estre::class);
+    }
+
+    public function capsulas()
+    {
+        return $this->belongsToMany(Capsula::class);
+    }
 }

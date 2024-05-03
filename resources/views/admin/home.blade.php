@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="pt-16">
-        <img src="{{ asset('assets/SazoneLogo.png') }}" alt="Logo"
-            style="max-width: 350px; max-height: 500px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;">
+    <div class="pt-16 ">
         @if ($diningRoom->statusV == 1)
             <div class="flex justify-end gap-3">
                 @if (Auth::user()->hasRole(['master-admin', 'super-admin']))
@@ -60,7 +58,7 @@
                 @endif
             </div>
             </div> --}}
-            <div class="collapse collapse-plus bg-stone-100 ">
+            <div class="collapse collapse-plus bg-stone-100 " >
                 <input type="radio" name="my-accordion-3"
                     @if (session('section')) {{ session('section') == 'advertisements' ? 'checked' : '' }} @endif />
                 <div class="collapse-title text-xl font-medium">
@@ -96,26 +94,70 @@
                 </div>
             </div>
             <div class="mt-6">
-                <div class="collapse collapse-plus bg-stone-100  ">
-                    <input type="radio" name="my-accordion-4"/>
-                        @if (session('section')) {{ session('section') == 'usuarios' ? 'checked' : '' }} @endif 
+                <div class="collapse collapse-plus bg-stone-100">
+                    <input type="radio" name="my-accordion-3" 
+                    @if (session('section'))
+                        {{ session('section') == 'usuarios' ? 'checked' : '' }}
+                    @endif/>
                     <div class="collapse-title text-xl font-medium">
                         Usuarios
                     </div>
                     <div class="collapse-content overflow-x-auto">
                         @include('admin.sections.user.index')
-                        {{-- <div class="">
-                            {{ $users->links() }}
-                        </div> --}}
                     </div>
                 </div>
             </div>
             <div class="mt-6">
+                <div class="collapse collapse-plus bg-stone-100  ">
+                    <input type="radio" name="my-accordion-3"
+                    @if (session('section'))
+                        {{ session('section') == 'capsulas' ? 'checked' : '' }}
+                    @endif/>
+                    <div class="collapse-title text-xl font-medium">
+                        Capsulas de Nutricion
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.capsula.index')
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6">
+                <div class="collapse collapse-plus bg-stone-100  ">
+                    <input type="radio" name="my-accordion-3"
+                    @if (session('section'))
+                        {{ session('section') == 'estres' ? 'checked' : '' }}
+                    @endif/>
+                    <div class="collapse-title text-xl font-medium">
+                        Delimania del Mes
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.estre.index')
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6">
+                <div class="collapse collapse-plus bg-stone-100  ">
+                    <input type="radio" name="my-accordion-3"
+                    @if (session('section'))
+                        {{ session('section') == 'tags' || session('section') == 'health' || session('section') == 'nutrition' ? 'checked' : '' }}
+                    @endif/>
+                    <div class="collapse-title text-xl font-medium">
+                        Vida Saludable
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+                        @include('admin.sections.tags.index')
+                        @include('admin.sections.health.index')
+                        @include('admin.sections.nutrition.index')
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6">
                 <div class="collapse collapse-plus bg-base-200">
-                    <input type="radio" name="my-accordion-3" />
+                    <input type="radio" name="my-accordion-3"
                     @if (session('section'))
                         {{ session('section') == 'opcionesAvanzadas' ? 'checked' : '' }}
-                    @endif
+                    @endif/>
                     <div class="collapse-title text-xl font-medium">
                         Opciones avanzadas
                     </div>

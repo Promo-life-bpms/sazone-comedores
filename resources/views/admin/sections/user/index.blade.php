@@ -1,10 +1,30 @@
-<div class="flex justify-end items-center gap-8 overflow-x-auto">
+<div class="flex justify-between items-center gap-8 overflow-x-auto">
+    <form method="GET" action="{{ route('dining.show', ['diningRoom' => $diningRoom->id]) }}">
+        <div class="pt-2 relative mx-auto text-gray-600 w-full">
+            <input
+                class="border-2 border-gray-300 bg-white w-80 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                type="search" name="search" placeholder="Buscar usuario">
+            <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px"
+                    y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
+                    xml:space="preserve" width="512px" height="512px">
+                    <path
+                        d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                </svg>
+            </button>
+        </div>
+    </form>
     <div class="flex gap-3">
-        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_import_user.showModal()">Importar Archivo</button>
-        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_add_user.showModal()">Agregar Usuario</button>
-        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="sendAccessAll({{ $diningRoom->id }})">Enviar Accesos</button>
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
+            onclick="modal_import_user.showModal()">Importar Archivo</button>
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
+            onclick="modal_add_user.showModal()">Agregar Usuario</button>
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
+            onclick="sendAccessAll({{ $diningRoom->id }})">Enviar Accesos</button>
     </div>
 </div>
+
 
 <br>
 @if (session('success_user_create'))
@@ -38,7 +58,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ Str::ucfirst($user->profile->type) }}</td>
                     <td>
-                        @if($user->status == 1)
+                        @if ($user->status == 1)
                             Activo
                         @else
                             Inactivo
@@ -56,7 +76,12 @@
                                 </svg>
                             </button> --}}
                             <button class="btn btn-circle btn-ghost btn-xs" onclick="sendAccess({{ $user->id }})">
-                                <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Lock Reset</title><path d="M13.16,3.17A8.83,8.83,0,1,1,5.76,16.8l1.4-1.11a7.05,7.05,0,1,0-1-4.57H8.6L5.3,14.41,2,11.12H4.38a8.83,8.83,0,0,1,8.78-7.95m2.57,7.21a.81.81,0,0,1,.81.81v3.9a.82.82,0,0,1-.82.82H11a.79.79,0,0,1-.75-.82V11a.79.79,0,0,1,.74-.81V9.46a2.39,2.39,0,0,1,2.71-2.37A2.47,2.47,0,0,1,15.8,9.57v.81m-1.11-.84A1.22,1.22,0,0,0,14,8.4a1.29,1.29,0,0,0-1.86,1.09v.89h2.57Z"/></svg>
+                                <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <title>Lock Reset</title>
+                                    <path
+                                        d="M13.16,3.17A8.83,8.83,0,1,1,5.76,16.8l1.4-1.11a7.05,7.05,0,1,0-1-4.57H8.6L5.3,14.41,2,11.12H4.38a8.83,8.83,0,0,1,8.78-7.95m2.57,7.21a.81.81,0,0,1,.81.81v3.9a.82.82,0,0,1-.82.82H11a.79.79,0,0,1-.75-.82V11a.79.79,0,0,1,.74-.81V9.46a2.39,2.39,0,0,1,2.71-2.37A2.47,2.47,0,0,1,15.8,9.57v.81m-1.11-.84A1.22,1.22,0,0,0,14,8.4a1.29,1.29,0,0,0-1.86,1.09v.89h2.57Z" />
+                                </svg>
                             </button>
                             {{-- <button class="btn btn-circle btn-ghost btn-xs" onclick="editUser({{ $user->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -78,6 +103,7 @@
             @endforeach
         </tbody>
     </table>
+        {{ $users->links() }}
 </div>
 @include('admin.sections.user.modal-add')
 @include('admin.sections.user.modal-import')
@@ -151,9 +177,9 @@
         });
     }
 
-        async function updateUserStatusAndEmail(id) {
+    async function updateUserStatusAndEmail(id) {
         let url = "{{ route('users.updateUserStatusAndEmail') }}";
-        await axios.put(url, { 
+        await axios.put(url, {
             user_id: id
         }).then((response) => {
             console.log(response);
@@ -194,7 +220,7 @@
         });
     }
 
-        async function enviarAccesosATodos(id) {
+    async function enviarAccesosATodos(id) {
         let url = "{{ route('users.sendAccessAll') }}";
         await axios.post(url, {
             dining_id: id
@@ -215,7 +241,7 @@
                 icon: "error"
             });
         });
-    }   
+    }
 
     function sendAccess(id) {
         Swal.fire({
@@ -255,6 +281,6 @@
             });
         });
 
-        
-}
+
+    }
 </script>

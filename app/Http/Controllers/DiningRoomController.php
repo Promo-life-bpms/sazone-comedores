@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
+
 class DiningRoomController extends Controller
 {
 
@@ -38,12 +39,21 @@ class DiningRoomController extends Controller
         return view('super.pages.dining-room.index', compact('diningRooms'));
     }
 
-    public function show(DiningRoom $diningRoom)
+    public function show(DiningRoom $diningRoom, Request $request)
     {
-        $users = $diningRoom->users()->where('status', 1)->get();      
+        $search = $request->get('search');
+        $users = $diningRoom->users()
+            ->where('status', 1)
+            ->where('name', 'like', '%' . $search . '%')
+            ->paginate(15);
 
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
+        $tagnames = $diningRoom->tagnames;
+        $nutritions =  $diningRoom->nutritions;
+        $healths = $diningRoom->healths;
+        $estres = $diningRoom->estres;
+        $capsulas = $diningRoom->capsulas;
 
         $allFood = [];
         foreach ($menuDays as $day) {
@@ -53,7 +63,7 @@ class DiningRoomController extends Controller
             }
         }
 
-        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood'));
+        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths', 'estres', 'capsulas'));
     }
 
     public function store(Request $request)
@@ -240,9 +250,9 @@ class DiningRoomController extends Controller
     public function updateUserAdmin(Request $request)
     {
         $update_user = User::find($request->id);
-        
+
         UserHasDiningRooms::where('user_id', $update_user->id)->delete();
-    
+
         $diningRooms = DiningRoom::all();
         foreach ($diningRooms as $diningRoom) {
             if (isset($request->dining_rooms[$diningRoom->id])) {
@@ -252,23 +262,22 @@ class DiningRoomController extends Controller
                 $userHasDiningRoom->save();
             }
         }
-    
+
         return redirect()->back()->with('success', 'Relación usuario-comedor actualizada correctamente');
     }
-    
+
     public function updateDiningStatus(Request $request)
     {
         $dining_room_id = $request->dining_room_id;
-    
+
         // Busca la sala de comedor por su ID
         $diningRoom = DiningRoom::findOrFail($dining_room_id);
-    
+
         // Actualiza el campo 'statusV' a 0
         $diningRoom->update([
             'statusV' => 0,
         ]);
-    
+
         return response()->json(['success' => 'Comedor Inactivo'], 200);
     }
-    
 }

@@ -1,25 +1,72 @@
 <div class="navbar bg-base-100 shadow-lg">
     <div class="flex-1">
-        <a class="btn btn-ghost text-xl" href="{{ route('home') }}">
-            <img class="max-h-10" src="{{ asset($diningRoom->logo) }}" alt="">
-        </a>
+        <a class="btn btn-round btn-ghost" href="{{ route('home') }}">
+            <img class="max-h-11" class="rounded-full border w-10 h-10 object-cover"
+                src="{{ asset('assets/SazoneLogo.png') }}" alt=""></a>
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1 py-0 gap-x-3">
             @if (Auth::user()->hasRole(['admin']))
+                <li>
+                    <a class="flex flex-col p-0"
+                        href="{{ route('dining.show', ['diningRoom' => Auth::user()->profile->diningRoom->id]) }}">
+                        <div class="rounded-full w-10 h-10 object-cover bg-[#F6F6F6] flex justify-center items-center">
+                            <svg fill="#005A76" width="16px" height="16px" viewBox="0 0 1920 1920"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1556.611 1920c-54.084 0-108.168-20.692-149.333-61.857L740.095 1190.96c-198.162 41.712-406.725-19.269-550.475-163.019C14.449 852.771-35.256 582.788 65.796 356.27l32.406-72.696 390.194 390.193c24.414 24.305 64.266 24.305 88.68 0l110.687-110.686c11.824-11.934 18.283-27.59 18.283-44.34 0-16.751-6.46-32.516-18.283-44.34L297.569 84.207 370.265 51.8C596.893-49.252 866.875.453 1041.937 175.515c155.026 155.136 212.833 385.157 151.851 594.815l650.651 650.651c39.961 39.852 61.967 92.95 61.967 149.443 0 56.383-22.006 109.482-61.967 149.334l-138.275 138.385c-41.275 41.165-95.36 61.857-149.553 61.857Z"
+                                    fill-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="text-xs font-semibold">
+                            Mi comedor
+                        </p>
+                    </a>
+                </li>
+            @endif
             <li>
-                <a class="flex flex-col p-0" href="{{ route('dining.show', ['diningRoom'=>Auth::user()->profile->diningRoom->id]) }}">
+                <a class="flex flex-col p-0 " href="{{ route('nutricion-vida') }}">
                     <div class="rounded-full w-10 h-10 object-cover bg-[#F6F6F6] flex justify-center items-center">
-                        <svg fill="#005A76" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1556.611 1920c-54.084 0-108.168-20.692-149.333-61.857L740.095 1190.96c-198.162 41.712-406.725-19.269-550.475-163.019C14.449 852.771-35.256 582.788 65.796 356.27l32.406-72.696 390.194 390.193c24.414 24.305 64.266 24.305 88.68 0l110.687-110.686c11.824-11.934 18.283-27.59 18.283-44.34 0-16.751-6.46-32.516-18.283-44.34L297.569 84.207 370.265 51.8C596.893-49.252 866.875.453 1041.937 175.515c155.026 155.136 212.833 385.157 151.851 594.815l650.651 650.651c39.961 39.852 61.967 92.95 61.967 149.443 0 56.383-22.006 109.482-61.967 149.334l-138.275 138.385c-41.275 41.165-95.36 61.857-149.553 61.857Z" fill-rule="evenodd"/>
+                        <svg width="20" height="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.001 512.001"
+                            xml:space="preserve">
+                            <g>
+                                <g>
+                                    <rect x="106.017" y="159.533" width="179.701" height="33.391" />
+                                </g>
+                            </g>
+                            <g>
+                                <g>
+                                    <rect x="106.017" y="79.772" width="179.701" height="33.391" />
+                                </g>
+                            </g>
+                            <g>
+                                <g>
+                                    <path d="M486.118,253.418c-13.781-17.484-32.401-27.936-54.213-30.872c10.625-23.093,9.304-47.608,9.22-48.958l-0.909-14.727
+   l-14.726-0.908c-1.054-0.068-16.187-0.886-33.746,3.788V0.001H0v512h285.722v-1.154c4.727,0.759,9.53,1.154,14.397,1.154
+   c21.851,0,31.945-3.733,40.412-7.555c3.27-1.476,3.551-1.533,4.769-1.533c1.218,0,1.499,0.057,4.768,1.533
+   c8.466,3.823,18.56,7.555,40.412,7.555c40.622,0,76.936-26.832,99.631-73.619c14.115-29.096,21.888-63.464,21.889-96.774
+   C512.002,305.915,502.81,274.595,486.118,253.418z M379.176,205.117c7.175-7.174,17.907-10.802,27.3-12.518
+   c-1.715,9.403-5.343,20.13-12.515,27.303c-3.926,3.926-8.918,6.783-14.17,8.852c-0.206,0.08-0.408,0.161-0.613,0.242
+   c-4.169,1.588-8.485,2.689-12.548,3.43C368.226,223.376,371.699,212.596,379.176,205.117z M33.391,478.609V33.392h324.961v145.5
+   c-0.945,0.84-1.878,1.705-2.786,2.613c-3.619,3.619-6.671,7.559-9.274,11.656c-1.715-4.414-3.287-8.155-4.523-10.98l-30.593,13.38
+   c4.92,11.247,10.023,25.465,13.429,39.484c-8.019-4.154-17.363-8.259-27.582-10.5c-30.734-6.741-57.935-1.488-78.495,14.76
+   H106.022v33.391h86.634c-6.423,13.46-10.746,29.175-12.751,46.377h-73.883v33.391h72.867c0.777,15.594,3.203,31.262,7.143,46.376
+   h-80.01v33.391h91.621c0.919,2.073,1.863,4.127,2.845,6.15c7.648,15.766,16.848,29.256,27.233,40.228H33.391z M460.069,423.809
+   c-9.928,20.466-32.171,54.801-69.589,54.801c-16.491,0-21.9-2.442-26.671-4.597c-4.432-2.001-9.948-4.491-18.51-4.491
+   c-8.563,0-14.078,2.49-18.51,4.491c-4.773,2.155-10.18,4.597-26.672,4.597c-37.417,0-59.659-34.335-69.587-54.801
+   c-24.753-51.029-24.675-118.192,0.175-149.72c13.334-16.916,33.242-22.611,59.165-16.926c10.592,2.322,20.701,8.093,29.62,13.184
+   c9.7,5.537,17.361,9.909,25.809,9.909c8.447,0,16.109-4.373,25.808-9.909c8.921-5.091,19.031-10.862,29.62-13.184
+   c25.927-5.687,45.832,0.009,59.165,16.926C484.744,305.616,484.822,372.78,460.069,423.809z" fill="#005A76" />
+                                </g>
+                            </g>
                         </svg>
                     </div>
                     <p class="text-xs font-semibold">
-                        Mi comedor
+                        Vida Saludable
                     </p>
                 </a>
             </li>
-            @endif
             <li>
                 <a class="flex flex-col p-0" href="{{ route('acerca') }}">
                     <div class="rounded-full w-10 h-10 object-cover bg-[#F6F6F6] flex justify-center items-center">
@@ -77,3 +124,117 @@
         </ul>
     </div>
 </div>
+
+
+{{-- <div class="space-y-4">
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4 dark:bg-white">
+      <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
+        <div class="flex items-center justify-between">
+            <a class="btn btn-round btn-ghost" href="{{ route('home') }}">
+                <img class="max-h-11" class="rounded-full border w-10 h-10 object-cover"
+                    src="{{ asset('assets/SazoneLogo.png') }}" alt=""></a>
+                    
+          <div class="sm:hidden">
+            <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-lg border border-gray-700 font-medium bg-gray-800 text-gray-400 shadow-sm align-middle hover:bg-gray-700/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 transition-all text-sm dark:bg-white dark:hover:bg-gray-100 dark:border-gray-200 dark:text-gray-600 dark:focus:ring-offset-white" data-hs-collapse="#navbar-dark" aria-controls="navbar-dark" aria-label="Toggle navigation">
+              <svg class="hs-collapse-open:hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+            <svg class="hs-collapse-open:block hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="navbar-dark" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow">
+          <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
+            @if (Auth::user()->hasRole(['admin']))
+                    <a class="flex flex-col p-0"
+                        href="{{ route('dining.show', ['diningRoom' => Auth::user()->profile->diningRoom->id]) }}">
+                        <div class="rounded-full w-10 h-10 object-cover bg-[#F6F6F6] flex justify-center items-center">
+                            <svg fill="#005A76" width="16px" height="16px" viewBox="0 0 1920 1920"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1556.611 1920c-54.084 0-108.168-20.692-149.333-61.857L740.095 1190.96c-198.162 41.712-406.725-19.269-550.475-163.019C14.449 852.771-35.256 582.788 65.796 356.27l32.406-72.696 390.194 390.193c24.414 24.305 64.266 24.305 88.68 0l110.687-110.686c11.824-11.934 18.283-27.59 18.283-44.34 0-16.751-6.46-32.516-18.283-44.34L297.569 84.207 370.265 51.8C596.893-49.252 866.875.453 1041.937 175.515c155.026 155.136 212.833 385.157 151.851 594.815l650.651 650.651c39.961 39.852 61.967 92.95 61.967 149.443 0 56.383-22.006 109.482-61.967 149.334l-138.275 138.385c-41.275 41.165-95.36 61.857-149.553 61.857Z"
+                                    fill-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="text-xs font-semibold">
+                            Mi comedor
+                        </p>
+                    </a>
+            @endif
+            <a class="flex flex-col p-0 " href="{{ route('nutricion-vida') }}">
+                <div class="rounded-full w-10 h-10 object-cover bg-[#F6F6F6] flex justify-center items-center">
+                    <svg width="20" height="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.001 512.001"
+                        xml:space="preserve">
+                        <g>
+                            <g>
+                                <rect x="106.017" y="159.533" width="179.701" height="33.391" />
+                            </g>
+                        </g>
+                        <g>
+                            <g>
+                                <rect x="106.017" y="79.772" width="179.701" height="33.391" />
+                            </g>
+                        </g>
+                        <g>
+                            <g>
+                                <path d="M486.118,253.418c-13.781-17.484-32.401-27.936-54.213-30.872c10.625-23.093,9.304-47.608,9.22-48.958l-0.909-14.727
+l-14.726-0.908c-1.054-0.068-16.187-0.886-33.746,3.788V0.001H0v512h285.722v-1.154c4.727,0.759,9.53,1.154,14.397,1.154
+c21.851,0,31.945-3.733,40.412-7.555c3.27-1.476,3.551-1.533,4.769-1.533c1.218,0,1.499,0.057,4.768,1.533
+c8.466,3.823,18.56,7.555,40.412,7.555c40.622,0,76.936-26.832,99.631-73.619c14.115-29.096,21.888-63.464,21.889-96.774
+C512.002,305.915,502.81,274.595,486.118,253.418z M379.176,205.117c7.175-7.174,17.907-10.802,27.3-12.518
+c-1.715,9.403-5.343,20.13-12.515,27.303c-3.926,3.926-8.918,6.783-14.17,8.852c-0.206,0.08-0.408,0.161-0.613,0.242
+c-4.169,1.588-8.485,2.689-12.548,3.43C368.226,223.376,371.699,212.596,379.176,205.117z M33.391,478.609V33.392h324.961v145.5
+c-0.945,0.84-1.878,1.705-2.786,2.613c-3.619,3.619-6.671,7.559-9.274,11.656c-1.715-4.414-3.287-8.155-4.523-10.98l-30.593,13.38
+c4.92,11.247,10.023,25.465,13.429,39.484c-8.019-4.154-17.363-8.259-27.582-10.5c-30.734-6.741-57.935-1.488-78.495,14.76
+H106.022v33.391h86.634c-6.423,13.46-10.746,29.175-12.751,46.377h-73.883v33.391h72.867c0.777,15.594,3.203,31.262,7.143,46.376
+h-80.01v33.391h91.621c0.919,2.073,1.863,4.127,2.845,6.15c7.648,15.766,16.848,29.256,27.233,40.228H33.391z M460.069,423.809
+c-9.928,20.466-32.171,54.801-69.589,54.801c-16.491,0-21.9-2.442-26.671-4.597c-4.432-2.001-9.948-4.491-18.51-4.491
+c-8.563,0-14.078,2.49-18.51,4.491c-4.773,2.155-10.18,4.597-26.672,4.597c-37.417,0-59.659-34.335-69.587-54.801
+c-24.753-51.029-24.675-118.192,0.175-149.72c13.334-16.916,33.242-22.611,59.165-16.926c10.592,2.322,20.701,8.093,29.62,13.184
+c9.7,5.537,17.361,9.909,25.809,9.909c8.447,0,16.109-4.373,25.808-9.909c8.921-5.091,19.031-10.862,29.62-13.184
+c25.927-5.687,45.832,0.009,59.165,16.926C484.744,305.616,484.822,372.78,460.069,423.809z" fill="#005A76" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <p class="text-xs font-semibold">
+                    Vida Saludable
+                </p>
+            </a>
+            <a class="flex flex-col p-0" href="{{ route('acerca') }}">
+                <div class="rounded-full w-10 h-10 object-cover bg-[#F6F6F6] flex justify-center items-center">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8 0.5C3.86 0.5 0.5 3.86 0.5 8C0.5 12.14 3.86 15.5 8 15.5C12.14 15.5 15.5 12.14 15.5 8C15.5 3.86 12.14 0.5 8 0.5ZM8.75 11.75H7.25V7.25H8.75V11.75ZM8.75 5.75H7.25V4.25H8.75V5.75Z"
+                            fill="#005A76" />
+                    </svg>
+                </div>
+                <p class="text-xs font-semibold">
+                    Acerca de
+                </p>
+            </a>
+            <a class="flex flex-col p-0" href="{{ route('menu') }}">
+                <div class="rounded-full w-10 h-10 object-cover bg-[#F6F6F6] flex justify-center items-center">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M13.545 17.25H14.79C15.42 17.25 15.9375 16.7625 16.0125 16.1475L17.25 3.7875H13.5V0.75H12.0225V3.7875H8.295L8.52 5.5425C9.8025 5.895 11.0025 6.5325 11.7225 7.2375C12.8025 8.3025 13.545 9.405 13.545 11.205V17.25ZM0.75 16.5V15.75H12.0225V16.5C12.0225 16.905 11.685 17.25 11.25 17.25H1.5C1.0875 17.25 0.75 16.905 0.75 16.5ZM12.0225 11.25C12.0225 5.25 0.75 5.25 0.75 11.25H12.0225ZM0.75 12.75H12V14.25H0.75V12.75Z"
+                            fill="#005A76" />
+                    </svg>
+                </div>
+                <p class="text-xs font-semibold">
+                    Menú
+                </p>
+            </a>
+            <a class="flex flex-col p-0" href="{{ route('mi-cuenta') }}">
+                <img alt="logo" class="rounded-full border w-10 h-10 object-cover"
+                    src="{{ asset('assets/user.png') }}" />
+                <p class="text-xs font-semibold">
+                    Mi Cuenta
+                </p>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+</div> --}}

@@ -6,8 +6,13 @@ use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DiningRoomController;
+use App\Http\Controllers\HealthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MAntiEstresController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\NutriCapsController;
+use App\Http\Controllers\NutritionController;
+use App\Http\Controllers\TagsNameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +38,9 @@ Route::get('/cupones', [App\Http\Controllers\HomeController::class, 'cupones'])-
 Route::get('/menu', [App\Http\Controllers\HomeController::class, 'menu'])->name('menu');
 Route::get('/acerca-de', [App\Http\Controllers\HomeController::class, 'acerca'])->name('acerca');
 Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])->name('mi-cuenta');
+Route::get('/nutricion-vida', [App\Http\Controllers\HomeController::class, 'nutricionVida'])->name('nutricion-vida');
+
+Route::post('/store/commentary', [App\Http\Controllers\CommentaryController::class, 'storeCommentary'])->name('storeCommentary');
 
 
 Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');
@@ -50,6 +58,21 @@ Route::prefix('admin')->group(function () {
     Route::post('/anuncios', [AdvertisementController::class, 'store'])->name('anuncios.store');
     Route::post('/anuncios/editAdvertisement', [AdvertisementController::class, 'editAdvertisement'])->name('anuncios.editAdvertisement');
     Route::delete('/anuncios/delete', [AdvertisementController::class, 'deleteAdvertisement'])->name('anuncios.deleteAdvertisement');
+    Route::post('/tags', [TagsNameController::class, 'store'])->name('tags.store');
+    Route::post('/tags/editTag', [TagsNameController::class, 'editTag'])->name('tags.editTag');
+    Route::delete('/tags/delete', [TagsNameController::class, 'deleteTag'])->name('tags.deleteTag');
+    Route::post('/health', [HealthController::class, 'store'])->name('saludable.store');
+    Route::post('/health/editHealth', [HealthController::class, 'editHealth'])->name('saludable.editHealth');
+    Route::delete('/health/delete', [HealthController::class, 'deleteHealth'])->name('saludable.deleteHealth');
+    Route::post('/nutricion', [NutritionController::class, 'store'])->name('nutricion.store');
+    Route::post('/nutricion/editNutrition', [NutritionController::class, 'editNutrition'])->name('nutricion.editNutrition');
+    Route::delete('/nutricion/delete', [NutritionController::class, 'deleteNutrition'])->name('nutricion.deleteNutrition');
+    Route::post('/menuEstres', [MAntiEstresController::class, 'store'])->name('menuEstres.store');
+    Route::post('/menuEstres/editMenuEstres', [MAntiEstresController::class, 'editMenuEstres'])->name('menuEstres.editMenuEstres');
+    Route::delete('/menuEstres/delete', [MAntiEstresController::class, 'deleteMenuEstres'])->name('menuEstres.deleteMenuEstres');
+    Route::post('/nutriCapsulas', [NutriCapsController::class, 'store'])->name('nutriCapsulas.store');
+    Route::post('/nutriCapsulas/editMenuEstres', [NutriCapsController::class, 'editNutriCaps'])->name('nutriCapsulas.editNutriCaps');
+    Route::delete('/nutriCapsulas/delete', [NutriCapsController::class, 'deleteNutriCaps'])->name('nutriCapsulas.deleteNutriCaps');
 });
 
 Route::prefix('super')->group(function () {
