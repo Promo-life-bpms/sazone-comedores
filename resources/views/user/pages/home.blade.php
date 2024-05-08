@@ -398,7 +398,9 @@
 
             <div class="col-span-1">
                 <section class="bg-grey lg:py-12 antialiased">
-                    <img src="{{asset('assets/sugerencias.jpeg')}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
+                    <a href="https://forms.gle/rf6RDkpofTJXGn9c7" target="__blank">                    
+                        <img src="{{asset('assets/sugerencias.jpeg')}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
+                    </a>
 
                     <div class="w-full mx-auto px-4">
                         <div class="flex justify-between items-center mb-6">
