@@ -274,7 +274,7 @@
                 <p class="text-lg font-semibold mb-3"> Menu Anti-Estres</p>
                 <div id="video-container" class="w-full h-72 rounded-lg overflow-hidden relative">
                     <video src="{{ asset('assets/welcome.mp4') }}" alt="" controls
-                        class="w-full h-full object-cover"></video>
+                        class="w-full h-full object-cover" style="padding-left: 15px; padding-right:15px;"></video>
                 </div>
             </div>
         </div>
@@ -350,9 +350,9 @@
                         <img src="{{asset('assets/sugerencias.jpeg')}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
                     </a>
 
-                    <div class="w-full mx-auto px-4">
+                    <div class="w-full mx-auto px-4 mt-6">
                         <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o
+                            <h2 class="text-lg lg:text-xl font-bold text-gray-900 ">Sugerencias o
                                 Comentarios</h2>
                         </div>
                         <form class="mb-6">
