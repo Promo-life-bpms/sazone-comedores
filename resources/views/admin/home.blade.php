@@ -86,7 +86,7 @@
                     <input type="radio" name="my-accordion-3"
                         @if (session('section')) {{ session('section') == 'menu' ? 'checked' : '' }} @endif />
                     <div class="collapse-title text-xl font-medium">
-                        Menu
+                        Menu 
                     </div>
                     <div class="collapse-content overflow-x-auto">
                         @include('admin.sections.menu.index')

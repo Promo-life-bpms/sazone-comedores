@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DayFood;
 use App\Models\DiningRoom;
+use App\Models\MenuBanner;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserHasDiningRooms;
@@ -25,6 +26,7 @@ class DiningRoomController extends Controller
 
     public function index()
     {
+        
         $user = Auth::user();
 
         if ($user->hasRole('master-admin')) {
@@ -36,7 +38,9 @@ class DiningRoomController extends Controller
             $diningRooms = [];
         }
 
-        return view('super.pages.dining-room.index', compact('diningRooms'));
+        $menu_banner = MenuBanner::where('id','diningRoomIds')->get();
+
+        return view('super.pages.dining-room.index', compact('diningRooms','menu_banner'));
     }
 
     public function show(DiningRoom $diningRoom, Request $request)
@@ -46,7 +50,8 @@ class DiningRoomController extends Controller
             ->where('status', 1)
             ->where('name', 'like', '%' . $search . '%')
             ->paginate(15);
-
+        $menu_banner = MenuBanner::where('dining_room_id',$diningRoom->id)->get();        
+        
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
         $tagnames = $diningRoom->tagnames;
@@ -54,7 +59,7 @@ class DiningRoomController extends Controller
         $healths = $diningRoom->healths;
         $estres = $diningRoom->estres;
         $capsulas = $diningRoom->capsulas;
-
+    
         $allFood = [];
         foreach ($menuDays as $day) {
             foreach ($day->menus($diningRoom->id) as $food) {
@@ -63,7 +68,7 @@ class DiningRoomController extends Controller
             }
         }
 
-        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths', 'estres', 'capsulas'));
+        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths', 'estres', 'capsulas', 'menu_banner'));
     }
 
     public function store(Request $request)

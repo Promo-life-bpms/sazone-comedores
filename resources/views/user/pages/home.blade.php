@@ -179,7 +179,7 @@
         </div>
     </div>
 
-    <div class="grid md:grid-cols-3 grid-cols-1 mt-0 gap-5">
+    <div class="grid md:grid-cols-3 grid-cols-1 mt-0 gap-5 mt-5">
         <div class="col-span-1">
             <p class="text-lg font-semibold mb-3">Menu del dia</p>
             <div data-hs-carousel='{
@@ -190,18 +190,12 @@
                 <div class="hs-carousel overflow-hidden w-full min-h-96 bg-white rounded-lg">
                     <div
                         class="hs-carousel-body  top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-                        @if (count($day->menus($diningRoom->id)) > 0)
-                            @foreach ($day->menus($diningRoom->id) as $menu)
+                        @if (count($menu_banner) > 0)
+                            @foreach ($menu_banner as $menu)
                                 <div id="menuSlide{{ $loop->iteration }}" class="hs-carousel-slide">
                                     <div class="relative justify-center h-full">
-                                        <img src="{{ asset('storage/' . $menu->image) }}"
+                                        <img src="{{ asset('storage/' . $menu->src) }}"
                                             class="w-full object-cover h-72" />
-                                        <div
-                                            class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#7bdac22e] p-5 rounded-md">
-                                            <h3 class="text-center pb-3 text-white text-2xl font-bold">{{ $menu->name }}
-                                            </h3>
-                                            <h3 class="text-sm text-center pb-3 text-white">{{ $menu->time }}</h3>
-                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -317,37 +311,8 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-span-2">
-            <div class="col-span-1">
-                <section class="bg-grey  lg:py-12 antialiased">
-                    <div class="w-full max-w-2xl mx-auto px-4">
-                        <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o
-                                Comentarios</h2>
-                        </div>
-                        <form class="mb-6">
-                            <div
-                                class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                                <label for="comment" class="sr-only">Escribe tu Comentario o Sugerencia</label>
-                                <textarea id="comment" rows="6"
-                                    class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                                    placeholder="Write a comment..." required></textarea>
-                            </div>
-                            <div type="submit" class="flex justify-end gap-3">
-                                <button
-                                    class="btn text-white inline-flex items-center py-2.5 px-4 text-xs font-medium text-center"
-                                    style="background-color: rgb(48, 79, 157)">Enviar Comentarios</button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <div class="col-span-1">
-            <div class="col-span-1">
+            <div class="col-span-1 mt-5">
                 <p class="text-lg font-semibold mb-3">Capsulas de Nutricion</p>
                 <div data-hs-carousel='{"loadingClasses": "opacity-0", "isAutoPlay": true}' class="relative">
                     <div class="hs-carousel overflow-hidden  min-h-96 bg-white rounded-lg">
@@ -403,6 +368,41 @@
                 </div>
 
             </div>
+        </div>
+
+        <div class="col-span-2">
+
+            <div class="col-span-1">
+                <section class="bg-grey lg:py-12 antialiased">
+                    <img src="{{asset('assets/sugerencias.jpeg')}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
+
+                    <div class="w-full mx-auto px-4">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Sugerencias o
+                                Comentarios</h2>
+                        </div>
+                        <form class="mb-6">
+                            <div
+                                class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+                                <label for="comment" class="sr-only">Escribe tu Comentario o Sugerencia</label>
+                                <textarea id="comment" rows="6"
+                                    class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
+                                    placeholder="¡Compartenos tus comentarios!" required></textarea>
+                            </div>
+                            <div type="submit" class="flex justify-end gap-3">
+                                <button
+                                    class="btn text-white inline-flex items-center py-2.5 px-4 text-xs font-medium text-center"
+                                    style="background-color: rgb(48, 79, 157)">Enviar Comentarios</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+
+        <div class="col-span-1">
+          
         </div>
 
     @endsection

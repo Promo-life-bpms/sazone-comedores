@@ -1,8 +1,76 @@
-<div class="flex justify-end gap-3">
-    <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_import_food.showModal()">Importar Archivo</button>
-    <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_add_food.showModal()">Agregar Platillo</button>
-</div>
+<div class="flex justify-between">
+    <div></div>
+    <div class="flex justify-end gap-3">
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="my_modal_2.showModal()"> Portadas platillos</button>
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_import_food.showModal()">Importar Archivo</button>
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_add_food.showModal()">Agregar Platillo</button>
+    </div>
+  </div>
+
 <br>
+
+<dialog id="my_modal_2" class="modal">
+    <div class="modal-box">
+
+        <h3 class="font-bold text-lg">Portadas</h3>
+        <br>
+        <div class="bg-stone-50 p-4">
+            <form action="{{ route('storeMenuBanner') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                <input type="hidden" name="id" value="{{ $diningRoom->id }}">
+                <label for="src" class="block text-sm font-medium text-gray-700">Selecciona una imagen:</label>
+                <div class="mt-1 flex items-center justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                    <div class="space-y-1 text-center">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                            <path d="M24 14a1 1 0 0 0-1 1v10a1 1 0 0 0 2 0V15a1 1 0 0 0-1-1zM24 29c-.28 0-.53.11-.71.29l-4.58 4.57a1 1 0 0 0 1.42 1.42l4.58-4.57A1 1 0 0 0 24 29zm14-21H10c-1.1 0-2 .9-2 2v32c0 1.1.9 2 2 2h28c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM38 40H10V10h4v11c0 .55.45 1 1 1h11v14h12v-4c0-.55-.45-1-1-1zm-18-7h-8v-2h8v2zm0-4h-8v-2h8v2zm0-4h-8v-2h8v2zm10 8h-8v-2h8v2zm0-4h-8v-2h8v2z" />
+                        </svg>
+                        <div class="flex text-sm text-gray-600">
+                            <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                <span>Subir una imagen</span>
+                                <input id="file-upload" name="src" type="file" class="sr-only" accept="image/*" required>
+                            </label>
+                            <p class="pl-1">o arrástrala y suéltala aquí</p>
+                        </div>
+                        <p class="text-xs text-gray-500">Solo se permiten archivos de hasta 5 MB.</p>
+                    </div>
+                </div>
+                <br>
+                <button class="btn text-white" style="background-color: rgb(48, 79, 157)" type="submit">Subir imagen</button>
+            </form>
+        </div>
+    
+
+        <br>
+        @if($menu_banner->isNotEmpty())
+
+            <h4>Imágenes disponibles</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+                @foreach($menu_banner as $imagen)
+                    <div class="border border-gray-200 p-4 rounded-lg">
+                        <img src="{{ asset('storage/' . $imagen->src) }}" alt="Imagen del menú" class="mb-4" style="height: 100px; object-fit:cover; width:100%;">
+                        <form action="{{ route('deleteMenuBanner') }}" method="POST">
+                            <input type="hidden" name="id" value="{{ $imagen->id }}">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">Borrar</button>
+                        </form>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-xs">Sin imágenes disponibles</p>
+        @endif
+    
+        
+    </div>
+    
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+
 @if (session('success_menu'))
     <div role="alert" class="alert alert-success" id="alert_advertisment">
         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"

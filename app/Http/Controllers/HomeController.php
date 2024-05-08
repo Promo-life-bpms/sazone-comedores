@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DayFood;
 use App\Models\DiningRoom;
 use App\Models\Health;
+use App\Models\MenuBanner;
 use App\Models\Nutrition;
 use App\Models\TagName;
 use Illuminate\Http\Request;
@@ -55,8 +56,9 @@ class HomeController extends Controller
         $healths = $diningRoom->healths;
         $estres = $diningRoom->estres;
         $capsulas = $diningRoom->capsulas;
+        $menu_banner = MenuBanner::where('dining_room_id',$diningRoom->id)->get();        
 
-        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements','tagnames', 'nutritions', 'healths','estres','capsulas'));
+        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements','tagnames', 'nutritions', 'healths','estres','capsulas','menu_banner'));
     }
 
     public function cupones()
