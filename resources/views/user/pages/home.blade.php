@@ -338,9 +338,7 @@
 
             <div class="col-span-1 mt-5">
                 <p class="text-lg font-semibold mb-3">Horarios de servicio</p>
-                <div class="bg-white bg-stone-50 rounded-lg p-6 flex items-center justify-center" style="height: 300px;">
-                    <h2 class="text-xl font-semibold mb-4 text-center"></h2>
-                </div>
+                <img src="{{ asset('assets/horario.jpeg')}}" alt="" style="width:100%; height:250px;">
             </div>
         </div>
 
