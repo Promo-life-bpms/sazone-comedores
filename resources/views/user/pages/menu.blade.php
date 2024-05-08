@@ -37,7 +37,7 @@
                                                     class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                     <div class="md:w-6/12 lg:w-5/12">
                                                         <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
-                                                            src="{{ asset('storage/' . $menu->image) }}" />
+                                                            src="{{asset('assets/default_comida.jpg')}}"  />
                                                     </div>
                                                     <div
                                                         class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
@@ -68,7 +68,7 @@
                                                     class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                     <div class="md:w-6/12 lg:w-5/12">
                                                         <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
-                                                            src="{{ asset('storage/' . $menu->image) }}" />
+                                                            src="{{asset('assets/default_comida.jpg')}}"  />
                                                     </div>
                                                     <div
                                                         class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
@@ -99,7 +99,7 @@
                                                     class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                     <div class="md:w-6/12 lg:w-5/12">
                                                         <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
-                                                            src="{{ asset('storage/' . $menu->image) }}" />
+                                                            src="{{asset('assets/default_comida.jpg')}}"  />
                                                     </div>
                                                     <div
                                                         class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
@@ -129,7 +129,7 @@
                                                     class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                     <div class="md:w-6/12 lg:w-5/12">
                                                         <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
-                                                            src="{{ asset('storage/' . $menu->image) }}" />
+                                                            src="{{asset('assets/default_comida.jpg')}}"  />
                                                     </div>
                                                     <div
                                                         class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">

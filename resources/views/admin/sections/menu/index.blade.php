@@ -101,8 +101,11 @@
                 @foreach ($day->menus($diningRoom->id) as $food)
                     <div class="col-span-1">
                         <div class="rounded-xl relative cursor-pointer ">
-                            <img src="{{ asset('storage/' . $food->image) }}"
+                            
+                            <img src="{{asset('assets/default_comida.jpg')}}" 
                                 class="object-cover w-full h-40 rounded-xl" alt="">
+                          
+                            
                             <div class="absolute bottom-0 rounded-xl h-40 bg-[#00000075] w-full p-2 text-white">
                                 <div class="flex w-full justify-between flex-col h-full">
                                     {{-- Boton de eliminar y editar --}}
