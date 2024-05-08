@@ -90,7 +90,10 @@
                         @foreach (['Cena', 'Eventos especiales'] as $index => $time)
                             <div
                                 class="flex flex-col w-1/2 {{ $index > 0 ? 'ml-4' : '' }} border-gray-800 {{ $time == 'Cena' ? 'border-r-2 border-gray-800' : '' }}">
-                                <h1 class="text-3xl font-semibold mb-5">{{ $time }}</h1>
+
+                                @if($time != 'Eventos especiales')
+                                    <h1 class="text-3xl font-semibold mb-5">{{ $time }}</h1>
+                                @endif
                                 <div class="flex flex-col">
                                     @foreach ($day->menus($diningRoom->id) as $menu)
                                         @if ($menu->time == $time)
