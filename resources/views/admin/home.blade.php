@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-6">
+          {{--   <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
                     <input type="radio" name="my-accordion-3"
                     @if (session('section'))
@@ -120,7 +120,7 @@
                         @include('admin.sections.capsula.index')
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
                     <input type="radio" name="my-accordion-3"
@@ -145,9 +145,9 @@
                         Vida Saludable
                     </div>
                     <div class="collapse-content overflow-x-auto">
-                        @include('admin.sections.tags.index')
+                        {{--  @include('admin.sections.tags.index') --}}
                         @include('admin.sections.health.index')
-                        @include('admin.sections.nutrition.index')
+                        {{-- @include('admin.sections.nutrition.index') --}}
                     </div>
                 </div>
             </div>

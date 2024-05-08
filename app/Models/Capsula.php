@@ -16,6 +16,7 @@ class Capsula extends Model
         'vigencia',
     ];
     
+    public $table = 'capsulas';
 
     public function diningRooms()
     {
