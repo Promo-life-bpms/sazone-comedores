@@ -122,6 +122,7 @@ class HomeController extends Controller
         $estres = $diningRoom->estres;
         $capsulas = $diningRoom->capsulas;
         $allFood = [];
+        $menu_banner = MenuBanner::where('dining_room_id',$diningRoom->id)->get();        
 
         foreach ($menuDays as $day) {
             foreach ($day->menus($diningRoom->id) as $food) {
@@ -130,7 +131,7 @@ class HomeController extends Controller
             }
         }
 
-        return view('user.pages.home', compact('diningRoom', 'menuDays', 'allFood', 'advertisements','tagnames','nutritions','healths', 'users','day','estres','capsulas'));
+        return view('user.pages.home', compact('diningRoom', 'menuDays', 'allFood', 'advertisements','tagnames','nutritions','healths', 'users','day','estres','capsulas', 'menu_banner'));
     }
 
     public function nutricionVida()
