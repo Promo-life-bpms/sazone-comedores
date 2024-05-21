@@ -1,6 +1,22 @@
+<style>
+    @media only screen and (max-width: 500px) {
+        .texto-info {
+            font-size: 9px !important;
+        }
+
+        .logo-header {
+            padding-left: 0 !important;
+        }
+
+        .logo-header > img {
+            width: 60px !important;
+        }
+    }
+</style>
+
 <div class="navbar bg-base-100 shadow-lg">
     <div class="flex-1">
-        <a class="btn btn-round btn-ghost" href="{{ route('home') }}">
+        <a class="btn btn-round btn-ghost logo-header" href="{{ route('home') }}">
             <img class="max-h-11" class="rounded-full border w-10 h-10 object-cover"
                 src="{{ asset('assets/SazoneLogo.png') }}" alt=""></a>
     </div>
@@ -8,7 +24,7 @@
         <ul class="menu menu-horizontal px-1 py-0 gap-x-3">
             @if (Auth::user()->hasRole(['admin']))
                 <li>
-                    <a class="flex flex-col p-0"
+                    <a class="flex flex-col p-0" 
                         href="{{ route('dining.show', ['diningRoom' => Auth::user()->profile->diningRoom->id]) }}">
                         <div class="rounded-full w-10 h-10 object-cover bg-[#F6F6F6] flex justify-center items-center">
                             <svg fill="#005A76" width="16px" height="16px" viewBox="0 0 1920 1920"
@@ -18,7 +34,7 @@
                                     fill-rule="evenodd" />
                             </svg>
                         </div>
-                        <p class="text-xs font-semibold">
+                        <p class="texto-info text-xs font-semibold">
                             Mi comedor
                         </p>
                     </a>
@@ -62,7 +78,7 @@
                             </g>
                         </svg>
                     </div>
-                    <p class="text-xs font-semibold">
+                    <p class="texto-info text-xs font-semibold">
                         Vida Saludable
                     </p>
                 </a>
@@ -77,7 +93,7 @@
                                 fill="#005A76" />
                         </svg>
                     </div>
-                    <p class="text-xs font-semibold">
+                    <p class="texto-info text-xs font-semibold">
                         Acerca de
                     </p>
                 </a>
@@ -92,7 +108,7 @@
                                 fill="#005A76" />
                         </svg>
                     </div>
-                    <p class="text-xs font-semibold">
+                    <p class="texto-info text-xs font-semibold">
                         Menú
                     </p>
                 </a>
@@ -107,7 +123,7 @@
                                 fill="#005A76" />
                         </svg>
                     </div>
-                    <p class="text-xs font-semibold">
+                    <p class="texto-info text-xs font-semibold">
                         Cupones
                     </p>
                 </a>
@@ -116,7 +132,7 @@
                 <a class="flex flex-col p-0" href="{{ route('mi-cuenta') }}">
                     <img alt="logo" class="rounded-full border w-10 h-10 object-cover"
                         src="{{ asset('assets/user.png') }}" />
-                    <p class="text-xs font-semibold">
+                    <p class="texto-info text-xs font-semibold">
                         Mi Cuenta
                     </p>
                 </a>
