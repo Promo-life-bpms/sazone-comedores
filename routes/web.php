@@ -45,6 +45,7 @@ Route::post('/store/commentary', [App\Http\Controllers\CommentaryController::cla
 
 Route::post('/store/commentary', [App\Http\Controllers\MenuBannerController::class, 'store'])->name('storeMenuBanner');
 Route::post('/delete/commentary', [App\Http\Controllers\MenuBannerController::class, 'delete'])->name('deleteMenuBanner');
+Route::post('/reset/menu', [App\Http\Controllers\MenuController::class, 'resetMenu'])->name('resetMenu');
 
 
 

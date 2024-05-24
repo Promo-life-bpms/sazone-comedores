@@ -3,6 +3,14 @@
 @section('content')
     <div class="pt-16 ">
         @if ($diningRoom->statusV == 1)
+
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">¡Éxito!</strong>
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
+            @endif
+
             <div class="flex justify-end gap-3">
                 @if (Auth::user()->hasRole(['master-admin', 'super-admin']))
                     <a href="{{ route('dining.preview', $diningRoom) }}" class="btn text-white"

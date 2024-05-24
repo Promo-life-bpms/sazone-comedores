@@ -7,6 +7,7 @@ use App\Models\Menu;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -262,5 +263,20 @@ class MenuController extends Controller
 
         if ($contents) return $contents;
         else return FALSE;
+    }
+
+
+    public function resetMenu(Request $request) {
+
+        $foods =  Menu::where('dining_room_id',$request->dining_id)->get();
+
+        foreach($foods as $food){
+            DB::table('day_food_menu')->where('menu_id', $food->id)->delete();
+        }
+
+        Menu::where('dining_room_id', $request->dining_id)->delete();
+        
+        return redirect()->back()->with('success', 'Platillos eliminados correctametne');
+
     }
 }
