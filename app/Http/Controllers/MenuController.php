@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DiningRoom;
 use App\Models\Menu;
+use App\Models\MenuVisibility;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -277,6 +278,22 @@ class MenuController extends Controller
         Menu::where('dining_room_id', $request->dining_id)->delete();
         
         return redirect()->back()->with('success', 'Platillos eliminados correctametne');
+
+    }
+
+    public function setMenuVisible(Request $request) {
+        $fingMenuVisible = MenuVisibility::where('dining_room_id' , $request->dining_id)->first();
+
+        if($fingMenuVisible != null || $fingMenuVisible != []){
+            $fingMenuVisible->visible = 1;
+            $fingMenuVisible->save();
+        }else{
+            $createMenu = new MenuVisibility();
+            $createMenu->dining_room_id = $request->dining_id;
+            $createMenu->visible = 0;
+            $createMenu->save();
+        }
+        return redirect()->back()->with('success', 'Ahora los platillos estan disponibles');
 
     }
 }

@@ -3,6 +3,9 @@
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
+        <div class="text-center">
+            <p class="text-lg font-bold">Limpiar platillos</p>
+        </div>
         <div class="flex justify-center">
             <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="24" height="24" fill="white"/>

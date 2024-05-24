@@ -2,7 +2,7 @@
     <div></div>
     <div class="flex justify-end gap-3">
         <button class="btn text-white" style="background-color: red" onclick="modal_delete_food.showModal()"> Limpiar platillos</button>
-        <button class="btn text-white" style="background-color: green" onclick="my_modal_2.showModal()"> Habilitar platillos</button>
+        <button class="btn text-white" style="background-color: green" onclick="modal_visible_productos.showModal()"> Habilitar platillos</button>
 
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="my_modal_2.showModal()"> Portadas platillos</button>
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_import_food.showModal()">Importar Archivo</button>
@@ -14,7 +14,9 @@
 
 <dialog id="my_modal_2" class="modal">
     <div class="modal-box">
-
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
         <h3 class="font-bold text-lg">Portadas</h3>
         <br>
         <div class="bg-stone-50 p-4">
@@ -269,6 +271,7 @@
 @include('admin.sections.menu.modal-import')
 @include('admin.sections.menu.modal-edit')
 @include('admin.sections.menu.modal-delete-food')
+@include('admin.sections.menu.modal-visible-productos')
 
 <script>
     let allMenu = @json($allFood);
