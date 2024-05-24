@@ -332,6 +332,14 @@
                 <p>No hay un menú disponible</p>
             @endif
         </div>
+
+
+        <h1 class="text-3xl font-semibold mb-5">Servicios Especiales</h1>
+
+        <div class="mb-10">
+            <embed src="{{asset('assets/SAZONE_MENU_SERVICIOS_ESPECIALES.pdf')}}" width="100%" height="500" 
+                type="application/pdf">
+        </div>
     </div>
 
     <script>
