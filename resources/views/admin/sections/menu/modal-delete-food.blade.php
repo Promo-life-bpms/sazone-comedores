@@ -13,7 +13,7 @@
             </svg>
         </div>
 
-        <p class="text-lg">Advertencia, todos los platillos de este comedor serán eliminados, ¿Desea continuar?</p>
+        <p class="text-lg">Advertencia, todos los platillos de este comedor serán eliminados. ¿Desea continuar?</p>
         <p class="text-xs text-stone-700 mt-20">Nota: Los productos pueden ser cargados nuevamente posterior a este proceso</p>
 
         <form method="POST" action="{{ route('resetMenu') }}" enctype="multipart/form-data" class="space-y-3">

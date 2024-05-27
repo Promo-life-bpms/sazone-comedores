@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DayFood;
 use App\Models\DiningRoom;
 use App\Models\MenuBanner;
+use App\Models\MenuVisibility;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserHasDiningRooms;
@@ -52,6 +53,13 @@ class DiningRoomController extends Controller
             ->paginate(15);
         $menu_banner = MenuBanner::where('dining_room_id',$diningRoom->id)->get();        
         
+        $findMenuVisible = MenuVisibility::where('dining_room_id' , $diningRoom->id)->first();
+
+        $isMenuVisible = 0;
+        if($findMenuVisible != null || $findMenuVisible != [] ){
+            $isMenuVisible = $findMenuVisible->visible;
+        }
+
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
         $tagnames = $diningRoom->tagnames;
@@ -59,7 +67,7 @@ class DiningRoomController extends Controller
         $healths = $diningRoom->healths;
         $estres = $diningRoom->estres;
         $capsulas = $diningRoom->capsulas;
-    
+        $visibleMenu = $isMenuVisible;
         $allFood = [];
         foreach ($menuDays as $day) {
             foreach ($day->menus($diningRoom->id) as $food) {
@@ -68,7 +76,7 @@ class DiningRoomController extends Controller
             }
         }
 
-        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths', 'estres', 'capsulas', 'menu_banner'));
+        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths', 'estres', 'capsulas', 'menu_banner', 'isMenuVisible'));
     }
 
     public function store(Request $request)

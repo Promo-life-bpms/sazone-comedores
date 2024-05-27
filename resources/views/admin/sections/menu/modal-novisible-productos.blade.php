@@ -1,10 +1,10 @@
-<dialog id="modal_visible_productos" class="modal">
+<dialog id="modal_novisible_productos" class="modal">
     <div class="modal-box space-y-3 px-8">
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
         <div class="text-center">
-            <p class="text-lg font-bold">Habilitar menu</p>
+            <p class="text-lg font-bold">Deshabilitar menu</p>
         </div>
         <div class="flex justify-center">
             <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,9 +13,9 @@
         </div>
 
        
-        <p class="text-base">El menú será visible para todos. ¿Desea continuar?</p>
+        <p class="text-base">El menú <b>no</b> será visible para los comensales. ¿Desea continuar?</p>
 
-        <form method="POST" action="{{ route('setMenuVisible') }}" enctype="multipart/form-data" class="space-y-3">
+        <form method="POST" action="{{ route('setMenuInvisible') }}" enctype="multipart/form-data" class="space-y-3">
             @method('POST')
             @csrf
             <input type="hidden" name="dining_id" value="{{ $diningRoom->id }}" autocomplete="off">

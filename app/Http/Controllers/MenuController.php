@@ -290,10 +290,26 @@ class MenuController extends Controller
         }else{
             $createMenu = new MenuVisibility();
             $createMenu->dining_room_id = $request->dining_id;
-            $createMenu->visible = 0;
+            $createMenu->visible = 1;
             $createMenu->save();
         }
         return redirect()->back()->with('success', 'Ahora los platillos estan disponibles');
+
+    }
+
+    public function setMenuInvisible(Request $request) {
+        $fingMenuVisible = MenuVisibility::where('dining_room_id' , $request->dining_id)->first();
+
+        if($fingMenuVisible != null || $fingMenuVisible != []){
+            $fingMenuVisible->visible = 0;
+            $fingMenuVisible->save();
+        }else{
+            $createMenu = new MenuVisibility();
+            $createMenu->dining_room_id = $request->dining_id;
+            $createMenu->visible = 0;
+            $createMenu->save();
+        }
+        return redirect()->back()->with('success', 'Ahora los platillos estan ocultos para los comensales');
 
     }
 }

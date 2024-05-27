@@ -48,7 +48,7 @@ Route::post('/delete/commentary', [App\Http\Controllers\MenuBannerController::cl
 Route::post('/reset/menu', [App\Http\Controllers\MenuController::class, 'resetMenu'])->name('resetMenu');
 
 Route::post('/menu/visble', [App\Http\Controllers\MenuController::class, 'setMenuVisible'])->name('setMenuVisible');
-
+Route::post('/menu/invisible', [App\Http\Controllers\MenuController::class, 'setMenuInvisible'])->name('setMenuInvisible');
 
 
 Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');

@@ -2,7 +2,12 @@
     <div></div>
     <div class="flex justify-end gap-3">
         <button class="btn text-white" style="background-color: red" onclick="modal_delete_food.showModal()"> Limpiar platillos</button>
-        <button class="btn text-white" style="background-color: green" onclick="modal_visible_productos.showModal()"> Habilitar platillos</button>
+
+        @if($isMenuVisible == 0)
+            <button class="btn text-white" style="background-color: gray" onclick="modal_visible_productos.showModal()"> Habilitar platillos</button>
+        @else
+            <button class="btn text-white" style="background-color: green" onclick="modal_novisible_productos.showModal()"> Deshabilitar platillos</button>
+        @endif
 
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="my_modal_2.showModal()"> Portadas platillos</button>
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_import_food.showModal()">Importar Archivo</button>
@@ -272,6 +277,7 @@
 @include('admin.sections.menu.modal-edit')
 @include('admin.sections.menu.modal-delete-food')
 @include('admin.sections.menu.modal-visible-productos')
+@include('admin.sections.menu.modal-novisible-productos')
 
 <script>
     let allMenu = @json($allFood);
