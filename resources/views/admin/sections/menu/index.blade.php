@@ -10,7 +10,7 @@
         @endif
 
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="my_modal_2.showModal()"> Portadas platillos</button>
-        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_import_food.showModal()">Importar Archivo</button>
+        <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_import_food.showModal()">Importar Platillos</button>
         <button class="btn text-white" style="background-color: rgb(48, 79, 157)" onclick="modal_add_food.showModal()">Agregar Platillo</button>
     </div>
   </div>

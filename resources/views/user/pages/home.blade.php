@@ -240,8 +240,8 @@
                     </div>
 
                 @else
-                    <div class="w-full bg-stone-200 h-100 pt-30 pb-30 z-10 ">
-                            Menú no disponible
+                    <div class="w-full bg-stone-200 h-100 pt-30 pb-30 z-10 text-center">
+                        Platillos no disponibles
                     </div>
                 @endif
                 
