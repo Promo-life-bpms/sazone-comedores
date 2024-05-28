@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DayFood;
+use App\Models\DayFoodMenu;
 use App\Models\DiningRoom;
 use App\Models\Menu;
 use App\Models\MenuVisibility;
@@ -182,7 +184,71 @@ class MenuController extends Controller
 
             // Import to database with spreadsheet
             $spreadsheet = IOFactory::load('storage/' . $path . '/' . $nameFile);
-            $hojaActual = $spreadsheet->getSheet(0);
+
+            // Obtener la última hoja disponible
+            $sheetCount = $spreadsheet->getSheetCount();
+            $lastSheet = $spreadsheet->getSheet($sheetCount - 1);
+
+            // Obtener la última fila de la última hoja (opcional)
+            $highestRow = $lastSheet->getHighestRow();
+
+
+            $filas = [13,16,19,22,25,28,31,34,37,40,43,46,49,55,58,61,64,68];
+            $columnas = ['B', 'C', 'D','E','F','G','H'];
+
+           
+            foreach ($filas as $fila) {
+                foreach ($columnas as $columna) {
+                    $cellCoordinate = $columna . $fila; 
+                    $cellValue = $lastSheet->getCell($cellCoordinate)->getValue(); 
+            
+                    if(trim($cellValue) != ''){
+                       $createMenu = new Menu();
+                       $createMenu->name =  $cellValue;
+                       $createMenu->description = '';
+                       $createMenu->dining_room_id = $request->dining_id;
+                       $createMenu->time = 'Comida';
+                       $createMenu->image = '';
+                       $createMenu->save();
+            
+                       $day = 1;
+            
+                       switch($columna){
+                            case 'B':
+                                $day = 1;
+                                break;
+                            case 'C':
+                                $day = 2;
+                                break;
+                            case 'D':
+                                $day = 3;
+                                break;
+                            case 'E':
+                                $day = 4;
+                                break;
+                            case 'F':
+                                $day = 5;
+                                break;
+                            case 'G':
+                                $day = 5;
+                                break;
+                            case 'H':
+                                $day = 5;
+                                break;
+                       }
+            
+                       $createDayFoodMenu = new DayFoodMenu();
+                       $createDayFoodMenu->day_food_id = $day;
+                       $createDayFoodMenu->menu_id = $createMenu->id; // Use the id of the created Menu object
+                       $createDayFoodMenu->updated_at = now(); // Use appropriate datetime value
+                       $createDayFoodMenu->created_at = now(); // Use appropriate datetime value
+                       $createDayFoodMenu->save();
+                    }
+                }
+            }
+           
+
+           /*  $hojaActual = $spreadsheet->getSheet(0);
             $numeroMayorDeFila = $hojaActual->getHighestRow();
 
             $menus = [];
@@ -247,7 +313,7 @@ class MenuController extends Controller
             }
 
             // Delete dile
-            Storage::delete('public/' . $path . $nameFile);
+            Storage::delete('public/' . $path . $nameFile); */
             return redirect()->back()->with('success_import', 'Se ha importado correctamente el archivo');
         } else {
             return redirect()->back()->with('error', 'No se ha podido crear el platillo por un problema con el archivo');
