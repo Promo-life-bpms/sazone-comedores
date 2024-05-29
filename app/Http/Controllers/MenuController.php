@@ -202,18 +202,35 @@ class MenuController extends Controller
                     $cellCoordinate = $columna . $fila; 
                     $cellValue = $lastSheet->getCell($cellCoordinate)->getValue(); 
             
+                    $time = 'Comida';
+
+                    switch($fila){
+                        case 43:
+                            $time = 'Desayuno';
+                            break;
+                        case 46:
+                            $time = 'Desayuno';
+                            break;
+                        case 58:
+                            $time = 'Desayuno';
+                            break;
+                        case 68:
+                            $time = 'Desayuno';
+                            break;
+                    }
+
                     if(trim($cellValue) != ''){
                        $createMenu = new Menu();
                        $createMenu->name =  $cellValue;
                        $createMenu->description = '';
                        $createMenu->dining_room_id = $request->dining_id;
-                       $createMenu->time = 'Comida';
+                       $createMenu->time = $time;
                        $createMenu->image = '';
                        $createMenu->save();
             
                        $day = 1;
             
-                       switch($columna){
+                        switch($columna){
                             case 'B':
                                 $day = 1;
                                 break;
@@ -230,18 +247,20 @@ class MenuController extends Controller
                                 $day = 5;
                                 break;
                             case 'G':
-                                $day = 5;
+                                $day = 6;
                                 break;
                             case 'H':
-                                $day = 5;
+                                $day = 7;
                                 break;
-                       }
+                        }
+
+
             
                        $createDayFoodMenu = new DayFoodMenu();
                        $createDayFoodMenu->day_food_id = $day;
-                       $createDayFoodMenu->menu_id = $createMenu->id; // Use the id of the created Menu object
-                       $createDayFoodMenu->updated_at = now(); // Use appropriate datetime value
-                       $createDayFoodMenu->created_at = now(); // Use appropriate datetime value
+                       $createDayFoodMenu->menu_id = $createMenu->id; 
+                       $createDayFoodMenu->updated_at = now(); 
+                       $createDayFoodMenu->created_at = now(); 
                        $createDayFoodMenu->save();
                     }
                 }
@@ -314,7 +333,7 @@ class MenuController extends Controller
 
             // Delete dile
             Storage::delete('public/' . $path . $nameFile); */
-            return redirect()->back()->with('success_import', 'Se ha importado correctamente el archivo');
+            return redirect()->back()->with('success', 'Se ha importado correctamente el archivo');
         } else {
             return redirect()->back()->with('error', 'No se ha podido crear el platillo por un problema con el archivo');
         }
