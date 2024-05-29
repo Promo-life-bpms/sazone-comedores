@@ -188,7 +188,7 @@
           }'
                 class="relative">
 
-                @if($isMenuVisible == 1)
+                @if( isset($isMenuVisible) && $isMenuVisible == 1)
                     <div class="hs-carousel overflow-hidden w-full min-h-96 bg-white rounded-lg" style="width:100%;">
                         <div class="hs-carousel-body  top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
                             @if (count($menu_banner) > 0)

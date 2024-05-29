@@ -7,7 +7,7 @@
     <div class="pt-5">
         <h1 class="text-3xl font-semibold mb-5">Menu Semanal</h1>
 
-        @if($isMenuVisible == 1)
+        @if( isset($isMenuVisible) && $isMenuVisible == 1)
         
             <div class="tabs tabs-bordered hidden grid-cols-6 sm:grid flex-col">
                 
