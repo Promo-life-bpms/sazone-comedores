@@ -263,24 +263,16 @@
                 <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
                 <div data-hs-carousel='{"loadingClasses": "isAutoPlay": true}' class="relative">
                     <div class="hs-carousel overflow-hidden  min-h-96 rounded-lg">
-                        <div
-                            class="hs-carousel-body top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700">
-                            @foreach ($estres as $estre)
-                                <div id="capsulasSlide{{ $loop->iteration }}" class="hs-carousel-slide">
-                                    <div class="flex justify-center h-full">
-                                        <img src="{{ asset('storage/' . $estre->resource) }}"
-                                            class="w-full object-cover h-72" />
-                                        @if (!($estre->title == null && $estre->description == null))
-                                            <div
-                                                class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                                                <h3 class="text-xl text-center pb-3">{{ $estre->title }}</h3>
-                                                <p class="opacity-100 text-justify">{{ $estre->description }}</p>
-                                            </div>
-                                        @endif
-                                    </div>
+                        
+                        @foreach ($estres as $estre)
+                            <div id="capsulasSlide{{ $loop->iteration }}" class="hs-carousel-slide">
+                                <div class="flex justify-center h-full">
+                                    <img src="{{ asset('storage/' . $estre->resource) }}"
+                                        class="w-full object-cover h-72" />
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
+                   
                     </div>
 
                     <button type="button"
