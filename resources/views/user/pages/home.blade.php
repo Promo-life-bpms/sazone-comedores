@@ -201,40 +201,7 @@
                                     </div>
                                 @endforeach
                             @else
-        
-                                {{-- @if (count($day->menus($diningRoom->id)) > 0)
-                                    @foreach ($day->menus($diningRoom->id) as $menu)
-                                        <div id="menuSlide{{ $loop->iteration }}" class="carousel-item relative w-full">
-                                            <div class="relative w-full">
-                                                <img src="{{ asset('storage/' . $menu->image) }}" class="w-full object-cover h-72"  style="width: 100%;"/>
-                                                <div
-                                                    class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#7bdac22e] p-5 rounded-md">
-                                                    <h3 class="text-center pb-3 text-white text-2xl font-bold">{{ $menu->name }}</h3>
-                                                <h3 class="text-sm text-center pb-3 text-white">{{ $menu->time }}</h3>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                                <a href="#menuSlide{{ $loop->first ? $loop->count : $loop->iteration - 1 }}"
-                                                    class="btn btn-circle">❮</a>
-                                                <a href="#menuSlide{{ $loop->last ? 1 : $loop->iteration + 1 }}"
-                                                    class="btn btn-circle">❯</a>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    @else
-                                        <div id="menuSlideNot" class="carousel-item relative w-full border rounded-sm ">
-                                            <div class="relative w-full">
-                                                <img src="" class="w-full object-contain" />
-                                                <div
-                                                    class="absolute top-10 md:bottom-10 md:top-auto left-10 right-10 bg-[#6ef2d12e] p-5 rounded-md">
-                                                    <h3 class="text-xl text-center pb-3">Sin Menu Disponible</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                @endif --}}
-                                <p>Sin anuncios del menu disponibles</p>
-                                
+                               <p>Sin anuncios del menu disponibles</p>
                             @endif
                         </div>
                     </div>
@@ -291,10 +258,10 @@
         <div class="col-span-1">
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
-                <div data-hs-carousel='{"loadingClasses": "opacity-0", "isAutoPlay": true}' class="relative">
-                    <div class="hs-carousel overflow-hidden  min-h-96 bg-white rounded-lg">
+                <div data-hs-carousel='{"loadingClasses": "isAutoPlay": true}' class="relative">
+                    <div class="hs-carousel overflow-hidden  min-h-96 rounded-lg">
                         <div
-                            class="hs-carousel-body top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                            class="hs-carousel-body top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700">
                             @foreach ($estres as $estre)
                                 <div id="capsulasSlide{{ $loop->iteration }}" class="hs-carousel-slide">
                                     <div class="flex justify-center h-full">
