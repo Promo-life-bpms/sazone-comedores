@@ -256,6 +256,9 @@
         </div>
 
         <div class="col-span-1">
+
+            <br>
+            
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
                 <div data-hs-carousel='{"loadingClasses": "isAutoPlay": true}' class="relative">
