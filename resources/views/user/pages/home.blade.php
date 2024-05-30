@@ -247,7 +247,7 @@
 
         <div class="col-span-2">
             <div class="col-span-1">
-                <p class="text-lg font-semibold mb-3"> Menu Anti-Estres</p>
+                <p class="text-lg font-semibold mb-3 ml-4"> Menu Anti-Estres</p>
                 <div id="video-container" class="w-full h-72 rounded-lg overflow-hidden relative">
                     <video src="{{ asset('assets/welcome.mp4') }}" alt="" controls
                         class="w-full h-full object-cover" style="padding-left: 15px; padding-right:15px;"></video>
@@ -317,14 +317,15 @@
 
             <div class="col-span-1">
                 <section class="bg-grey lg:py-12 antialiased">
+                    <h2 class="text-lg lg:text-xl font-bold text-gray-900 ml-4">Encuesta de servicio</h2>
+                        <br>
                     <a href="https://forms.gle/rf6RDkpofTJXGn9c7" target="__blank">                    
                         <img src="{{asset('assets/sugerencias.jpeg')}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
                     </a>
 
-                    <div class="w-full mx-auto px-4 mt-6">
+                    {{-- <div class="w-full mx-auto px-4 mt-6">
                         <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-lg lg:text-xl font-bold text-gray-900 ">Sugerencias o
-                                Comentarios</h2>
+                           
                         </div>
                         <form class="mb-6">
                             <div
@@ -340,7 +341,7 @@
                                     style="background-color: rgb(48, 79, 157)">Enviar Comentarios</button>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </section>
             </div>
 
