@@ -224,7 +224,7 @@ class DiningRoomController extends Controller
     public function admins()
     {
         $userIds = UserRole::whereIn('role_id', [1, 2])->pluck('user_id')->toArray();
-        $users = User::whereIn('id', $userIds)->get();
+        $users = User::whereIn('id', $userIds)->where('status',1)->get();
         $diningRooms = DiningRoom::all();
         return view('super.pages.dining-room.users', compact('users', 'diningRooms'));
     }
