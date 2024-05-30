@@ -35,11 +35,11 @@
         <h1 style="font-size: 40px;">Valores</h1>
         <ul>
             <ul>
-                <li>Actitud ganadora: Nos esforzamos</li>
-                <li>Liderazgo involucrado:</li>
-                <li>Servicio sorprendente:</li>
-                <li>Espíritu colaborativo:</li>
-                <li>Atención al detalle:</li>
+                <li><b>Actitud ganadora:</b>  Nos esforzamos, nos atrevemos, nos reinventamos para exceder espectativas</li>
+                <li><b>Liderazgo involucrado:</b>  Inspiramos con el ejemplo y empoderamos a nuestra gente asumiendo nuevas responsabilidades y adueñandonos de los procesos siendo congruente con nuestras acciones.</li>
+                <li><b>Servicio sorprendente:</b>  Hacemos cada momento único para ofrecer experiencias inigualables y elevar la expectativa. </li>
+                <li><b>Espíritu colaborativo: </b>  Somos más fuertes cuando trabajamos juntos generando ideas en equipo para lograr mejores resultados.</li>
+                <li><b>Atención al detalle:</b> Cuidamos todo lo que hacemos porque cada detalle cuenta, trabajando de forma impecable y haciendo que las cosas sucedan.</li>
             </ul>
         </ul>
     </div>
