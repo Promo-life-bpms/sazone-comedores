@@ -46,20 +46,20 @@
                 </div>
             </div>
 
-            <div class="mt-6">
-                <div class="collapse collapse-plus bg-stone-100">
-                    <input type="radio" name="my-accordion-3" 
-                    @if (session('section'))
-                        {{ session('section') == 'usuarios' ? 'checked' : '' }}
-                    @endif/>
-                    <div class="collapse-title text-xl font-medium">
-                        Usuarios
-                    </div>
-                    <div class="collapse-content overflow-x-auto">
-                        @include('admin.sections.user.index')
+                <div class="mt-6">
+                    <div class="collapse collapse-plus bg-stone-100">
+                        <input type="radio" name="my-accordion-3" 
+                        @if (session('section'))
+                            {{ session('section') == 'usuarios' ? 'checked' : '' }}
+                        @endif/>
+                        <div class="collapse-title text-xl font-medium">
+                            Usuarios
+                        </div>
+                        <div class="collapse-content overflow-x-auto">
+                            @include('admin.sections.user.index')
+                        </div>
                     </div>
                 </div>
-            </div>
        
             <div class="mt-6">
                 <div class="collapse collapse-plus bg-stone-100  ">
@@ -89,6 +89,25 @@
                         {{--  @include('admin.sections.tags.index') --}}
                         @include('admin.sections.health.index')
                         {{-- @include('admin.sections.nutrition.index') --}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <div class="collapse collapse-plus bg-stone-100  ">
+                    <input type="radio" name="my-accordion-3"
+                    @if (session('section'))
+                        {{ session('section') == 'tags' || session('section') == 'health' || session('section') == 'nutrition' ? 'checked' : '' }}
+                    @endif/>
+                    <div class="collapse-title text-xl font-medium">
+                        Encuesta y Horario de Servicio
+                    </div>
+                    <div class="collapse-content overflow-x-auto">
+
+                        @include('admin.sections.quiz.index')
+                        <br>
+                        @include('admin.sections.services.index')
+
                     </div>
                 </div>
             </div>

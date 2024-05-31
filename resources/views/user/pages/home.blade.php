@@ -159,6 +159,7 @@
                             </div>
                         </div>
                     @endforeach
+
                 </div>
             </div>
 
@@ -338,25 +339,6 @@
                         <img src="{{asset('assets/sugerencias.jpeg')}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
                     </a>
 
-                    {{-- <div class="w-full mx-auto px-4 mt-6">
-                        <div class="flex justify-between items-center mb-6">
-                           
-                        </div>
-                        <form class="mb-6">
-                            <div
-                                class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
-                                <label for="comment" class="sr-only">Escribe tu Comentario o Sugerencia</label>
-                                <textarea id="comment" rows="6"
-                                    class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
-                                    placeholder="¡Compartenos tus comentarios!" required></textarea>
-                            </div>
-                            <div type="submit" class="flex justify-end gap-3">
-                                <button
-                                    class="btn text-white inline-flex items-center py-2.5 px-4 text-xs font-medium text-center"
-                                    style="background-color: rgb(48, 79, 157)">Enviar Comentarios</button>
-                            </div>
-                        </form>
-                    </div> --}}
                 </section>
             </div>
 
@@ -366,4 +348,4 @@
           
         </div>
 
-    @endsection
+@endsection

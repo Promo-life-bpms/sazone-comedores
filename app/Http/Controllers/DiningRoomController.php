@@ -6,7 +6,9 @@ use App\Models\DayFood;
 use App\Models\DiningRoom;
 use App\Models\MenuBanner;
 use App\Models\MenuVisibility;
+use App\Models\Quiz;
 use App\Models\Role;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\UserHasDiningRooms;
 use App\Models\UserRole;
@@ -76,7 +78,10 @@ class DiningRoomController extends Controller
             }
         }
 
-        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths', 'estres', 'capsulas', 'menu_banner', 'isMenuVisible'));
+        $allQuiz = Quiz::where('dining_room_id', $diningRoom->id)->get();
+        $allService = Service::where('dining_room_id', $diningRoom->id)->get();
+
+        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths', 'estres', 'capsulas', 'menu_banner', 'isMenuVisible', 'allQuiz', 'allService'));
     }
 
     public function store(Request $request)

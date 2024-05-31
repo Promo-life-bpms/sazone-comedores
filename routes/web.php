@@ -50,6 +50,12 @@ Route::post('/reset/menu', [App\Http\Controllers\MenuController::class, 'resetMe
 Route::post('/menu/visble', [App\Http\Controllers\MenuController::class, 'setMenuVisible'])->name('setMenuVisible');
 Route::post('/menu/invisible', [App\Http\Controllers\MenuController::class, 'setMenuInvisible'])->name('setMenuInvisible');
 
+Route::post('/quiz/create', [App\Http\Controllers\QuizController::class, 'storeQuiz'])->name('storeQuiz');
+Route::post('/quiz/delete', [App\Http\Controllers\QuizController::class, 'deleteQuiz'])->name('deleteQuiz');
+
+Route::post('/store/create', [App\Http\Controllers\QuizController::class, 'storeService'])->name('storeService');
+Route::post('/store/delete', [App\Http\Controllers\QuizController::class, 'deleteService'])->name('deleteService');
+
 
 Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');
 
