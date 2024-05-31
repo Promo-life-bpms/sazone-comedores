@@ -1,10 +1,9 @@
-@include('admin.sections.health.modal-edit')
-@include('admin.sections.health.modal-create')
+@include('admin.sections.quiz.modal-create')
 <div class="space-y-2">Encuesta de servicio
     <div class="flex justify-end gap-3">
         @if (Auth::user()->hasRole(['master-admin']))
             <button class="btn text-white" style="background-color: rgb(48, 79, 157)"
-                onclick="my_modal_saludable.showModal()">Agregar Encuesta</button>
+                onclick="modal_quiz_create.showModal()">Agregar Encuesta</button>
         @endif
     </div>
     
