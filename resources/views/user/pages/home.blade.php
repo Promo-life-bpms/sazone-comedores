@@ -129,6 +129,21 @@
             <div class="hs-carousel overflow-hidden w-full min-h-96 bg-white rounded-lg">
                 <div
                     class="hs-carousel-body  top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+
+                    <div class="hs-carousel-slide">
+                        <div class="flex justify-center h-full">
+                            <img src="{{ asset('assets/banner1.png') }}"
+                                class="w-full object-cover max-h-96" />
+                        </div>
+                    </div>
+
+                    <div class="hs-carousel-slide">
+                        <div class="flex justify-center h-full">
+                            <img src="{{ asset('assets/banner2.png') }}"
+                                class="w-full object-cover max-h-96" />
+                        </div>
+                    </div>
+
                     @foreach ($advertisements as $anuncio)
                         <div class="hs-carousel-slide">
                             <div class="flex justify-center h-full">
@@ -136,9 +151,9 @@
                                     class="w-full object-cover max-h-96" />
                                 @if (!($anuncio->title == null && $anuncio->description == null))
                                     <div class="self-center text-center p-5 rounded-md"
-                                        style="background-color: rgba(110, 242, 209, 0.18);">
-                                        <h3 class="text-xl pb-3">{{ $anuncio->title }}</h3>
-                                        <p class="opacity-100 text-justify">{{ $anuncio->description }}</p>
+                                        style="background-color: rgba(111, 111, 111, 0.18);">
+                                        <h3 class="text-xl pb-3 text-white">{{ $anuncio->title }}</h3>
+                                        <p class="opacity-100 text-justify text-white">{{ $anuncio->description }}</p>
                                     </div>
                                 @endif
                             </div>
