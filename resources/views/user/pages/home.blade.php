@@ -325,7 +325,13 @@
 
             <div class="col-span-1 mt-5">
                 <p class="text-lg font-semibold mb-3">Horarios de servicio</p>
-                <img src="{{ asset('assets/horario.jpeg')}}" alt="" style="width:100%; height:250px;">
+                @if(isset($service_time->img))
+                    <img src="{{ asset('storage/'.$service_time->img)}}" alt="" style="width:100%; height:250px;">
+                @else
+                    <div style="width:100%; height:250px;">
+                        <p>Horario de servicio no disponible</p>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -335,9 +341,18 @@
                 <section class="bg-grey lg:py-12 antialiased">
                     <h2 class="text-lg lg:text-xl font-bold text-gray-900 ml-4">Encuesta de servicio</h2>
                         <br>
-                    <a href="https://forms.gle/rf6RDkpofTJXGn9c7" target="__blank">                    
-                        <img src="{{asset('assets/sugerencias.jpeg')}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
-                    </a>
+
+                        @if(isset($service_time->img ))
+                            <a href="https://forms.gle/rf6RDkpofTJXGn9c7" target="__blank">   
+                                <img src="{{asset('assets/'. $quiz->img)}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
+                            </a>
+                        @else
+                            <div class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
+                                <p>Encuesta de servicio no disponible</p>
+                            </div>
+                        @endif
+
+                   
 
                 </section>
             </div>

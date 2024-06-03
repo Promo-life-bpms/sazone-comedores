@@ -9,15 +9,11 @@
             @method('POST')
             @csrf
 
-            <input type="hidden" name="id" value="{{ $diningRoom->id }}">
+            <input type="hidden" name="dining_room_id" value="{{ $diningRoom->id }}">
             <label for="src" class="block text-sm font-medium text-gray-700">Selecciona una imagen:</label>
             
-            <input name="src" type="file" accept="image/*" required>
-          
-            <br>
-            <label for="src" class="block text-sm font-medium text-gray-700">Coloca la url del cuestionario:</label>
+            <input type="file" name="file" class="file-input bg-custom-blue file-input-bordered w-full" accept="image/*" required>
 
-            <input type="text" name="url" id="">
             <div class="space-y-2">
                 <button class="btn text-white w-full uppercase" style="background-color: rgb(48, 79, 157)" type="submit">Guardar</button>
             </div>
