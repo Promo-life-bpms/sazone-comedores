@@ -344,7 +344,7 @@
 
                         @if(isset($service_time->img ))
                             <a href="https://forms.gle/rf6RDkpofTJXGn9c7" target="__blank">   
-                                <img src="{{asset('assets/'. $quiz->img)}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
+                                <img src="{{asset('storage/'. $quiz->img)}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
                             </a>
                         @else
                             <div class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
