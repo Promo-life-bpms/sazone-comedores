@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\DayFood;
 use App\Models\DiningRoom;
 use App\Models\Health;
+use App\Models\MenuBanner;
+use App\Models\MenuVisibility;
 use App\Models\Nutrition;
+use App\Models\Quiz;
+use App\Models\Service;
 use App\Models\TagName;
 use Illuminate\Http\Request;
 
@@ -55,8 +59,19 @@ class HomeController extends Controller
         $healths = $diningRoom->healths;
         $estres = $diningRoom->estres;
         $capsulas = $diningRoom->capsulas;
+        $menu_banner = MenuBanner::where('dining_room_id',$diningRoom->id)->get(); 
+        
+        $findMenuVisible = MenuVisibility::where('dining_room_id' , $diningRoom->id)->first();
 
-        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements','tagnames', 'nutritions', 'healths','estres','capsulas'));
+        $isMenuVisible = 0;
+        if($findMenuVisible != null || $findMenuVisible != [] ){
+            $isMenuVisible = $findMenuVisible->visible;
+        }
+
+        $quiz = Quiz::where('dining_room_id',$diningRoom->id)->get()->last();
+        $service_time = Service::where('dining_room_id',$diningRoom->id)->get()->last();
+
+        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements','tagnames', 'nutritions', 'healths','estres','capsulas','menu_banner', 'isMenuVisible', 'quiz', 'service_time' ));
     }
 
     public function cupones()
@@ -79,7 +94,15 @@ class HomeController extends Controller
         } else {
             $menuDays = DayFood::all();
             $diningRoom = auth()->user()->profile->diningRoom;
-            return view('user.pages.menu', compact('menuDays', 'diningRoom'));
+
+            $findMenuVisible = MenuVisibility::where('dining_room_id' , $diningRoom->id)->first();
+
+            $isMenuVisible = 0;
+            if($findMenuVisible != null || $findMenuVisible != [] ){
+                $isMenuVisible = $findMenuVisible->visible;
+            }
+
+            return view('user.pages.menu', compact('menuDays', 'diningRoom', 'isMenuVisible'));
         }
         
     }
@@ -112,6 +135,12 @@ class HomeController extends Controller
             return $user->status == 1;
         });
         // Obtén los datos que necesitas mostrar para la vista preliminar de un usuario normal
+
+        $today = date('l');
+        $today = strtolower($today);
+        $today = ucfirst($today);
+        $day = DayFood::where('slug', $today)->first();
+        
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
         $tagnames = $diningRoom->tagnames;
@@ -120,15 +149,20 @@ class HomeController extends Controller
         $estres = $diningRoom->estres;
         $capsulas = $diningRoom->capsulas;
         $allFood = [];
+        $menu_banner = MenuBanner::where('dining_room_id',$diningRoom->id)->get();        
+    
+        $findMenuVisible = MenuVisibility::where('dining_room_id' , $diningRoom->id)->first();
 
-        foreach ($menuDays as $day) {
-            foreach ($day->menus($diningRoom->id) as $food) {
-                $food->daysAvailable;
-                $allFood[] = $food;
-            }
+        $isMenuVisible = 0;
+        if($findMenuVisible != null || $findMenuVisible != [] ){
+            $isMenuVisible = $findMenuVisible->visible;
         }
 
-        return view('user.pages.home', compact('diningRoom', 'menuDays', 'allFood', 'advertisements','tagnames','nutritions','healths', 'users','day','estres','capsulas'));
+
+        $quiz = Quiz::where('dining_room_id',$diningRoom->id)->get()->last();
+        $service_time = Service::where('dining_room_id',$diningRoom->id)->get()->last();
+
+        return view('user.pages.home', compact('diningRoom', 'day', 'advertisements','tagnames', 'nutritions', 'healths','estres','capsulas','menu_banner', 'isMenuVisible', 'quiz', 'service_time' ));
     }
 
     public function nutricionVida()

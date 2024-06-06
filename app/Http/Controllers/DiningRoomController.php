@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\DayFood;
 use App\Models\DiningRoom;
+use App\Models\MenuBanner;
+use App\Models\MenuVisibility;
+use App\Models\Quiz;
 use App\Models\Role;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\UserHasDiningRooms;
 use App\Models\UserRole;
@@ -25,6 +29,7 @@ class DiningRoomController extends Controller
 
     public function index()
     {
+        
         $user = Auth::user();
 
         if ($user->hasRole('master-admin')) {
@@ -36,7 +41,9 @@ class DiningRoomController extends Controller
             $diningRooms = [];
         }
 
-        return view('super.pages.dining-room.index', compact('diningRooms'));
+        $menu_banner = MenuBanner::where('id','diningRoomIds')->get();
+
+        return view('super.pages.dining-room.index', compact('diningRooms','menu_banner'));
     }
 
     public function show(DiningRoom $diningRoom, Request $request)
@@ -46,6 +53,14 @@ class DiningRoomController extends Controller
             ->where('status', 1)
             ->where('name', 'like', '%' . $search . '%')
             ->paginate(15);
+        $menu_banner = MenuBanner::where('dining_room_id',$diningRoom->id)->get();        
+        
+        $findMenuVisible = MenuVisibility::where('dining_room_id' , $diningRoom->id)->first();
+
+        $isMenuVisible = 0;
+        if($findMenuVisible != null || $findMenuVisible != [] ){
+            $isMenuVisible = $findMenuVisible->visible;
+        }
 
         $menuDays = DayFood::all();
         $advertisements = $diningRoom->advertisements;
@@ -54,7 +69,7 @@ class DiningRoomController extends Controller
         $healths = $diningRoom->healths;
         $estres = $diningRoom->estres;
         $capsulas = $diningRoom->capsulas;
-
+        $visibleMenu = $isMenuVisible;
         $allFood = [];
         foreach ($menuDays as $day) {
             foreach ($day->menus($diningRoom->id) as $food) {
@@ -63,7 +78,10 @@ class DiningRoomController extends Controller
             }
         }
 
-        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths', 'estres', 'capsulas'));
+        $allQuiz = Quiz::where('dining_room_id', $diningRoom->id)->get();
+        $allService = Service::where('dining_room_id', $diningRoom->id)->get();
+
+        return view('admin.home', compact('diningRoom', 'menuDays', 'users', 'advertisements', 'allFood', 'tagnames', 'nutritions', 'healths', 'estres', 'capsulas', 'menu_banner', 'isMenuVisible', 'allQuiz', 'allService'));
     }
 
     public function store(Request $request)
@@ -211,7 +229,7 @@ class DiningRoomController extends Controller
     public function admins()
     {
         $userIds = UserRole::whereIn('role_id', [1, 2])->pluck('user_id')->toArray();
-        $users = User::whereIn('id', $userIds)->get();
+        $users = User::whereIn('id', $userIds)->where('status',1)->get();
         $diningRooms = DiningRoom::all();
         return view('super.pages.dining-room.users', compact('users', 'diningRooms'));
     }

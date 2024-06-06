@@ -9,6 +9,7 @@ use App\Http\Controllers\DiningRoomController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MAntiEstresController;
+use App\Http\Controllers\MenuBannerController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NutriCapsController;
 use App\Http\Controllers\NutritionController;
@@ -41,6 +42,19 @@ Route::get('/mi-cuenta', [App\Http\Controllers\HomeController::class, 'cuenta'])
 Route::get('/nutricion-vida', [App\Http\Controllers\HomeController::class, 'nutricionVida'])->name('nutricion-vida');
 
 Route::post('/store/commentary', [App\Http\Controllers\CommentaryController::class, 'storeCommentary'])->name('storeCommentary');
+
+Route::post('/store/commentary', [App\Http\Controllers\MenuBannerController::class, 'store'])->name('storeMenuBanner');
+Route::post('/delete/commentary', [App\Http\Controllers\MenuBannerController::class, 'delete'])->name('deleteMenuBanner');
+Route::post('/reset/menu', [App\Http\Controllers\MenuController::class, 'resetMenu'])->name('resetMenu');
+
+Route::post('/menu/visble', [App\Http\Controllers\MenuController::class, 'setMenuVisible'])->name('setMenuVisible');
+Route::post('/menu/invisible', [App\Http\Controllers\MenuController::class, 'setMenuInvisible'])->name('setMenuInvisible');
+
+Route::post('/quiz/create', [App\Http\Controllers\QuizController::class, 'storeQuiz'])->name('storeQuiz');
+Route::post('/quiz/delete', [App\Http\Controllers\QuizController::class, 'deleteQuiz'])->name('deleteQuiz');
+
+Route::post('/store/create', [App\Http\Controllers\QuizController::class, 'storeService'])->name('storeService');
+Route::post('/store/delete', [App\Http\Controllers\QuizController::class, 'deleteService'])->name('deleteService');
 
 
 Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');

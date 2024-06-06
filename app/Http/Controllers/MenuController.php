@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DayFood;
+use App\Models\DayFoodMenu;
 use App\Models\DiningRoom;
 use App\Models\Menu;
+use App\Models\MenuVisibility;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -180,7 +184,90 @@ class MenuController extends Controller
 
             // Import to database with spreadsheet
             $spreadsheet = IOFactory::load('storage/' . $path . '/' . $nameFile);
-            $hojaActual = $spreadsheet->getSheet(0);
+
+            // Obtener la última hoja disponible
+            $sheetCount = $spreadsheet->getSheetCount();
+            $lastSheet = $spreadsheet->getSheet($sheetCount - 1);
+
+            // Obtener la última fila de la última hoja (opcional)
+            $highestRow = $lastSheet->getHighestRow();
+
+
+            $filas = [13,16,19,22,25,28,31,34,37,40,43,46,49,55,58,61,64,68];
+            $columnas = ['B', 'C', 'D','E','F','G','H'];
+
+           
+            foreach ($filas as $fila) {
+                foreach ($columnas as $columna) {
+                    $cellCoordinate = $columna . $fila; 
+                    $cellValue = $lastSheet->getCell($cellCoordinate)->getValue(); 
+            
+                    $time = 'Comida';
+
+                    switch($fila){
+                        case 43:
+                            $time = 'Desayuno';
+                            break;
+                        case 46:
+                            $time = 'Desayuno';
+                            break;
+                        case 58:
+                            $time = 'Desayuno';
+                            break;
+                        case 68:
+                            $time = 'Desayuno';
+                            break;
+                    }
+
+                    if(trim($cellValue) != ''){
+                       $createMenu = new Menu();
+                       $createMenu->name =  $cellValue;
+                       $createMenu->description = '';
+                       $createMenu->dining_room_id = $request->dining_id;
+                       $createMenu->time = $time;
+                       $createMenu->image = '';
+                       $createMenu->save();
+            
+                       $day = 1;
+            
+                        switch($columna){
+                            case 'B':
+                                $day = 1;
+                                break;
+                            case 'C':
+                                $day = 2;
+                                break;
+                            case 'D':
+                                $day = 3;
+                                break;
+                            case 'E':
+                                $day = 4;
+                                break;
+                            case 'F':
+                                $day = 5;
+                                break;
+                            case 'G':
+                                $day = 6;
+                                break;
+                            case 'H':
+                                $day = 7;
+                                break;
+                        }
+
+
+            
+                       $createDayFoodMenu = new DayFoodMenu();
+                       $createDayFoodMenu->day_food_id = $day;
+                       $createDayFoodMenu->menu_id = $createMenu->id; 
+                       $createDayFoodMenu->updated_at = now(); 
+                       $createDayFoodMenu->created_at = now(); 
+                       $createDayFoodMenu->save();
+                    }
+                }
+            }
+           
+
+           /*  $hojaActual = $spreadsheet->getSheet(0);
             $numeroMayorDeFila = $hojaActual->getHighestRow();
 
             $menus = [];
@@ -245,8 +332,8 @@ class MenuController extends Controller
             }
 
             // Delete dile
-            Storage::delete('public/' . $path . $nameFile);
-            return redirect()->back()->with('success_import', 'Se ha importado correctamente el archivo');
+            Storage::delete('public/' . $path . $nameFile); */
+            return redirect()->back()->with('success', 'Se ha importado correctamente el archivo');
         } else {
             return redirect()->back()->with('error', 'No se ha podido crear el platillo por un problema con el archivo');
         }
@@ -262,5 +349,52 @@ class MenuController extends Controller
 
         if ($contents) return $contents;
         else return FALSE;
+    }
+
+
+    public function resetMenu(Request $request) {
+
+        $foods =  Menu::where('dining_room_id',$request->dining_id)->get();
+
+        foreach($foods as $food){
+            DB::table('day_food_menu')->where('menu_id', $food->id)->delete();
+        }
+
+        Menu::where('dining_room_id', $request->dining_id)->delete();
+        
+        return redirect()->back()->with('success', 'Platillos eliminados correctametne');
+
+    }
+
+    public function setMenuVisible(Request $request) {
+        $fingMenuVisible = MenuVisibility::where('dining_room_id' , $request->dining_id)->first();
+
+        if($fingMenuVisible != null || $fingMenuVisible != []){
+            $fingMenuVisible->visible = 1;
+            $fingMenuVisible->save();
+        }else{
+            $createMenu = new MenuVisibility();
+            $createMenu->dining_room_id = $request->dining_id;
+            $createMenu->visible = 1;
+            $createMenu->save();
+        }
+        return redirect()->back()->with('success', 'Ahora los platillos estan disponibles');
+
+    }
+
+    public function setMenuInvisible(Request $request) {
+        $fingMenuVisible = MenuVisibility::where('dining_room_id' , $request->dining_id)->first();
+
+        if($fingMenuVisible != null || $fingMenuVisible != []){
+            $fingMenuVisible->visible = 0;
+            $fingMenuVisible->save();
+        }else{
+            $createMenu = new MenuVisibility();
+            $createMenu->dining_room_id = $request->dining_id;
+            $createMenu->visible = 0;
+            $createMenu->save();
+        }
+        return redirect()->back()->with('success', 'Ahora los platillos estan ocultos para los comensales');
+
     }
 }
