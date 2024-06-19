@@ -6,7 +6,9 @@
     </div>
     <div class="pt-5">
         <h1 class="text-3xl font-semibold mb-5">Menu Semanal</h1>
-
+        @php
+            $frutas = ['fruta', 'manzana', 'banana', 'naranja', 'pera', 'uva', 'mango', 'piña', 'sandía', 'melon', 'kiwi', 'fresa', 'cereza', 'papaya', 'limón', 'mandarina', 'durazno', 'ciruela', 'guayaba', 'granada'];
+        @endphp 
         @if( isset($isMenuVisible) && $isMenuVisible == 1)
         
             <div class="tabs tabs-bordered hidden grid-cols-6 sm:grid flex-col">
@@ -34,6 +36,12 @@
                                     <h1 class="text-3xl font-semibold mb-5">{{ $time }}</h1>
                                     <div class="flex flex-col">
                                         @foreach ($day->menus($diningRoom->id) as $menu)
+                                            @php
+                                                $platilloLower = strtolower(str_replace(' ', '', $menu->name));
+                                            @endphp
+
+
+
                                             @if ($menu->time == $time)
                                                 <div class="mb-6 min-h-40"> <!-- Establecer una altura fija para la tarjeta -->
                                                     <div
@@ -64,19 +72,36 @@
                                     class="flex flex-col w-1/2 {{ $index > 0 ? 'ml-4' : '' }} border-gray-800 {{ $time == 'desayuno' ? 'border-r-2 border-gray-800' : '' }}">
                                     <h1 class="text-3xl font-semibold mb-5"></h1>
                                     <div class="flex flex-col">
+
                                         @foreach ($day->menus($diningRoom->id) as $menu)
+
+                                            @php
+                                                $platilloLower = strtolower(str_replace(' ', '', $menu->name));
+                                            @endphp
+
+
                                             @if ($menu->time == $time)
                                                 <div class="mb-6 min-h-40"> <!-- Establecer una altura fija para la tarjeta -->
                                                     <div
                                                         class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
-                                                        <div class="md:w-6/12 lg:w-5/12">
-                                                            <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
-                                                                src="{{asset('assets/default_comida.jpg')}}"  />
-                                                        </div>
+                                                
+                                                    <div class="md:w-6/12 lg:w-5/12">
+                                                    @if (Illuminate\Support\Str::contains($platilloLower, $frutas))
+                                                        <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
+                                                            src="{{asset('assets/frutas.jpg')}}"  />
+                                                                
+                                                    @else
+                                                        <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
+                                                            src="{{asset('assets/default_comida.jpg')}}"  />
+                                                    @endif
+                                                        
+                                                    </div>
+                                              
+                                                        
                                                         <div
                                                             class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
                                                             <h2 class="text-xl font-semibold text-secondary mb-2">
-                                                                {{ $menu->name }}</h2>
+                                                                {{ $menuNameLower }}</h2>
                                                             <p class="text-gray-700 leading-snug overflow-hidden line-clamp-3">
                                                                 {{ $menu->description }}</p>
                                                             <!-- Utilizar line-clamp-3 para limitar a 3 líneas de texto -->
@@ -99,13 +124,22 @@
                                     @endif
                                     <div class="flex flex-col">
                                         @foreach ($day->menus($diningRoom->id) as $menu)
+                                            @php
+                                                $platilloLower = strtolower(str_replace(' ', '', $menu->name));
+                                            @endphp
                                             @if ($menu->time == $time)
                                                 <div class="mb-6 min-h-40">
                                                     <div
                                                         class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                         <div class="md:w-6/12 lg:w-5/12">
+                                                        @if (Illuminate\Support\Str::contains($platilloLower, $frutas))
+                                                            <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
+                                                                src="{{asset('assets/frutas.jpg')}}"  />
+                                                                    
+                                                        @else
                                                             <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
                                                                 src="{{asset('assets/default_comida.jpg')}}"  />
+                                                        @endif
                                                         </div>
                                                         <div
                                                             class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
@@ -129,13 +163,22 @@
                                     <h1 class="text-3xl font-semibold mb-5"></h1>
                                     <div class="flex flex-col">
                                         @foreach ($day->menus($diningRoom->id) as $menu)
+                                            @php
+                                                $platilloLower = strtolower(str_replace(' ', '', $menu->name));
+                                            @endphp
                                             @if ($menu->time == $time)
                                                 <div class="mb-6 min-h-40">
                                                     <div
                                                         class="md:flex md:items-stretch md:shadow-lg md:bg-white md:rounded-lg">
                                                         <div class="md:w-6/12 lg:w-5/12">
-                                                            <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
-                                                                src="{{asset('assets/default_comida.jpg')}}"  />
+                                                            @if (Illuminate\Support\Str::contains($platilloLower, $frutas))
+                                                                <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
+                                                                    src="{{asset('assets/frutas.jpg')}}"  />
+                                                                        
+                                                            @else
+                                                                <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
+                                                                    src="{{asset('assets/default_comida.jpg')}}"  />
+                                                            @endif
                                                         </div>
                                                         <div
                                                             class="md:w-6/12 lg:w-7/12 bg-white p-4 md:rounded-lg md:rounded-l-none">
@@ -194,6 +237,9 @@
                                 @endforeach
 
                                 @foreach ($day->menus($diningRoom->id) as $menu)
+                                    @php
+                                        $platilloLower = strtolower(str_replace(' ', '', $menu->name));
+                                    @endphp
                                     @if ($menu->time == 'desayuno')
                                         <div class="w-full max-w-4xl mx-auto h-52">
                                             <div class=" text-justify relative py-8">
@@ -202,8 +248,14 @@
                                                     {{ $menu->description }}
                                                 </div>
                                                 <div class="absolute top-0 bottom-10  -z-50">
-                                                    <img src="{{ asset('storage/' . $menu->image) }}" alt=""
-                                                        class="w-50px h-60 object-cover rounded-lg">
+                                                    @if (Illuminate\Support\Str::contains($platilloLower, $frutas))
+                                                        <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
+                                                            src="{{asset('assets/frutas.jpg')}}"  />
+                                                                
+                                                    @else
+                                                        <img class="rounded-lg md:rounded-r-none w-full h-full object-cover"
+                                                            src="{{asset('assets/default_comida.jpg')}}"  />
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -290,44 +342,9 @@
                                     @endif
                                 @endforeach
 
-                                <h1 class="text-3xl mb-5">Eventos Especiales</h1>
-                                @foreach ($day->menus($diningRoom->id) as $menu)
-                                    @if ($menu->time == 'Eventos especiales')
-                                        <div class="w-full max-w-4xl mx-auto h-52">
-                                            <div class=" text-justify relative py-8">
-                                                <div class="bg-white bg-opacity-50 p-5 shadow-md top-100">
-                                                    <p class="text-lg font-semibold ">{{ $menu->name }}</p>
-                                                    {{ $menu->description }}
-                                                </div>
-                                                <div class="absolute top-0 bottom-500  -z-50">
-                                                    <img src="{{ asset('storage/' . $menu->image) }}" alt=""
-                                                        class="w-50px h-60 object-cover rounded-lg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br><br>
-                                    @endif
-                                @endforeach
+                                
 
-                                @foreach ($day->menus($diningRoom->id) as $menu)
-                                    @if ($menu->time == 'eventos especiales')
-                                        <div class="w-full max-w-4xl mx-auto h-52">
-                                            <div class=" text-justify relative py-8">
-                                                <div class="bg-white bg-opacity-50 p-5 shadow-md top-100">
-                                                    <p class="text-lg font-semibold ">{{ $menu->name }}</p>
-                                                    {{ $menu->description }}
-                                                </div>
-                                                <div class="absolute top-0 bottom-500  -z-50">
-                                                    <img src="{{ asset('storage/' . $menu->image) }}" alt=""
-                                                        class="w-50px h-60 object-cover rounded-lg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br><br>
-                                    @endif
-                                @endforeach
+                            
                             </div>
                         </div>
                     @endforeach
