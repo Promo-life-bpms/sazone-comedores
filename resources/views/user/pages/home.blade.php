@@ -278,17 +278,15 @@
             <div class="col-span-1">
                 <p class="text-lg font-semibold mb-3">Delimania del Mes</p>
                 <div data-hs-carousel='{"loadingClasses": "isAutoPlay": true}' class="relative">
-                    <div class="hs-carousel overflow-hidden  min-h-96 rounded-lg">
-                        
+                    <div class="hs-carousel overflow-hidden min-h-96 rounded-lg">
                         @foreach ($estres as $estre)
                             <div id="capsulasSlide{{ $loop->iteration }}" class="hs-carousel-slide">
                                 <div class="flex justify-center h-full">
                                     <img src="{{ asset('storage/' . $estre->resource) }}"
-                                        class="w-full object-cover h-72" />
+                                        class="w-full max-h-96 sm:object-contain md:object-cover p-2" />
                                 </div>
                             </div>
                         @endforeach
-                   
                     </div>
 
                     <button type="button"
@@ -324,40 +322,35 @@
             </div>
 
             <div class="col-span-1 mt-5">
-                <p class="text-lg font-semibold mb-3">Horarios de servicio</p>
-                @if(isset($service_time->img))
-                    <img src="{{ asset('storage/'.$service_time->img)}}" alt="" style="width:100%; height:250px;">
-                @else
-                    <div style="width:100%; height:250px;">
-                        <p>Horario de servicio no disponible</p>
-                    </div>
-                @endif
-            </div>
+            <p class="text-lg font-semibold mb-3">Horarios de servicio</p>
+            @if(isset($service_time->img))
+                <img src="{{ asset('storage/'.$service_time->img) }}" alt="" class="w-full max-h-64 sm:object-contain md:object-cover p-2">
+            @else
+                <div class="w-full h-64 flex items-center justify-center bg-gray-200 p-2">
+                    <p>Horario de servicio no disponible</p>
+                </div>
+            @endif
+        </div>
         </div>
 
-        <div class="col-span-2">
-
-            <div class="col-span-1">
-                <section class="bg-grey lg:py-12 antialiased">
-                    <h2 class="text-lg lg:text-xl font-bold text-gray-900 ml-4">Encuesta de servicio</h2>
+        <div class="col-span-2 w-full max-h-96">
+                <div class="col-span-1 w-full max-h-96">
+                    <section class="bg-grey lg:py-12 antialiased">
+                        <h2 class="text-lg lg:text-xl font-bold text-gray-900 ml-4">Encuesta de servicio</h2>
                         <br>
 
-                        @if(isset($service_time->img ))
+                        @if(isset($service_time->img))
                             <a href="https://forms.gle/rf6RDkpofTJXGn9c7" target="__blank">   
-                                <img src="{{asset('storage/'. $quiz->img)}}" alt="" class="w-full" style="height: 400px; object-fit:cover; padding-left:15px;padding-right:15px;">
+                                <img src="{{ asset('storage/' . $quiz->img) }}" alt="" class="w-full sm:object-contain md:object-cover max-h-96 p-4">
                             </a>
                         @else
-                            <div class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
+                            <div class="w-full h-96 flex items-center justify-center bg-gray-200 p-4">
                                 <p>Encuesta de servicio no disponible</p>
                             </div>
                         @endif
-
-                   
-
-                </section>
+                    </section>
+                </div>
             </div>
-
-        </div>
 
         <div class="col-span-1">
           
