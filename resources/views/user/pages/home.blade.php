@@ -133,14 +133,14 @@
                     <div class="hs-carousel-slide">
                         <div class="flex justify-center h-full">
                             <img src="{{ asset('assets/banner1.png') }}"
-                                class="w-full object-cover max-h-96" />
+                                class="w-full object-cover" />
                         </div>
                     </div>
 
                     <div class="hs-carousel-slide">
                         <div class="flex justify-center h-full">
                             <img src="{{ asset('assets/banner2.png') }}"
-                                class="w-full object-cover max-h-96" />
+                                class="w-full object-cover" />
                         </div>
                     </div>
 
@@ -148,7 +148,7 @@
                         <div class="hs-carousel-slide">
                             <div class="flex justify-center h-full">
                                 <img src="{{ asset('storage/' . $anuncio->resource) }}"
-                                    class="w-full object-cover max-h-96" />
+                                    class="w-full object-cover" />
                                 @if (!($anuncio->title == null && $anuncio->description == null))
                                     <div class="self-center text-center p-5 rounded-md"
                                         style="background-color: rgba(111, 111, 111, 0.18);">
@@ -344,7 +344,7 @@
 
                         @if(isset($service_time->img ))
                             <a href="https://forms.gle/rf6RDkpofTJXGn9c7" target="__blank">   
-                                <img src="{{asset('storage/'. $quiz->img)}}" alt="" class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
+                                <img src="{{asset('storage/'. $quiz->img)}}" alt="" class="w-full" style="height: 400px; object-fit:cover; padding-left:15px;padding-right:15px;">
                             </a>
                         @else
                             <div class="w-full" style="height: 400px; object-fit:fill; padding-left:15px;padding-right:15px;">
