@@ -212,7 +212,7 @@
                                     <div id="menuSlide{{ $loop->iteration }}" class="hs-carousel-slide">
                                         <div class="relative justify-center h-full">
                                             <img src="{{ asset('storage/' . $menu->src) }}"
-                                                class="w-full object-cover h-72" />
+                                                class="w-full max-h-96 sm:object-contain md:object-cover p-2" />
                                         </div>
                                     </div>
                                 @endforeach
